@@ -15,8 +15,7 @@ namespace ZiplineClient
     public partial class MainForm : Form
     {
         readonly byte[] header_bytes = { 0x63, 0xC3, 0x1E, 0xE9, 0xF0, 0x58, 0x60, 0x1D };
-        readonly byte[] delim_bytes = Encoding.ASCII.GetBytes("<END>");
-        readonly IPEndPoint server_endpoint = new(IPAddress.Parse("127.0.0.1"), 9999);
+        readonly IPEndPoint server_endpoint = new(IPAddress.Parse("137.184.241.2"), 52525);
         public MainForm()
         {
             InitializeComponent();
@@ -27,25 +26,40 @@ namespace ZiplineClient
         { // Method queries server for a list of the online users and shared files. 
             string command = "get_users_files";
             byte[] cmd_bytes = Encoding.UTF8.GetBytes(command);
-            int pkg_length = 12 + cmd_bytes.Length + delim_bytes.Length;
+            int pkg_length = 12 + cmd_bytes.Length;
             byte[] length_bytes = BitConverter.GetBytes(pkg_length);
-            byte[] package = new byte[pkg_length];
+            byte[] outgoing_package = new byte[pkg_length];
 
-            length_bytes.CopyTo(package, 0);
-            header_bytes.CopyTo(package, 4);
-            cmd_bytes.CopyTo(package, 12);
-            Array.Copy(delim_bytes, 0, package, package.Length - delim_bytes.Length, delim_bytes.Length); // Copy delimiter to the end.
+            length_bytes.CopyTo(outgoing_package, 0);
+            header_bytes.CopyTo(outgoing_package, 4);
+            cmd_bytes.CopyTo(outgoing_package, 12);
 
             TcpClient tclient = new();
             tclient.Connect(server_endpoint);
             try
             {
                 NetworkStream stream = tclient.GetStream();
-                stream.Write(package, 0, package.Length);
+                stream.Write(outgoing_package, 0, outgoing_package.Length);
 
+                byte[] size_data = new byte[4];
+                int bytesRead = 0, totalBytesRead = 0;
+                do
+                {
+                    bytesRead = stream.Read(size_data, totalBytesRead, size_data.Length - totalBytesRead);
+                    totalBytesRead += bytesRead;
+                } while (totalBytesRead < 4);
+                int package_length = BitConverter.ToInt32(size_data, 0);
 
+                byte[] incoming_package = new byte[package_length];
+                totalBytesRead = 0;
+                do
+                {
+                    bytesRead = stream.Read(incoming_package, totalBytesRead, package_length - totalBytesRead);
+                    totalBytesRead += bytesRead;
+                } while (totalBytesRead < package_length);
 
-
+                string json = Encoding.UTF8.GetString(incoming_package);
+                MessageBox.Show(json);
 
             } catch (Exception ex)
             {
