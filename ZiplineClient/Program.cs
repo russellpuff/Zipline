@@ -1,4 +1,4 @@
-namespace Zipline
+namespace ZiplineClient
 {
     internal static class Program
     {
@@ -8,10 +8,10 @@ namespace Zipline
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            LoginForm lf = new();
+            Application.Run(lf);
+            if (lf.UserAuthenticated) { Application.Run(new MainForm()); }
         }
     }
 }
