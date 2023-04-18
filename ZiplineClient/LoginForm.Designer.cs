@@ -28,47 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lfLoginButton = new System.Windows.Forms.Button();
-            this.lfTestButton = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lfLoginButton = new Button();
+            lfUsernameTextBox = new TextBox();
+            lfUsernameLabel = new Label();
+            lfPasswordLabel = new Label();
+            lfPasswordTextBox = new TextBox();
+            SuspendLayout();
             // 
             // lfLoginButton
             // 
-            this.lfLoginButton.Location = new System.Drawing.Point(108, 53);
-            this.lfLoginButton.Name = "lfLoginButton";
-            this.lfLoginButton.Size = new System.Drawing.Size(75, 23);
-            this.lfLoginButton.TabIndex = 0;
-            this.lfLoginButton.Text = "Login";
-            this.lfLoginButton.UseVisualStyleBackColor = true;
+            lfLoginButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lfLoginButton.Location = new Point(88, 152);
+            lfLoginButton.Name = "lfLoginButton";
+            lfLoginButton.Size = new Size(99, 32);
+            lfLoginButton.TabIndex = 0;
+            lfLoginButton.Text = "Login";
+            lfLoginButton.UseVisualStyleBackColor = true;
+            lfLoginButton.Click += LoginButton_Click;
             // 
-            // lfTestButton
+            // lfUsernameTextBox
             // 
-            this.lfTestButton.Location = new System.Drawing.Point(107, 162);
-            this.lfTestButton.Name = "lfTestButton";
-            this.lfTestButton.Size = new System.Drawing.Size(75, 23);
-            this.lfTestButton.TabIndex = 1;
-            this.lfTestButton.Text = "test";
-            this.lfTestButton.UseVisualStyleBackColor = true;
-            this.lfTestButton.Click += new System.EventHandler(this.TestButton_Click);
+            lfUsernameTextBox.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lfUsernameTextBox.Location = new Point(12, 33);
+            lfUsernameTextBox.MaxLength = 20;
+            lfUsernameTextBox.Name = "lfUsernameTextBox";
+            lfUsernameTextBox.Size = new Size(258, 33);
+            lfUsernameTextBox.TabIndex = 1;
+            lfUsernameTextBox.TextChanged += UsernameTextBox_TextChanged;
+            // 
+            // lfUsernameLabel
+            // 
+            lfUsernameLabel.AutoSize = true;
+            lfUsernameLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lfUsernameLabel.Location = new Point(12, 9);
+            lfUsernameLabel.Name = "lfUsernameLabel";
+            lfUsernameLabel.Size = new Size(81, 21);
+            lfUsernameLabel.TabIndex = 2;
+            lfUsernameLabel.Text = "Username";
+            // 
+            // lfPasswordLabel
+            // 
+            lfPasswordLabel.AutoSize = true;
+            lfPasswordLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lfPasswordLabel.Location = new Point(12, 78);
+            lfPasswordLabel.Name = "lfPasswordLabel";
+            lfPasswordLabel.Size = new Size(76, 21);
+            lfPasswordLabel.TabIndex = 3;
+            lfPasswordLabel.Text = "Password";
+            // 
+            // lfPasswordTextBox
+            // 
+            lfPasswordTextBox.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lfPasswordTextBox.Location = new Point(12, 102);
+            lfPasswordTextBox.Name = "lfPasswordTextBox";
+            lfPasswordTextBox.PasswordChar = '*';
+            lfPasswordTextBox.Size = new Size(258, 33);
+            lfPasswordTextBox.TabIndex = 4;
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(291, 298);
-            this.Controls.Add(this.lfTestButton);
-            this.Controls.Add(this.lfLoginButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "LoginForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "LoginForm";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(286, 193);
+            Controls.Add(lfPasswordTextBox);
+            Controls.Add(lfPasswordLabel);
+            Controls.Add(lfUsernameLabel);
+            Controls.Add(lfUsernameTextBox);
+            Controls.Add(lfLoginButton);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Name = "LoginForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Zipline Client Login";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button lfLoginButton;
-        private Button lfTestButton;
+        private TextBox lfUsernameTextBox;
+        private Label lfUsernameLabel;
+        private Label lfPasswordLabel;
+        private TextBox lfPasswordTextBox;
     }
 }

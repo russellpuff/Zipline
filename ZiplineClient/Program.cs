@@ -11,7 +11,7 @@ namespace ZiplineClient
             ApplicationConfiguration.Initialize();
             LoginForm lf = new();
             Application.Run(lf);
-            if (lf.UserAuthenticated) { Application.Run(new MainForm()); }
+            if (lf.UserAuthenticated) { Application.Run(new MainForm(lf.Username)); }
         }
     }
 }

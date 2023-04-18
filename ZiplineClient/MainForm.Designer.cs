@@ -28,709 +28,581 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mfCentralTabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.mfMainDataGrid = new System.Windows.Forms.DataGridView();
-            this.mfMainDataGridGIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mfMainDataGridOwnerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mfMainDataGridFilenameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mfMainDataGridFilesizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mfMainDataGridAccessColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.listView4 = new System.Windows.Forms.ListView();
-            this.listView3 = new System.Windows.Forms.ListView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.listView5 = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.mfCentralTabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mfMainDataGrid)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            this.SuspendLayout();
+            mfCentralTabControl = new TabControl();
+            mfBrowserTab = new TabPage();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            mfFavoritesDataGrid = new DataGridView();
+            mfFavoritesDataGridGUIDColumn = new DataGridViewTextBoxColumn();
+            mfFavoritesDataGridOwnerColumn = new DataGridViewTextBoxColumn();
+            mfFavoritesDataGridFilenameColumn = new DataGridViewTextBoxColumn();
+            mfFavoritesDataGridFilesizeColumn = new DataGridViewTextBoxColumn();
+            mfFavoritesDataGridAccessColumn = new DataGridViewCheckBoxColumn();
+            mfMainDataGrid = new DataGridView();
+            mfMainDataGridGUIDColumn = new DataGridViewTextBoxColumn();
+            mfMainDataGridOwnerColumn = new DataGridViewTextBoxColumn();
+            mfMainDataGridFilenameColumn = new DataGridViewTextBoxColumn();
+            mfMainDataGridFilesizeColumn = new DataGridViewTextBoxColumn();
+            mfMainDataGridAccessColumn = new DataGridViewCheckBoxColumn();
+            mfOnlineUsersLabel = new Label();
+            mfOnlineUsersList = new ListBox();
+            mfNotificationsLabel = new Label();
+            mfNotificationsList = new ListBox();
+            mfFavoritesLabel = new Label();
+            mfMyFilesTab = new TabPage();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            mfAddNewFileLabel = new Label();
+            mfUsersToShareList = new ListBox();
+            mfUsersSharedWithList = new ListBox();
+            mfAuthorizedUsersList = new ListBox();
+            mfAuthorizedUsersLabel = new Label();
+            mfMyFilesDataGrid = new DataGridView();
+            mfMyFilesDataGridGUIDColumn = new DataGridViewTextBoxColumn();
+            mfMyFilesDataGridFilenameColumn = new DataGridViewTextBoxColumn();
+            mfMyFilesDataGridFilesizeColumn = new DataGridViewTextBoxColumn();
+            mfUsersShareListLabel = new Label();
+            mfSharedUsersLabel = new Label();
+            mfUnshareButton = new Button();
+            mfShareButton = new Button();
+            mfSelectFileButton = new Button();
+            mfAcceptFileButton = new Button();
+            mfNewFileFilenameTextBox = new TextBox();
+            mfNewFileFilenameLabel = new Label();
+            mfOptionsTab = new TabPage();
+            button1 = new Button();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            mfCentralTabControl.SuspendLayout();
+            mfBrowserTab.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)mfFavoritesDataGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)mfMainDataGrid).BeginInit();
+            mfMyFilesTab.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)mfMyFilesDataGrid).BeginInit();
+            mfOptionsTab.SuspendLayout();
+            SuspendLayout();
             // 
             // mfCentralTabControl
             // 
-            this.mfCentralTabControl.Controls.Add(this.tabPage1);
-            this.mfCentralTabControl.Controls.Add(this.tabPage2);
-            this.mfCentralTabControl.Controls.Add(this.tabPage3);
-            this.mfCentralTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mfCentralTabControl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.mfCentralTabControl.Location = new System.Drawing.Point(0, 0);
-            this.mfCentralTabControl.Margin = new System.Windows.Forms.Padding(2);
-            this.mfCentralTabControl.Name = "mfCentralTabControl";
-            this.mfCentralTabControl.SelectedIndex = 0;
-            this.mfCentralTabControl.Size = new System.Drawing.Size(680, 715);
-            this.mfCentralTabControl.TabIndex = 0;
+            mfCentralTabControl.Controls.Add(mfBrowserTab);
+            mfCentralTabControl.Controls.Add(mfMyFilesTab);
+            mfCentralTabControl.Controls.Add(mfOptionsTab);
+            mfCentralTabControl.Dock = DockStyle.Fill;
+            mfCentralTabControl.Font = new Font("Century", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            mfCentralTabControl.Location = new Point(0, 0);
+            mfCentralTabControl.Margin = new Padding(2);
+            mfCentralTabControl.Name = "mfCentralTabControl";
+            mfCentralTabControl.SelectedIndex = 0;
+            mfCentralTabControl.Size = new Size(680, 715);
+            mfCentralTabControl.TabIndex = 0;
+            mfCentralTabControl.SelectedIndexChanged += CentralTabControl_SelectedIndexChanged;
             // 
-            // tabPage1
+            // mfBrowserTab
             // 
-            this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabPage1.Location = new System.Drawing.Point(4, 32);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(672, 679);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Browser";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            mfBrowserTab.Controls.Add(tableLayoutPanel1);
+            mfBrowserTab.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            mfBrowserTab.Location = new Point(4, 32);
+            mfBrowserTab.Name = "mfBrowserTab";
+            mfBrowserTab.Padding = new Padding(3);
+            mfBrowserTab.Size = new Size(672, 679);
+            mfBrowserTab.TabIndex = 0;
+            mfBrowserTab.Text = "Browser";
+            mfBrowserTab.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.mfMainDataGrid, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.listView2, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.450705F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.54929F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 211F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(666, 673);
-            this.tableLayoutPanel1.TabIndex = 0;
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
+            tableLayoutPanel1.Controls.Add(mfFavoritesDataGrid, 0, 3);
+            tableLayoutPanel1.Controls.Add(mfMainDataGrid, 0, 0);
+            tableLayoutPanel1.Controls.Add(mfOnlineUsersLabel, 1, 0);
+            tableLayoutPanel1.Controls.Add(mfOnlineUsersList, 1, 1);
+            tableLayoutPanel1.Controls.Add(mfNotificationsLabel, 1, 2);
+            tableLayoutPanel1.Controls.Add(mfNotificationsList, 1, 3);
+            tableLayoutPanel1.Controls.Add(mfFavoritesLabel, 0, 2);
+            tableLayoutPanel1.Location = new Point(3, 3);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 4;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 8.450705F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 91.54929F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 211F));
+            tableLayoutPanel1.Size = new Size(666, 673);
+            tableLayoutPanel1.TabIndex = 0;
             // 
-            // dataGridView2
+            // mfFavoritesDataGrid
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewImageColumn2});
-            this.dataGridView2.Location = new System.Drawing.Point(3, 464);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView2.Size = new System.Drawing.Size(426, 206);
-            this.dataGridView2.TabIndex = 6;
+            mfFavoritesDataGrid.AllowUserToAddRows = false;
+            mfFavoritesDataGrid.AllowUserToDeleteRows = false;
+            mfFavoritesDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            mfFavoritesDataGrid.Columns.AddRange(new DataGridViewColumn[] { mfFavoritesDataGridGUIDColumn, mfFavoritesDataGridOwnerColumn, mfFavoritesDataGridFilenameColumn, mfFavoritesDataGridFilesizeColumn, mfFavoritesDataGridAccessColumn });
+            mfFavoritesDataGrid.Location = new Point(3, 464);
+            mfFavoritesDataGrid.Name = "mfFavoritesDataGrid";
+            mfFavoritesDataGrid.ReadOnly = true;
+            mfFavoritesDataGrid.RowHeadersVisible = false;
+            mfFavoritesDataGrid.RowTemplate.Height = 25;
+            mfFavoritesDataGrid.ScrollBars = ScrollBars.Vertical;
+            mfFavoritesDataGrid.Size = new Size(426, 206);
+            mfFavoritesDataGrid.TabIndex = 6;
             // 
-            // dataGridViewTextBoxColumn5
+            // mfFavoritesDataGridGUIDColumn
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "GID";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Visible = false;
+            mfFavoritesDataGridGUIDColumn.HeaderText = "GUID";
+            mfFavoritesDataGridGUIDColumn.Name = "mfFavoritesDataGridGUIDColumn";
+            mfFavoritesDataGridGUIDColumn.ReadOnly = true;
+            mfFavoritesDataGridGUIDColumn.Visible = false;
             // 
-            // dataGridViewTextBoxColumn6
+            // mfFavoritesDataGridOwnerColumn
             // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Owner";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            mfFavoritesDataGridOwnerColumn.HeaderText = "Owner";
+            mfFavoritesDataGridOwnerColumn.Name = "mfFavoritesDataGridOwnerColumn";
+            mfFavoritesDataGridOwnerColumn.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn7
+            // mfFavoritesDataGridFilenameColumn
             // 
-            this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Filename";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            mfFavoritesDataGridFilenameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            mfFavoritesDataGridFilenameColumn.HeaderText = "Filename";
+            mfFavoritesDataGridFilenameColumn.Name = "mfFavoritesDataGridFilenameColumn";
+            mfFavoritesDataGridFilenameColumn.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn8
+            // mfFavoritesDataGridFilesizeColumn
             // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Filesize";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            mfFavoritesDataGridFilesizeColumn.HeaderText = "Filesize";
+            mfFavoritesDataGridFilesizeColumn.Name = "mfFavoritesDataGridFilesizeColumn";
+            mfFavoritesDataGridFilesizeColumn.ReadOnly = true;
             // 
-            // dataGridViewImageColumn2
+            // mfFavoritesDataGridAccessColumn
             // 
-            this.dataGridViewImageColumn2.HeaderText = "Access";
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
-            this.dataGridViewImageColumn2.Width = 70;
+            mfFavoritesDataGridAccessColumn.HeaderText = "Access";
+            mfFavoritesDataGridAccessColumn.Name = "mfFavoritesDataGridAccessColumn";
+            mfFavoritesDataGridAccessColumn.ReadOnly = true;
+            mfFavoritesDataGridAccessColumn.Resizable = DataGridViewTriState.True;
+            mfFavoritesDataGridAccessColumn.Width = 70;
             // 
             // mfMainDataGrid
             // 
-            this.mfMainDataGrid.AllowUserToAddRows = false;
-            this.mfMainDataGrid.AllowUserToDeleteRows = false;
-            this.mfMainDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.mfMainDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.mfMainDataGridGIDColumn,
-            this.mfMainDataGridOwnerColumn,
-            this.mfMainDataGridFilenameColumn,
-            this.mfMainDataGridFilesizeColumn,
-            this.mfMainDataGridAccessColumn});
-            this.mfMainDataGrid.Location = new System.Drawing.Point(3, 3);
-            this.mfMainDataGrid.Name = "mfMainDataGrid";
-            this.mfMainDataGrid.ReadOnly = true;
-            this.mfMainDataGrid.RowHeadersVisible = false;
-            this.tableLayoutPanel1.SetRowSpan(this.mfMainDataGrid, 2);
-            this.mfMainDataGrid.RowTemplate.Height = 25;
-            this.mfMainDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.mfMainDataGrid.Size = new System.Drawing.Size(426, 417);
-            this.mfMainDataGrid.TabIndex = 0;
+            mfMainDataGrid.AllowUserToAddRows = false;
+            mfMainDataGrid.AllowUserToDeleteRows = false;
+            mfMainDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            mfMainDataGrid.Columns.AddRange(new DataGridViewColumn[] { mfMainDataGridGUIDColumn, mfMainDataGridOwnerColumn, mfMainDataGridFilenameColumn, mfMainDataGridFilesizeColumn, mfMainDataGridAccessColumn });
+            mfMainDataGrid.Location = new Point(3, 3);
+            mfMainDataGrid.Name = "mfMainDataGrid";
+            mfMainDataGrid.ReadOnly = true;
+            mfMainDataGrid.RowHeadersVisible = false;
+            tableLayoutPanel1.SetRowSpan(mfMainDataGrid, 2);
+            mfMainDataGrid.RowTemplate.Height = 25;
+            mfMainDataGrid.ScrollBars = ScrollBars.Vertical;
+            mfMainDataGrid.Size = new Size(426, 417);
+            mfMainDataGrid.TabIndex = 0;
             // 
-            // mfMainDataGridGIDColumn
+            // mfMainDataGridGUIDColumn
             // 
-            this.mfMainDataGridGIDColumn.HeaderText = "GID";
-            this.mfMainDataGridGIDColumn.Name = "mfMainDataGridGIDColumn";
-            this.mfMainDataGridGIDColumn.ReadOnly = true;
-            this.mfMainDataGridGIDColumn.Visible = false;
+            mfMainDataGridGUIDColumn.HeaderText = "GUID";
+            mfMainDataGridGUIDColumn.Name = "mfMainDataGridGUIDColumn";
+            mfMainDataGridGUIDColumn.ReadOnly = true;
+            mfMainDataGridGUIDColumn.Visible = false;
             // 
             // mfMainDataGridOwnerColumn
             // 
-            this.mfMainDataGridOwnerColumn.HeaderText = "Owner";
-            this.mfMainDataGridOwnerColumn.Name = "mfMainDataGridOwnerColumn";
-            this.mfMainDataGridOwnerColumn.ReadOnly = true;
+            mfMainDataGridOwnerColumn.HeaderText = "Owner";
+            mfMainDataGridOwnerColumn.Name = "mfMainDataGridOwnerColumn";
+            mfMainDataGridOwnerColumn.ReadOnly = true;
             // 
             // mfMainDataGridFilenameColumn
             // 
-            this.mfMainDataGridFilenameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.mfMainDataGridFilenameColumn.HeaderText = "Filename";
-            this.mfMainDataGridFilenameColumn.Name = "mfMainDataGridFilenameColumn";
-            this.mfMainDataGridFilenameColumn.ReadOnly = true;
+            mfMainDataGridFilenameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            mfMainDataGridFilenameColumn.HeaderText = "Filename";
+            mfMainDataGridFilenameColumn.Name = "mfMainDataGridFilenameColumn";
+            mfMainDataGridFilenameColumn.ReadOnly = true;
             // 
             // mfMainDataGridFilesizeColumn
             // 
-            this.mfMainDataGridFilesizeColumn.HeaderText = "Filesize";
-            this.mfMainDataGridFilesizeColumn.Name = "mfMainDataGridFilesizeColumn";
-            this.mfMainDataGridFilesizeColumn.ReadOnly = true;
+            mfMainDataGridFilesizeColumn.HeaderText = "Filesize";
+            mfMainDataGridFilesizeColumn.Name = "mfMainDataGridFilesizeColumn";
+            mfMainDataGridFilesizeColumn.ReadOnly = true;
             // 
             // mfMainDataGridAccessColumn
             // 
-            this.mfMainDataGridAccessColumn.HeaderText = "Access";
-            this.mfMainDataGridAccessColumn.Name = "mfMainDataGridAccessColumn";
-            this.mfMainDataGridAccessColumn.ReadOnly = true;
-            this.mfMainDataGridAccessColumn.Width = 70;
+            mfMainDataGridAccessColumn.HeaderText = "Access";
+            mfMainDataGridAccessColumn.Name = "mfMainDataGridAccessColumn";
+            mfMainDataGridAccessColumn.ReadOnly = true;
+            mfMainDataGridAccessColumn.Resizable = DataGridViewTriState.True;
+            mfMainDataGridAccessColumn.Width = 70;
             // 
-            // label1
+            // mfOnlineUsersLabel
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(489, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Online Users";
+            mfOnlineUsersLabel.Anchor = AnchorStyles.None;
+            mfOnlineUsersLabel.AutoSize = true;
+            mfOnlineUsersLabel.Location = new Point(489, 5);
+            mfOnlineUsersLabel.Name = "mfOnlineUsersLabel";
+            mfOnlineUsersLabel.Size = new Size(119, 25);
+            mfOnlineUsersLabel.TabIndex = 1;
+            mfOnlineUsersLabel.Text = "Online Users";
             // 
-            // listView1
+            // mfOnlineUsersList
             // 
-            this.listView1.Location = new System.Drawing.Point(435, 38);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(228, 382);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            mfOnlineUsersList.Dock = DockStyle.Fill;
+            mfOnlineUsersList.ItemHeight = 25;
+            mfOnlineUsersList.Location = new Point(435, 38);
+            mfOnlineUsersList.Name = "mfOnlineUsersList";
+            mfOnlineUsersList.Size = new Size(228, 382);
+            mfOnlineUsersList.TabIndex = 2;
             // 
-            // label2
+            // mfNotificationsLabel
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(489, 429);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Notifications";
+            mfNotificationsLabel.Anchor = AnchorStyles.None;
+            mfNotificationsLabel.AutoSize = true;
+            mfNotificationsLabel.Location = new Point(489, 429);
+            mfNotificationsLabel.Name = "mfNotificationsLabel";
+            mfNotificationsLabel.Size = new Size(119, 25);
+            mfNotificationsLabel.TabIndex = 3;
+            mfNotificationsLabel.Text = "Notifications";
             // 
-            // listView2
+            // mfNotificationsList
             // 
-            this.listView2.Location = new System.Drawing.Point(435, 464);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(228, 206);
-            this.listView2.TabIndex = 4;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            mfNotificationsList.Dock = DockStyle.Fill;
+            mfNotificationsList.ItemHeight = 25;
+            mfNotificationsList.Location = new Point(435, 464);
+            mfNotificationsList.Name = "mfNotificationsList";
+            mfNotificationsList.Size = new Size(228, 206);
+            mfNotificationsList.TabIndex = 4;
             // 
-            // label3
+            // mfFavoritesLabel
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(173, 429);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 25);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Favorites";
+            mfFavoritesLabel.Anchor = AnchorStyles.None;
+            mfFavoritesLabel.AutoSize = true;
+            mfFavoritesLabel.Location = new Point(173, 429);
+            mfFavoritesLabel.Name = "mfFavoritesLabel";
+            mfFavoritesLabel.Size = new Size(86, 25);
+            mfFavoritesLabel.TabIndex = 5;
+            mfFavoritesLabel.Text = "Favorites";
             // 
-            // tabPage2
+            // mfMyFilesTab
             // 
-            this.tabPage2.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabPage2.Location = new System.Drawing.Point(4, 32);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(672, 679);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "My Files";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            mfMyFilesTab.Controls.Add(tableLayoutPanel3);
+            mfMyFilesTab.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            mfMyFilesTab.Location = new Point(4, 32);
+            mfMyFilesTab.Name = "mfMyFilesTab";
+            mfMyFilesTab.Padding = new Padding(3);
+            mfMyFilesTab.Size = new Size(672, 679);
+            mfMyFilesTab.TabIndex = 1;
+            mfMyFilesTab.Text = "My Files";
+            mfMyFilesTab.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 4;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel3.Controls.Add(this.label7, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.listView5, 3, 3);
-            this.tableLayoutPanel3.Controls.Add(this.listView4, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.listView3, 3, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label4, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(this.dataGridView5, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label5, 3, 2);
-            this.tableLayoutPanel3.Controls.Add(this.label6, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.button2, 2, 5);
-            this.tableLayoutPanel3.Controls.Add(this.button1, 2, 4);
-            this.tableLayoutPanel3.Controls.Add(this.button3, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.button4, 0, 6);
-            this.tableLayoutPanel3.Controls.Add(this.textBox1, 0, 5);
-            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 4);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 7;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.450705F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.54929F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(666, 673);
-            this.tableLayoutPanel3.TabIndex = 1;
+            tableLayoutPanel3.ColumnCount = 4;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tableLayoutPanel3.Controls.Add(mfAddNewFileLabel, 0, 2);
+            tableLayoutPanel3.Controls.Add(mfUsersToShareList, 3, 3);
+            tableLayoutPanel3.Controls.Add(mfUsersSharedWithList, 1, 3);
+            tableLayoutPanel3.Controls.Add(mfAuthorizedUsersList, 3, 1);
+            tableLayoutPanel3.Controls.Add(mfAuthorizedUsersLabel, 3, 0);
+            tableLayoutPanel3.Controls.Add(mfMyFilesDataGrid, 0, 0);
+            tableLayoutPanel3.Controls.Add(mfUsersShareListLabel, 3, 2);
+            tableLayoutPanel3.Controls.Add(mfSharedUsersLabel, 1, 2);
+            tableLayoutPanel3.Controls.Add(mfUnshareButton, 2, 5);
+            tableLayoutPanel3.Controls.Add(mfShareButton, 2, 4);
+            tableLayoutPanel3.Controls.Add(mfSelectFileButton, 0, 3);
+            tableLayoutPanel3.Controls.Add(mfAcceptFileButton, 0, 6);
+            tableLayoutPanel3.Controls.Add(mfNewFileFilenameTextBox, 0, 5);
+            tableLayoutPanel3.Controls.Add(mfNewFileFilenameLabel, 0, 4);
+            tableLayoutPanel3.Location = new Point(3, 3);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 7;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 8.450705F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 91.54929F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            tableLayoutPanel3.Size = new Size(666, 673);
+            tableLayoutPanel3.TabIndex = 1;
             // 
-            // dataGridView5
+            // mfAddNewFileLabel
             // 
-            this.dataGridView5.AllowUserToAddRows = false;
-            this.dataGridView5.AllowUserToDeleteRows = false;
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20});
-            this.tableLayoutPanel3.SetColumnSpan(this.dataGridView5, 3);
-            this.dataGridView5.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.ReadOnly = true;
-            this.dataGridView5.RowHeadersVisible = false;
-            this.tableLayoutPanel3.SetRowSpan(this.dataGridView5, 2);
-            this.dataGridView5.RowTemplate.Height = 25;
-            this.dataGridView5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView5.Size = new System.Drawing.Size(458, 418);
-            this.dataGridView5.TabIndex = 0;
+            mfAddNewFileLabel.Anchor = AnchorStyles.None;
+            mfAddNewFileLabel.AutoSize = true;
+            mfAddNewFileLabel.Location = new Point(38, 436);
+            mfAddNewFileLabel.Name = "mfAddNewFileLabel";
+            mfAddNewFileLabel.Size = new Size(123, 25);
+            mfAddNewFileLabel.TabIndex = 10;
+            mfAddNewFileLabel.Text = "Add New File";
             // 
-            // dataGridViewTextBoxColumn17
+            // mfUsersToShareList
             // 
-            this.dataGridViewTextBoxColumn17.HeaderText = "GID";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            this.dataGridViewTextBoxColumn17.Visible = false;
+            mfUsersToShareList.Dock = DockStyle.Fill;
+            mfUsersToShareList.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            mfUsersToShareList.ItemHeight = 21;
+            mfUsersToShareList.Location = new Point(467, 471);
+            mfUsersToShareList.Name = "mfUsersToShareList";
+            tableLayoutPanel3.SetRowSpan(mfUsersToShareList, 4);
+            mfUsersToShareList.Size = new Size(196, 199);
+            mfUsersToShareList.TabIndex = 5;
             // 
-            // dataGridViewTextBoxColumn19
+            // mfUsersSharedWithList
             // 
-            this.dataGridViewTextBoxColumn19.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn19.HeaderText = "Filename";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            mfUsersSharedWithList.Dock = DockStyle.Fill;
+            mfUsersSharedWithList.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            mfUsersSharedWithList.ItemHeight = 21;
+            mfUsersSharedWithList.Location = new Point(202, 471);
+            mfUsersSharedWithList.Name = "mfUsersSharedWithList";
+            tableLayoutPanel3.SetRowSpan(mfUsersSharedWithList, 4);
+            mfUsersSharedWithList.Size = new Size(193, 199);
+            mfUsersSharedWithList.TabIndex = 4;
             // 
-            // dataGridViewTextBoxColumn20
+            // mfAuthorizedUsersList
             // 
-            this.dataGridViewTextBoxColumn20.HeaderText = "Filesize";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            mfAuthorizedUsersList.Dock = DockStyle.Fill;
+            mfAuthorizedUsersList.ItemHeight = 25;
+            mfAuthorizedUsersList.Location = new Point(467, 39);
+            mfAuthorizedUsersList.Name = "mfAuthorizedUsersList";
+            mfAuthorizedUsersList.Size = new Size(196, 388);
+            mfAuthorizedUsersList.TabIndex = 2;
             // 
-            // listView4
+            // mfAuthorizedUsersLabel
             // 
-            this.listView4.Location = new System.Drawing.Point(202, 471);
-            this.listView4.Name = "listView4";
-            this.tableLayoutPanel3.SetRowSpan(this.listView4, 4);
-            this.listView4.Size = new System.Drawing.Size(193, 199);
-            this.listView4.TabIndex = 4;
-            this.listView4.UseCompatibleStateImageBehavior = false;
+            mfAuthorizedUsersLabel.Anchor = AnchorStyles.None;
+            mfAuthorizedUsersLabel.AutoSize = true;
+            mfAuthorizedUsersLabel.Location = new Point(487, 5);
+            mfAuthorizedUsersLabel.Name = "mfAuthorizedUsersLabel";
+            mfAuthorizedUsersLabel.Size = new Size(156, 25);
+            mfAuthorizedUsersLabel.TabIndex = 1;
+            mfAuthorizedUsersLabel.Text = "Authorized Users";
             // 
-            // listView3
+            // mfMyFilesDataGrid
             // 
-            this.listView3.Location = new System.Drawing.Point(467, 39);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(196, 382);
-            this.listView3.TabIndex = 2;
-            this.listView3.UseCompatibleStateImageBehavior = false;
+            mfMyFilesDataGrid.AllowUserToAddRows = false;
+            mfMyFilesDataGrid.AllowUserToDeleteRows = false;
+            mfMyFilesDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            mfMyFilesDataGrid.Columns.AddRange(new DataGridViewColumn[] { mfMyFilesDataGridGUIDColumn, mfMyFilesDataGridFilenameColumn, mfMyFilesDataGridFilesizeColumn });
+            tableLayoutPanel3.SetColumnSpan(mfMyFilesDataGrid, 3);
+            mfMyFilesDataGrid.Location = new Point(3, 3);
+            mfMyFilesDataGrid.Name = "mfMyFilesDataGrid";
+            mfMyFilesDataGrid.ReadOnly = true;
+            mfMyFilesDataGrid.RowHeadersVisible = false;
+            tableLayoutPanel3.SetRowSpan(mfMyFilesDataGrid, 2);
+            mfMyFilesDataGrid.RowTemplate.Height = 25;
+            mfMyFilesDataGrid.ScrollBars = ScrollBars.Vertical;
+            mfMyFilesDataGrid.Size = new Size(458, 418);
+            mfMyFilesDataGrid.TabIndex = 0;
             // 
-            // label4
+            // mfMyFilesDataGridGUIDColumn
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(487, 5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(156, 25);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Authorized Users";
+            mfMyFilesDataGridGUIDColumn.HeaderText = "GID";
+            mfMyFilesDataGridGUIDColumn.Name = "mfMyFilesDataGridGUIDColumn";
+            mfMyFilesDataGridGUIDColumn.ReadOnly = true;
+            mfMyFilesDataGridGUIDColumn.Visible = false;
             // 
-            // tabPage3
+            // mfMyFilesDataGridFilenameColumn
             // 
-            this.tabPage3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabPage3.Location = new System.Drawing.Point(4, 32);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(672, 679);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Options";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            mfMyFilesDataGridFilenameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            mfMyFilesDataGridFilenameColumn.HeaderText = "Filename";
+            mfMyFilesDataGridFilenameColumn.Name = "mfMyFilesDataGridFilenameColumn";
+            mfMyFilesDataGridFilenameColumn.ReadOnly = true;
             // 
-            // tabPage4
+            // mfMyFilesDataGridFilesizeColumn
             // 
-            this.tabPage4.Location = new System.Drawing.Point(0, 0);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(200, 100);
-            this.tabPage4.TabIndex = 0;
+            mfMyFilesDataGridFilesizeColumn.HeaderText = "Filesize";
+            mfMyFilesDataGridFilesizeColumn.Name = "mfMyFilesDataGridFilesizeColumn";
+            mfMyFilesDataGridFilesizeColumn.ReadOnly = true;
             // 
-            // tableLayoutPanel2
+            // mfUsersShareListLabel
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel2.Controls.Add(this.dataGridView1, 0, 3);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(200, 100);
-            this.tableLayoutPanel2.TabIndex = 0;
+            mfUsersShareListLabel.Anchor = AnchorStyles.None;
+            mfUsersShareListLabel.AutoSize = true;
+            mfUsersShareListLabel.Location = new Point(519, 436);
+            mfUsersShareListLabel.Name = "mfUsersShareListLabel";
+            mfUsersShareListLabel.Size = new Size(91, 25);
+            mfUsersShareListLabel.TabIndex = 8;
+            mfUsersShareListLabel.Text = "Users List";
             // 
-            // dataGridView1
+            // mfSharedUsersLabel
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewImageColumn1});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(124, 206);
-            this.dataGridView1.TabIndex = 6;
+            mfSharedUsersLabel.Anchor = AnchorStyles.None;
+            mfSharedUsersLabel.AutoSize = true;
+            mfSharedUsersLabel.Location = new Point(229, 436);
+            mfSharedUsersLabel.Name = "mfSharedUsersLabel";
+            mfSharedUsersLabel.Size = new Size(139, 25);
+            mfSharedUsersLabel.TabIndex = 9;
+            mfSharedUsersLabel.Text = "Share File With";
             // 
-            // dataGridViewTextBoxColumn1
+            // mfUnshareButton
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "GID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
+            mfUnshareButton.Anchor = AnchorStyles.Top;
+            mfUnshareButton.Enabled = false;
+            mfUnshareButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            mfUnshareButton.Location = new Point(401, 573);
+            mfUnshareButton.Name = "mfUnshareButton";
+            mfUnshareButton.Size = new Size(60, 29);
+            mfUnshareButton.TabIndex = 7;
+            mfUnshareButton.Text = ">>";
+            mfUnshareButton.UseVisualStyleBackColor = true;
+            mfUnshareButton.Click += NewFileUnshareButton_Click;
             // 
-            // dataGridViewTextBoxColumn2
+            // mfShareButton
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Owner";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            mfShareButton.Anchor = AnchorStyles.Bottom;
+            mfShareButton.Enabled = false;
+            mfShareButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            mfShareButton.Location = new Point(401, 538);
+            mfShareButton.Name = "mfShareButton";
+            mfShareButton.Size = new Size(60, 29);
+            mfShareButton.TabIndex = 6;
+            mfShareButton.Text = "<<";
+            mfShareButton.UseVisualStyleBackColor = true;
+            mfShareButton.Click += NewFileShareButton_Click;
             // 
-            // dataGridViewTextBoxColumn3
+            // mfSelectFileButton
             // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Filename";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            mfSelectFileButton.Anchor = AnchorStyles.None;
+            mfSelectFileButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            mfSelectFileButton.Location = new Point(43, 477);
+            mfSelectFileButton.Name = "mfSelectFileButton";
+            mfSelectFileButton.Size = new Size(113, 32);
+            mfSelectFileButton.TabIndex = 11;
+            mfSelectFileButton.Text = "Select File";
+            mfSelectFileButton.UseVisualStyleBackColor = true;
+            mfSelectFileButton.Click += NewFileSelectButton_Click;
             // 
-            // dataGridViewTextBoxColumn4
+            // mfAcceptFileButton
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Filesize";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            mfAcceptFileButton.Anchor = AnchorStyles.None;
+            mfAcceptFileButton.Enabled = false;
+            mfAcceptFileButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            mfAcceptFileButton.Location = new Point(43, 631);
+            mfAcceptFileButton.Name = "mfAcceptFileButton";
+            mfAcceptFileButton.Size = new Size(113, 32);
+            mfAcceptFileButton.TabIndex = 12;
+            mfAcceptFileButton.Text = "Accept";
+            mfAcceptFileButton.UseVisualStyleBackColor = true;
+            mfAcceptFileButton.Click += NewFileAcceptButton_Click;
             // 
-            // dataGridViewImageColumn1
+            // mfNewFileFilenameTextBox
             // 
-            this.dataGridViewImageColumn1.HeaderText = "Access";
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Width = 70;
+            mfNewFileFilenameTextBox.Anchor = AnchorStyles.Top;
+            mfNewFileFilenameTextBox.Enabled = false;
+            mfNewFileFilenameTextBox.Location = new Point(3, 573);
+            mfNewFileFilenameTextBox.Name = "mfNewFileFilenameTextBox";
+            mfNewFileFilenameTextBox.Size = new Size(193, 33);
+            mfNewFileFilenameTextBox.TabIndex = 13;
             // 
-            // dataGridView3
+            // mfNewFileFilenameLabel
             // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewImageColumn3});
-            this.dataGridView3.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.ReadOnly = true;
-            this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.RowTemplate.Height = 25;
-            this.dataGridView3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView3.Size = new System.Drawing.Size(124, 417);
-            this.dataGridView3.TabIndex = 0;
+            mfNewFileFilenameLabel.Anchor = AnchorStyles.Bottom;
+            mfNewFileFilenameLabel.AutoSize = true;
+            mfNewFileFilenameLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            mfNewFileFilenameLabel.Location = new Point(70, 553);
+            mfNewFileFilenameLabel.Name = "mfNewFileFilenameLabel";
+            mfNewFileFilenameLabel.Size = new Size(59, 17);
+            mfNewFileFilenameLabel.TabIndex = 14;
+            mfNewFileFilenameLabel.Text = "Filename";
             // 
-            // dataGridViewTextBoxColumn9
+            // mfOptionsTab
             // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "GID";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Owner";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn11.HeaderText = "Filename";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Filesize";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn3
-            // 
-            this.dataGridViewImageColumn3.HeaderText = "Access";
-            this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
-            this.dataGridViewImageColumn3.ReadOnly = true;
-            this.dataGridViewImageColumn3.Width = 70;
-            // 
-            // listView5
-            // 
-            this.listView5.Location = new System.Drawing.Point(467, 471);
-            this.listView5.Name = "listView5";
-            this.tableLayoutPanel3.SetRowSpan(this.listView5, 4);
-            this.listView5.Size = new System.Drawing.Size(193, 199);
-            this.listView5.TabIndex = 5;
-            this.listView5.UseCompatibleStateImageBehavior = false;
+            mfOptionsTab.Controls.Add(button1);
+            mfOptionsTab.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            mfOptionsTab.Location = new Point(4, 32);
+            mfOptionsTab.Name = "mfOptionsTab";
+            mfOptionsTab.Padding = new Padding(3);
+            mfOptionsTab.Size = new Size(672, 679);
+            mfOptionsTab.TabIndex = 2;
+            mfOptionsTab.Text = "Options";
+            mfOptionsTab.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(401, 538);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 29);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "<<";
-            this.button1.UseVisualStyleBackColor = true;
+            button1.Location = new Point(543, 6);
+            button1.Name = "button1";
+            button1.Size = new Size(121, 63);
+            button1.TabIndex = 0;
+            button1.Text = "ping server";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += TEST_CLICK;
             // 
-            // button2
+            // tableLayoutPanel2
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(401, 573);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(60, 29);
-            this.button2.TabIndex = 7;
-            this.button2.Text = ">>";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(519, 436);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 25);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Users List";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(229, 436);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(139, 25);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Share File With";
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(38, 436);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(123, 25);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Add New File";
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(43, 477);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(113, 32);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Select File";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button4.Enabled = false;
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(43, 631);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(113, 32);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "Accept";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(3, 573);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(193, 33);
-            this.textBox1.TabIndex = 13;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(70, 553);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 17);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Filename";
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
+            tableLayoutPanel2.Location = new Point(0, 0);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 4;
+            tableLayoutPanel2.Size = new Size(200, 100);
+            tableLayoutPanel2.TabIndex = 0;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 715);
-            this.Controls.Add(this.mfCentralTabControl);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "MainForm";
-            this.Text = "Zipline Client";
-            this.mfCentralTabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mfMainDataGrid)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(680, 715);
+            Controls.Add(mfCentralTabControl);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Zipline Client";
+            mfCentralTabControl.ResumeLayout(false);
+            mfBrowserTab.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)mfFavoritesDataGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)mfMainDataGrid).EndInit();
+            mfMyFilesTab.ResumeLayout(false);
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)mfMyFilesDataGrid).EndInit();
+            mfOptionsTab.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
 
         private TabControl mfCentralTabControl;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
-        private TabPage tabPage3;
+        private TabPage mfBrowserTab;
+        private TabPage mfMyFilesTab;
+        private TabPage mfOptionsTab;
         private TableLayoutPanel tableLayoutPanel1;
         private DataGridView mfMainDataGrid;
-        private DataGridViewTextBoxColumn mfMainDataGridGIDColumn;
+        private Label mfOnlineUsersLabel;
+        private ListBox mfOnlineUsersList;
+        private Label mfNotificationsLabel;
+        private ListBox mfNotificationsList;
+        private Label mfFavoritesLabel;
+        private DataGridView mfFavoritesDataGrid;
+        private TableLayoutPanel tableLayoutPanel3;
+        private DataGridView mfMyFilesDataGrid;
+        private ListBox mfUsersSharedWithList;
+        private ListBox mfAuthorizedUsersList;
+        private Label mfAuthorizedUsersLabel;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Label mfAddNewFileLabel;
+        private ListBox mfUsersToShareList;
+        private Label mfUsersShareListLabel;
+        private Label mfSharedUsersLabel;
+        private Button mfUnshareButton;
+        private Button mfShareButton;
+        private Button mfSelectFileButton;
+        private Button mfAcceptFileButton;
+        private TextBox mfNewFileFilenameTextBox;
+        private Label mfNewFileFilenameLabel;
+        private DataGridViewTextBoxColumn mfMyFilesDataGridGUIDColumn;
+        private DataGridViewTextBoxColumn mfMyFilesDataGridFilenameColumn;
+        private DataGridViewTextBoxColumn mfMyFilesDataGridFilesizeColumn;
+        private DataGridViewTextBoxColumn mfMainDataGridGUIDColumn;
         private DataGridViewTextBoxColumn mfMainDataGridOwnerColumn;
         private DataGridViewTextBoxColumn mfMainDataGridFilenameColumn;
         private DataGridViewTextBoxColumn mfMainDataGridFilesizeColumn;
-        private DataGridViewImageColumn mfMainDataGridAccessColumn;
-        private Label label1;
-        private ListView listView1;
-        private Label label2;
-        private ListView listView2;
-        private Label label3;
-        private DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private DataGridViewImageColumn dataGridViewImageColumn2;
-        private TableLayoutPanel tableLayoutPanel3;
-        private DataGridView dataGridView5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private ListView listView4;
-        private ListView listView3;
-        private Label label4;
-        private TabPage tabPage4;
-        private TableLayoutPanel tableLayoutPanel2;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewImageColumn dataGridViewImageColumn1;
-        private DataGridView dataGridView3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private DataGridViewImageColumn dataGridViewImageColumn3;
-        private Label label7;
-        private ListView listView5;
-        private Label label5;
-        private Label label6;
-        private Button button2;
+        private DataGridViewCheckBoxColumn mfMainDataGridAccessColumn;
+        private DataGridViewTextBoxColumn mfFavoritesDataGridGUIDColumn;
+        private DataGridViewTextBoxColumn mfFavoritesDataGridOwnerColumn;
+        private DataGridViewTextBoxColumn mfFavoritesDataGridFilenameColumn;
+        private DataGridViewTextBoxColumn mfFavoritesDataGridFilesizeColumn;
+        private DataGridViewCheckBoxColumn mfFavoritesDataGridAccessColumn;
         private Button button1;
-        private Button button3;
-        private Button button4;
-        private TextBox textBox1;
-        private Label label8;
     }
 }
