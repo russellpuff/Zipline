@@ -28,15 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             mfCentralTabControl = new TabControl();
             mfBrowserTab = new TabPage();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            mfBrowserTableLayout = new TableLayoutPanel();
             mfFavoritesDataGrid = new DataGridView();
             mfFavoritesDataGridGUIDColumn = new DataGridViewTextBoxColumn();
             mfFavoritesDataGridOwnerColumn = new DataGridViewTextBoxColumn();
             mfFavoritesDataGridFilenameColumn = new DataGridViewTextBoxColumn();
             mfFavoritesDataGridFilesizeColumn = new DataGridViewTextBoxColumn();
             mfFavoritesDataGridAccessColumn = new DataGridViewCheckBoxColumn();
+            mfFilesContextMenu = new ContextMenuStrip(components);
+            downloadToolStripMenuItem = new ToolStripMenuItem();
+            requestAccessToolStripMenuItem = new ToolStripMenuItem();
             mfMainDataGrid = new DataGridView();
             mfMainDataGridGUIDColumn = new DataGridViewTextBoxColumn();
             mfMainDataGridOwnerColumn = new DataGridViewTextBoxColumn();
@@ -49,7 +53,7 @@
             mfNotificationsList = new ListBox();
             mfFavoritesLabel = new Label();
             mfMyFilesTab = new TabPage();
-            tableLayoutPanel3 = new TableLayoutPanel();
+            mfMyFilesTableLayout = new TableLayoutPanel();
             mfAddNewFileLabel = new Label();
             mfUsersToShareList = new ListBox();
             mfUsersSharedWithList = new ListBox();
@@ -69,16 +73,19 @@
             mfNewFileFilenameLabel = new Label();
             mfOptionsTab = new TabPage();
             button1 = new Button();
-            tableLayoutPanel2 = new TableLayoutPanel();
+            mfUsersContextMenu = new ContextMenuStrip(components);
+            refreshToolStripMenuItem = new ToolStripMenuItem();
             mfCentralTabControl.SuspendLayout();
             mfBrowserTab.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
+            mfBrowserTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)mfFavoritesDataGrid).BeginInit();
+            mfFilesContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)mfMainDataGrid).BeginInit();
             mfMyFilesTab.SuspendLayout();
-            tableLayoutPanel3.SuspendLayout();
+            mfMyFilesTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)mfMyFilesDataGrid).BeginInit();
             mfOptionsTab.SuspendLayout();
+            mfUsersContextMenu.SuspendLayout();
             SuspendLayout();
             // 
             // mfCentralTabControl
@@ -98,7 +105,7 @@
             // 
             // mfBrowserTab
             // 
-            mfBrowserTab.Controls.Add(tableLayoutPanel1);
+            mfBrowserTab.Controls.Add(mfBrowserTableLayout);
             mfBrowserTab.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             mfBrowserTab.Location = new Point(4, 32);
             mfBrowserTab.Name = "mfBrowserTab";
@@ -108,27 +115,27 @@
             mfBrowserTab.Text = "Browser";
             mfBrowserTab.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel1
+            // mfBrowserTableLayout
             // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
-            tableLayoutPanel1.Controls.Add(mfFavoritesDataGrid, 0, 3);
-            tableLayoutPanel1.Controls.Add(mfMainDataGrid, 0, 0);
-            tableLayoutPanel1.Controls.Add(mfOnlineUsersLabel, 1, 0);
-            tableLayoutPanel1.Controls.Add(mfOnlineUsersList, 1, 1);
-            tableLayoutPanel1.Controls.Add(mfNotificationsLabel, 1, 2);
-            tableLayoutPanel1.Controls.Add(mfNotificationsList, 1, 3);
-            tableLayoutPanel1.Controls.Add(mfFavoritesLabel, 0, 2);
-            tableLayoutPanel1.Location = new Point(3, 3);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 4;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 8.450705F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 91.54929F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 211F));
-            tableLayoutPanel1.Size = new Size(666, 673);
-            tableLayoutPanel1.TabIndex = 0;
+            mfBrowserTableLayout.ColumnCount = 2;
+            mfBrowserTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
+            mfBrowserTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
+            mfBrowserTableLayout.Controls.Add(mfFavoritesDataGrid, 0, 3);
+            mfBrowserTableLayout.Controls.Add(mfMainDataGrid, 0, 0);
+            mfBrowserTableLayout.Controls.Add(mfOnlineUsersLabel, 1, 0);
+            mfBrowserTableLayout.Controls.Add(mfOnlineUsersList, 1, 1);
+            mfBrowserTableLayout.Controls.Add(mfNotificationsLabel, 1, 2);
+            mfBrowserTableLayout.Controls.Add(mfNotificationsList, 1, 3);
+            mfBrowserTableLayout.Controls.Add(mfFavoritesLabel, 0, 2);
+            mfBrowserTableLayout.Location = new Point(3, 3);
+            mfBrowserTableLayout.Name = "mfBrowserTableLayout";
+            mfBrowserTableLayout.RowCount = 4;
+            mfBrowserTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 8.450705F));
+            mfBrowserTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 91.54929F));
+            mfBrowserTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
+            mfBrowserTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 211F));
+            mfBrowserTableLayout.Size = new Size(666, 673);
+            mfBrowserTableLayout.TabIndex = 0;
             // 
             // mfFavoritesDataGrid
             // 
@@ -136,12 +143,14 @@
             mfFavoritesDataGrid.AllowUserToDeleteRows = false;
             mfFavoritesDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             mfFavoritesDataGrid.Columns.AddRange(new DataGridViewColumn[] { mfFavoritesDataGridGUIDColumn, mfFavoritesDataGridOwnerColumn, mfFavoritesDataGridFilenameColumn, mfFavoritesDataGridFilesizeColumn, mfFavoritesDataGridAccessColumn });
+            mfFavoritesDataGrid.ContextMenuStrip = mfFilesContextMenu;
             mfFavoritesDataGrid.Location = new Point(3, 464);
             mfFavoritesDataGrid.Name = "mfFavoritesDataGrid";
             mfFavoritesDataGrid.ReadOnly = true;
             mfFavoritesDataGrid.RowHeadersVisible = false;
             mfFavoritesDataGrid.RowTemplate.Height = 25;
             mfFavoritesDataGrid.ScrollBars = ScrollBars.Vertical;
+            mfFavoritesDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             mfFavoritesDataGrid.Size = new Size(426, 206);
             mfFavoritesDataGrid.TabIndex = 6;
             // 
@@ -179,19 +188,40 @@
             mfFavoritesDataGridAccessColumn.Resizable = DataGridViewTriState.True;
             mfFavoritesDataGridAccessColumn.Width = 70;
             // 
+            // mfFilesContextMenu
+            // 
+            mfFilesContextMenu.Items.AddRange(new ToolStripItem[] { downloadToolStripMenuItem, requestAccessToolStripMenuItem });
+            mfFilesContextMenu.Name = "mfContextMenu";
+            mfFilesContextMenu.Size = new Size(156, 48);
+            mfFilesContextMenu.ItemClicked += FileContextMenu_ItemClicked;
+            // 
+            // downloadToolStripMenuItem
+            // 
+            downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
+            downloadToolStripMenuItem.Size = new Size(155, 22);
+            downloadToolStripMenuItem.Text = "Download";
+            // 
+            // requestAccessToolStripMenuItem
+            // 
+            requestAccessToolStripMenuItem.Name = "requestAccessToolStripMenuItem";
+            requestAccessToolStripMenuItem.Size = new Size(155, 22);
+            requestAccessToolStripMenuItem.Text = "Request Access";
+            // 
             // mfMainDataGrid
             // 
             mfMainDataGrid.AllowUserToAddRows = false;
             mfMainDataGrid.AllowUserToDeleteRows = false;
             mfMainDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             mfMainDataGrid.Columns.AddRange(new DataGridViewColumn[] { mfMainDataGridGUIDColumn, mfMainDataGridOwnerColumn, mfMainDataGridFilenameColumn, mfMainDataGridFilesizeColumn, mfMainDataGridAccessColumn });
+            mfMainDataGrid.ContextMenuStrip = mfFilesContextMenu;
             mfMainDataGrid.Location = new Point(3, 3);
             mfMainDataGrid.Name = "mfMainDataGrid";
             mfMainDataGrid.ReadOnly = true;
             mfMainDataGrid.RowHeadersVisible = false;
-            tableLayoutPanel1.SetRowSpan(mfMainDataGrid, 2);
+            mfBrowserTableLayout.SetRowSpan(mfMainDataGrid, 2);
             mfMainDataGrid.RowTemplate.Height = 25;
             mfMainDataGrid.ScrollBars = ScrollBars.Vertical;
+            mfMainDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             mfMainDataGrid.Size = new Size(426, 417);
             mfMainDataGrid.TabIndex = 0;
             // 
@@ -241,6 +271,7 @@
             // 
             // mfOnlineUsersList
             // 
+            mfOnlineUsersList.ContextMenuStrip = mfUsersContextMenu;
             mfOnlineUsersList.Dock = DockStyle.Fill;
             mfOnlineUsersList.ItemHeight = 25;
             mfOnlineUsersList.Location = new Point(435, 38);
@@ -279,7 +310,7 @@
             // 
             // mfMyFilesTab
             // 
-            mfMyFilesTab.Controls.Add(tableLayoutPanel3);
+            mfMyFilesTab.Controls.Add(mfMyFilesTableLayout);
             mfMyFilesTab.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             mfMyFilesTab.Location = new Point(4, 32);
             mfMyFilesTab.Name = "mfMyFilesTab";
@@ -289,39 +320,39 @@
             mfMyFilesTab.Text = "My Files";
             mfMyFilesTab.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel3
+            // mfMyFilesTableLayout
             // 
-            tableLayoutPanel3.ColumnCount = 4;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            tableLayoutPanel3.Controls.Add(mfAddNewFileLabel, 0, 2);
-            tableLayoutPanel3.Controls.Add(mfUsersToShareList, 3, 3);
-            tableLayoutPanel3.Controls.Add(mfUsersSharedWithList, 1, 3);
-            tableLayoutPanel3.Controls.Add(mfAuthorizedUsersList, 3, 1);
-            tableLayoutPanel3.Controls.Add(mfAuthorizedUsersLabel, 3, 0);
-            tableLayoutPanel3.Controls.Add(mfMyFilesDataGrid, 0, 0);
-            tableLayoutPanel3.Controls.Add(mfUsersShareListLabel, 3, 2);
-            tableLayoutPanel3.Controls.Add(mfSharedUsersLabel, 1, 2);
-            tableLayoutPanel3.Controls.Add(mfUnshareButton, 2, 5);
-            tableLayoutPanel3.Controls.Add(mfShareButton, 2, 4);
-            tableLayoutPanel3.Controls.Add(mfSelectFileButton, 0, 3);
-            tableLayoutPanel3.Controls.Add(mfAcceptFileButton, 0, 6);
-            tableLayoutPanel3.Controls.Add(mfNewFileFilenameTextBox, 0, 5);
-            tableLayoutPanel3.Controls.Add(mfNewFileFilenameLabel, 0, 4);
-            tableLayoutPanel3.Location = new Point(3, 3);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 7;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 8.450705F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 91.54929F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            tableLayoutPanel3.Size = new Size(666, 673);
-            tableLayoutPanel3.TabIndex = 1;
+            mfMyFilesTableLayout.ColumnCount = 4;
+            mfMyFilesTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            mfMyFilesTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            mfMyFilesTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            mfMyFilesTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            mfMyFilesTableLayout.Controls.Add(mfAddNewFileLabel, 0, 2);
+            mfMyFilesTableLayout.Controls.Add(mfUsersToShareList, 3, 3);
+            mfMyFilesTableLayout.Controls.Add(mfUsersSharedWithList, 1, 3);
+            mfMyFilesTableLayout.Controls.Add(mfAuthorizedUsersList, 3, 1);
+            mfMyFilesTableLayout.Controls.Add(mfAuthorizedUsersLabel, 3, 0);
+            mfMyFilesTableLayout.Controls.Add(mfMyFilesDataGrid, 0, 0);
+            mfMyFilesTableLayout.Controls.Add(mfUsersShareListLabel, 3, 2);
+            mfMyFilesTableLayout.Controls.Add(mfSharedUsersLabel, 1, 2);
+            mfMyFilesTableLayout.Controls.Add(mfUnshareButton, 2, 5);
+            mfMyFilesTableLayout.Controls.Add(mfShareButton, 2, 4);
+            mfMyFilesTableLayout.Controls.Add(mfSelectFileButton, 0, 3);
+            mfMyFilesTableLayout.Controls.Add(mfAcceptFileButton, 0, 6);
+            mfMyFilesTableLayout.Controls.Add(mfNewFileFilenameTextBox, 0, 5);
+            mfMyFilesTableLayout.Controls.Add(mfNewFileFilenameLabel, 0, 4);
+            mfMyFilesTableLayout.Location = new Point(3, 3);
+            mfMyFilesTableLayout.Name = "mfMyFilesTableLayout";
+            mfMyFilesTableLayout.RowCount = 7;
+            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 8.450705F));
+            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 91.54929F));
+            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
+            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            mfMyFilesTableLayout.Size = new Size(666, 673);
+            mfMyFilesTableLayout.TabIndex = 1;
             // 
             // mfAddNewFileLabel
             // 
@@ -340,7 +371,7 @@
             mfUsersToShareList.ItemHeight = 21;
             mfUsersToShareList.Location = new Point(467, 471);
             mfUsersToShareList.Name = "mfUsersToShareList";
-            tableLayoutPanel3.SetRowSpan(mfUsersToShareList, 4);
+            mfMyFilesTableLayout.SetRowSpan(mfUsersToShareList, 4);
             mfUsersToShareList.Size = new Size(196, 199);
             mfUsersToShareList.TabIndex = 5;
             // 
@@ -351,7 +382,7 @@
             mfUsersSharedWithList.ItemHeight = 21;
             mfUsersSharedWithList.Location = new Point(202, 471);
             mfUsersSharedWithList.Name = "mfUsersSharedWithList";
-            tableLayoutPanel3.SetRowSpan(mfUsersSharedWithList, 4);
+            mfMyFilesTableLayout.SetRowSpan(mfUsersSharedWithList, 4);
             mfUsersSharedWithList.Size = new Size(193, 199);
             mfUsersSharedWithList.TabIndex = 4;
             // 
@@ -380,14 +411,15 @@
             mfMyFilesDataGrid.AllowUserToDeleteRows = false;
             mfMyFilesDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             mfMyFilesDataGrid.Columns.AddRange(new DataGridViewColumn[] { mfMyFilesDataGridGUIDColumn, mfMyFilesDataGridFilenameColumn, mfMyFilesDataGridFilesizeColumn });
-            tableLayoutPanel3.SetColumnSpan(mfMyFilesDataGrid, 3);
+            mfMyFilesTableLayout.SetColumnSpan(mfMyFilesDataGrid, 3);
             mfMyFilesDataGrid.Location = new Point(3, 3);
             mfMyFilesDataGrid.Name = "mfMyFilesDataGrid";
             mfMyFilesDataGrid.ReadOnly = true;
             mfMyFilesDataGrid.RowHeadersVisible = false;
-            tableLayoutPanel3.SetRowSpan(mfMyFilesDataGrid, 2);
+            mfMyFilesTableLayout.SetRowSpan(mfMyFilesDataGrid, 2);
             mfMyFilesDataGrid.RowTemplate.Height = 25;
             mfMyFilesDataGrid.ScrollBars = ScrollBars.Vertical;
+            mfMyFilesDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             mfMyFilesDataGrid.Size = new Size(458, 418);
             mfMyFilesDataGrid.TabIndex = 0;
             // 
@@ -524,16 +556,17 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += TEST_CLICK;
             // 
-            // tableLayoutPanel2
+            // mfUsersContextMenu
             // 
-            tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
-            tableLayoutPanel2.Location = new Point(0, 0);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 4;
-            tableLayoutPanel2.Size = new Size(200, 100);
-            tableLayoutPanel2.TabIndex = 0;
+            mfUsersContextMenu.Items.AddRange(new ToolStripItem[] { refreshToolStripMenuItem });
+            mfUsersContextMenu.Name = "mfUsersContextMenu";
+            mfUsersContextMenu.Size = new Size(114, 26);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            refreshToolStripMenuItem.Size = new Size(113, 22);
+            refreshToolStripMenuItem.Text = "Refresh";
             // 
             // MainForm
             // 
@@ -546,17 +579,20 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Zipline Client";
+            FormClosing += MainForm_FormClosing;
             mfCentralTabControl.ResumeLayout(false);
             mfBrowserTab.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            mfBrowserTableLayout.ResumeLayout(false);
+            mfBrowserTableLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)mfFavoritesDataGrid).EndInit();
+            mfFilesContextMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)mfMainDataGrid).EndInit();
             mfMyFilesTab.ResumeLayout(false);
-            tableLayoutPanel3.ResumeLayout(false);
-            tableLayoutPanel3.PerformLayout();
+            mfMyFilesTableLayout.ResumeLayout(false);
+            mfMyFilesTableLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)mfMyFilesDataGrid).EndInit();
             mfOptionsTab.ResumeLayout(false);
+            mfUsersContextMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -566,7 +602,7 @@
         private TabPage mfBrowserTab;
         private TabPage mfMyFilesTab;
         private TabPage mfOptionsTab;
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel mfBrowserTableLayout;
         private DataGridView mfMainDataGrid;
         private Label mfOnlineUsersLabel;
         private ListBox mfOnlineUsersList;
@@ -574,12 +610,11 @@
         private ListBox mfNotificationsList;
         private Label mfFavoritesLabel;
         private DataGridView mfFavoritesDataGrid;
-        private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel mfMyFilesTableLayout;
         private DataGridView mfMyFilesDataGrid;
         private ListBox mfUsersSharedWithList;
         private ListBox mfAuthorizedUsersList;
         private Label mfAuthorizedUsersLabel;
-        private TableLayoutPanel tableLayoutPanel2;
         private Label mfAddNewFileLabel;
         private ListBox mfUsersToShareList;
         private Label mfUsersShareListLabel;
@@ -604,5 +639,10 @@
         private DataGridViewTextBoxColumn mfFavoritesDataGridFilesizeColumn;
         private DataGridViewCheckBoxColumn mfFavoritesDataGridAccessColumn;
         private Button button1;
+        private ContextMenuStrip mfFilesContextMenu;
+        private ToolStripMenuItem downloadToolStripMenuItem;
+        private ToolStripMenuItem requestAccessToolStripMenuItem;
+        private ContextMenuStrip mfUsersContextMenu;
+        private ToolStripMenuItem refreshToolStripMenuItem;
     }
 }

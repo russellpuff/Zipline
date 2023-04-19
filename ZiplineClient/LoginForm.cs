@@ -1,8 +1,13 @@
-﻿using System.Media;
+﻿using System.Collections.Specialized;
+using System.Media;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ZiplineClient
 {
@@ -10,6 +15,7 @@ namespace ZiplineClient
     {
         public bool UserAuthenticated { get; private set; }
         public string Username { get; private set; }
+        public string CurrentIP { get; private set; }
         public LoginForm()
         {
             InitializeComponent();
@@ -17,13 +23,57 @@ namespace ZiplineClient
             Username = string.Empty;
         }
 
-        private void LoginButton_Click(object sender, EventArgs e)
+        private async void LoginButton_ClickAsync(object sender, EventArgs e)
         {
             if (lfUsernameTextBox.Text.Length == 0) { return; }
-            // Replace this with actual login code lol
-            UserAuthenticated = true;
-            Username = lfUsernameTextBox.Text;
-            this.Close();
+            string password = "null"; // Replace with password hashing.
+            CurrentIP = await GetCurrentIP();
+            // Replace this with a grab from a config file.
+            CurrentIP += ":57321";
+            // 
+            if (CurrentIP == "STATUS_RETRY") { return; }
+            var outgoing_payload = new
+            {
+                Command = "login_user",
+                Username = lfUsernameTextBox.Text,
+                Password = password,
+                LatestIP = CurrentIP
+            };
+            string server_response = Program.SendCommandToServer(outgoing_payload);
+            if (server_response.Contains("OK"))
+            {
+                UserAuthenticated = true;
+                Username = lfUsernameTextBox.Text;
+                this.Close();
+            }
+            else if (server_response is not "STATUS_FAILURE")
+            { MessageBox.Show("Invalid username or password.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            else
+            {
+                string msg = $"Unable to communicate with the server.";
+                var result = MessageBox.Show(msg, "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                if (result == DialogResult.Retry) { LoginButton_ClickAsync(sender, e); } else { this.Close(); }
+            }
+        }
+
+        private async Task<string> GetCurrentIP()
+        {
+            string current_ip = string.Empty;
+            try
+            { // Request public ip. 
+                using HttpClient httpClient = new();
+                HttpResponseMessage response = await httpClient.GetAsync("https://api64.ipify.org");
+                if (response.IsSuccessStatusCode)
+                { current_ip = await response.Content.ReadAsStringAsync(); }
+            }
+            catch
+            {
+                string msg = "Couldn't retrieve current IP. Make sure you are connected to the internet.";
+                var result = MessageBox.Show(msg, "IP Retrieve Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                if (result == DialogResult.Cancel) { this.Close(); }
+                else { current_ip = "STATUS_RETRY"; } // bootleg solution
+            }
+            return current_ip;
         }
 
         private void UsernameTextBox_TextChanged(object sender, EventArgs e)
