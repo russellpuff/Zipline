@@ -27,8 +27,12 @@ def addNewFile(payload: 'json_object with Command, Username, FileGUID, Filename,
     filesize = payload['FileSize']
     authusers = payload['AuthorizedUsers'].split('?')
 
-    filexists = cursor.execute(SQL.queryFile, [fileguid]).fetchone()
-    if filexists:
+    userexists = cursor.execute(SQL.queryUser, [username]).fetchone()
+    if not userexists:
+        return 'STATUS_USER_DOES_NOT_EXIST'
+
+    fileexists = cursor.execute(SQL.queryFile, [fileguid]).fetchone()
+    if fileexists:
         return 'STATUS_FILE_EXISTS'
     
     cursor.execute(SQL.insertFile, [fileguid, filename, filesize, username])
@@ -46,6 +50,10 @@ def deleteFile(payload: 'json_object with Command, FileGUID Fields'):
     cursor = connection.cursor()
 
     fileguid = payload['FileGUID']
+    fileexists = cursor.execute(SQL.queryFile, [fileguid]).fetchone()
+    if not fileexists:
+        return 'STATUS_IGNORE'
+
     cursor.execute(SQL.deleteAccess, [fileguid])
     cursor.execute(SQL.deleteFile, [fileguid])
 
