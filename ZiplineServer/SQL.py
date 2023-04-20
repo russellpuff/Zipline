@@ -20,6 +20,13 @@ queryFile = '''
     WHERE           FILES.FILE_GUID = ?;
 '''
 
+queryFileGUID = '''
+    SELECT          FILES.FILE_GUID
+    FROM            FILES
+    INNER JOIN      USERS ON FILES.USER_ID = USERS.USER_ID
+    WHERE           USERS.USERNAME = ? and FILES.FILENAME = ?;
+'''
+
 queryUsersOnline = '''
     SELECT          LATEST_IP
     FROM            USERS

@@ -27,8 +27,12 @@ def addNewFile(payload: 'json_object with Command, Username, FileGUID, Filename,
     filesize = payload['FileSize']
     authusers = payload['AuthorizedUsers'].split('?')
 
-    filexists = cursor.execute(SQL.queryFile, [fileguid]).fetchone()
-    if filexists:
+    userexists = cursor.execute(SQL.queryUser, [username]).fetchone()
+    if not userexists:
+        return 'STATUS_USER_DOES_NOT_EXIST'
+
+    fileexists = cursor.execute(SQL.queryFile, [fileguid]).fetchone()
+    if fileexists:
         return 'STATUS_FILE_EXISTS'
     
     cursor.execute(SQL.insertFile, [fileguid, filename, filesize, username])
@@ -45,7 +49,21 @@ def deleteFile(payload: 'json_object with Command, FileGUID Fields'):
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
 
-    fileguid = payload['FileGUID']
+    if 'FileGUID' in payload:
+        fileguid = payload['FileGUID']
+    else:
+        username = payload['Username']
+        filename = payload['Filename']
+        fileguid = cursor.execute(SQL.queryFileGUID, [username, filename]).fetchone()
+        if fileguid:
+            fileguid = fileguid[0]
+        else:
+            return 'STATUS_IGNORE'
+
+    fileexists = cursor.execute(SQL.queryFile, [fileguid]).fetchone()
+    if not fileexists:
+        return 'STATUS_IGNORE'
+
     cursor.execute(SQL.deleteAccess, [fileguid])
     cursor.execute(SQL.deleteFile, [fileguid])
 
