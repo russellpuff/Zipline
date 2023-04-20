@@ -49,7 +49,17 @@ def deleteFile(payload: 'json_object with Command, FileGUID Fields'):
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
 
-    fileguid = payload['FileGUID']
+    if 'FileGUID' in payload:
+        fileguid = payload['FileGUID']
+    else:
+        username = payload['Username']
+        filename = payload['Filename']
+        fileguid = cursor.execute(SQL.queryFileGUID, [username, filename]).fetchone()
+        if fileguid:
+            fileguid = fileguid[0]
+        else:
+            return 'STATUS_IGNORE'
+
     fileexists = cursor.execute(SQL.queryFile, [fileguid]).fetchone()
     if not fileexists:
         return 'STATUS_IGNORE'

@@ -22,7 +22,8 @@ fileData = [
         (99005, 10038, 'ABCD-EFGH-IJKL-MNOP', 'boot.tar', 500),
         (99101, 10098, '1234-ABCD-1234-ABCD', 'data.dat', 110056085),
         (99889, 10001, 'ZZZZ-YYYY-XXXX-WWWW', 'plain.txt', 12002),
-        (99890, 10015, '11AA-22BB-33CC-44DD', 'sample.db', 64000)
+        (99890, 10015, '11AA-22BB-33CC-44DD', 'sample.db', 64000),
+        (99891, 10015, '2222-2222-2222-2222', 'test2.txt', 128)
 ]
 
 accessData = [

@@ -125,15 +125,26 @@ def testAddNewFile():
 def testDeleteFile():
     printHeader('deleteFile')
     failures = 0
-    ## Test with Existing File
+
+    ## Test with Existing File by GUID
     response = sendPackage('{"Command":"delete_file","FileGUID":"1234-2345-3456-4567"}')
     expected = genResponse('STATUS_OK')
-    failures += testResults('Existing File Test', response, expected)
+    failures += testResults('Existing File by GUID Test', response, expected)
 
-    ## Test with Non-Existent File
+    ## Test with Non-Existent File by GUID
     response = sendPackage('{"Command":"delete_file","FileGUID":"9999-9999-9999-9999"}')
     expected = genResponse('STATUS_IGNORE')
-    failures += testResults('Non-Existent File Test', response, expected)
+    failures += testResults('Non-Existent File by GUID Test', response, expected)
+
+    ## Test with Existing File by Username, Filename
+    response = sendPackage('{"Command":"delete_file","Username":"barbara","Filename":"test2.txt"}')
+    expected = genResponse('STATUS_OK')
+    failures += testResults('Existing File by Username,Filename Test', response, expected)
+
+    ## Test with Non-Existent File by Username, Filename
+    response = sendPackage('{"Command":"delete_file","Username":"barbara","Filename":"test2.txt"}')
+    expected = genResponse('STATUS_IGNORE')
+    failures += testResults('Non-Existent File by Username,Filename Test', response, expected)
 
     printFinalResults('deleteFile', failures)
 
