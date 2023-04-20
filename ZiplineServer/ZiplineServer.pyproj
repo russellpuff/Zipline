@@ -21,7 +21,13 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include=".CreateDB.py" />
+    <Compile Include=".FillDB.py" />
+    <Compile Include=".TestClient.py" />
     <Compile Include="ZiplineServer.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Zipline.db" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

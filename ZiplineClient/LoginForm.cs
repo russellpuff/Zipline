@@ -25,7 +25,7 @@ namespace ZiplineClient
 
         private async void LoginButton_ClickAsync(object sender, EventArgs e)
         {
-            if (lfUsernameTextBox.Text.Length == 0) { return; }
+            lfLoginButton.Enabled = false;
             string password = "null"; // Replace with password hashing.
             CurrentIP = await GetCurrentIP();
             // Replace this with a grab from a config file.
@@ -39,7 +39,7 @@ namespace ZiplineClient
                 Password = password,
                 LatestIP = CurrentIP
             };
-            string server_response = Program.SendCommandToServer(outgoing_payload);
+            string server_response = await Program.SendCommandToServerAsync(outgoing_payload);
             if (server_response.Contains("OK"))
             {
                 UserAuthenticated = true;
@@ -47,7 +47,7 @@ namespace ZiplineClient
                 this.Close();
             }
             else if (server_response is not "STATUS_FAILURE")
-            { MessageBox.Show("Invalid username or password.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            { MessageBox.Show("Invalid password.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             else
             {
                 string msg = $"Unable to communicate with the server.";
@@ -62,7 +62,7 @@ namespace ZiplineClient
             try
             { // Request public ip. 
                 using HttpClient httpClient = new();
-                HttpResponseMessage response = await httpClient.GetAsync("https://api64.ipify.org");
+                HttpResponseMessage response = await httpClient.GetAsync("https://api.ipify.org");
                 if (response.IsSuccessStatusCode)
                 { current_ip = await response.Content.ReadAsStringAsync(); }
             }
@@ -83,6 +83,8 @@ namespace ZiplineClient
             string modified_text = Regex.Replace(tb.Text, "[^0-9a-zA-Z_]", "");
             if (modified_text != tb.Text) { SystemSounds.Asterisk.Play(); tb.Text = modified_text; }
             tb.SelectionStart = cursorPos;
+
+            lfLoginButton.Enabled = tb.Text.Length >= 3; // Username must be between 3 and 20 characters. 
         }
     }
 }

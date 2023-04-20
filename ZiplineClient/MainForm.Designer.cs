@@ -28,572 +28,603 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            mfCentralTabControl = new TabControl();
-            mfBrowserTab = new TabPage();
-            mfBrowserTableLayout = new TableLayoutPanel();
-            mfFavoritesDataGrid = new DataGridView();
-            mfFavoritesDataGridGUIDColumn = new DataGridViewTextBoxColumn();
-            mfFavoritesDataGridOwnerColumn = new DataGridViewTextBoxColumn();
-            mfFavoritesDataGridFilenameColumn = new DataGridViewTextBoxColumn();
-            mfFavoritesDataGridFilesizeColumn = new DataGridViewTextBoxColumn();
-            mfFavoritesDataGridAccessColumn = new DataGridViewCheckBoxColumn();
-            mfFilesContextMenu = new ContextMenuStrip(components);
-            downloadToolStripMenuItem = new ToolStripMenuItem();
-            requestAccessToolStripMenuItem = new ToolStripMenuItem();
-            mfMainDataGrid = new DataGridView();
-            mfMainDataGridGUIDColumn = new DataGridViewTextBoxColumn();
-            mfMainDataGridOwnerColumn = new DataGridViewTextBoxColumn();
-            mfMainDataGridFilenameColumn = new DataGridViewTextBoxColumn();
-            mfMainDataGridFilesizeColumn = new DataGridViewTextBoxColumn();
-            mfMainDataGridAccessColumn = new DataGridViewCheckBoxColumn();
-            mfOnlineUsersLabel = new Label();
-            mfOnlineUsersList = new ListBox();
-            mfNotificationsLabel = new Label();
-            mfNotificationsList = new ListBox();
-            mfFavoritesLabel = new Label();
-            mfMyFilesTab = new TabPage();
-            mfMyFilesTableLayout = new TableLayoutPanel();
-            mfAddNewFileLabel = new Label();
-            mfUsersToShareList = new ListBox();
-            mfUsersSharedWithList = new ListBox();
-            mfAuthorizedUsersList = new ListBox();
-            mfAuthorizedUsersLabel = new Label();
-            mfMyFilesDataGrid = new DataGridView();
-            mfMyFilesDataGridGUIDColumn = new DataGridViewTextBoxColumn();
-            mfMyFilesDataGridFilenameColumn = new DataGridViewTextBoxColumn();
-            mfMyFilesDataGridFilesizeColumn = new DataGridViewTextBoxColumn();
-            mfUsersShareListLabel = new Label();
-            mfSharedUsersLabel = new Label();
-            mfUnshareButton = new Button();
-            mfShareButton = new Button();
-            mfSelectFileButton = new Button();
-            mfAcceptFileButton = new Button();
-            mfNewFileFilenameTextBox = new TextBox();
-            mfNewFileFilenameLabel = new Label();
-            mfOptionsTab = new TabPage();
-            button1 = new Button();
-            mfUsersContextMenu = new ContextMenuStrip(components);
-            refreshToolStripMenuItem = new ToolStripMenuItem();
-            mfCentralTabControl.SuspendLayout();
-            mfBrowserTab.SuspendLayout();
-            mfBrowserTableLayout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)mfFavoritesDataGrid).BeginInit();
-            mfFilesContextMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)mfMainDataGrid).BeginInit();
-            mfMyFilesTab.SuspendLayout();
-            mfMyFilesTableLayout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)mfMyFilesDataGrid).BeginInit();
-            mfOptionsTab.SuspendLayout();
-            mfUsersContextMenu.SuspendLayout();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.mfCentralTabControl = new System.Windows.Forms.TabControl();
+            this.mfBrowserTab = new System.Windows.Forms.TabPage();
+            this.mfBrowserTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.mfFavoritesDataGrid = new System.Windows.Forms.DataGridView();
+            this.mfFavoritesDataGridGUIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfFavoritesDataGridOwnerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfFavoritesDataGridFilenameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfFavoritesDataGridFilesizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfFavoritesDataGridAccessColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.mfFilesContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.requestAccessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mfMainDataGrid = new System.Windows.Forms.DataGridView();
+            this.mfMainDataGridGUIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfMainDataGridOwnerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfMainDataGridFilenameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfMainDataGridFilesizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfMainDataGridAccessColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.mfOnlineUsersLabel = new System.Windows.Forms.Label();
+            this.mfOnlineUsersList = new System.Windows.Forms.ListBox();
+            this.mfUsersContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mfNotificationsLabel = new System.Windows.Forms.Label();
+            this.mfNotificationsList = new System.Windows.Forms.ListBox();
+            this.mfFavoritesLabel = new System.Windows.Forms.Label();
+            this.mfMyFilesTab = new System.Windows.Forms.TabPage();
+            this.mfMyFilesTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.mfAddNewFileLabel = new System.Windows.Forms.Label();
+            this.mfUsersToShareList = new System.Windows.Forms.ListBox();
+            this.mfUsersSharedWithList = new System.Windows.Forms.ListBox();
+            this.mfAuthorizedUsersList = new System.Windows.Forms.ListBox();
+            this.mfAuthorizedUsersLabel = new System.Windows.Forms.Label();
+            this.mfMyFilesDataGrid = new System.Windows.Forms.DataGridView();
+            this.mfMyFilesDataGridGUIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfMyFilesDataGridFilenameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfMyFilesDataGridFilesizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfPersonalFilesContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shareWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mfUsersShareListLabel = new System.Windows.Forms.Label();
+            this.mfSharedUsersLabel = new System.Windows.Forms.Label();
+            this.mfUnshareButton = new System.Windows.Forms.Button();
+            this.mfShareButton = new System.Windows.Forms.Button();
+            this.mfSelectFileButton = new System.Windows.Forms.Button();
+            this.mfAcceptFileButton = new System.Windows.Forms.Button();
+            this.mfNewFileFilenameTextBox = new System.Windows.Forms.TextBox();
+            this.mfNewFileFilenameLabel = new System.Windows.Forms.Label();
+            this.mfOptionsTab = new System.Windows.Forms.TabPage();
+            this.mfCentralTabControl.SuspendLayout();
+            this.mfBrowserTab.SuspendLayout();
+            this.mfBrowserTableLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mfFavoritesDataGrid)).BeginInit();
+            this.mfFilesContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mfMainDataGrid)).BeginInit();
+            this.mfUsersContextMenu.SuspendLayout();
+            this.mfMyFilesTab.SuspendLayout();
+            this.mfMyFilesTableLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mfMyFilesDataGrid)).BeginInit();
+            this.mfPersonalFilesContextMenu.SuspendLayout();
+            this.SuspendLayout();
             // 
             // mfCentralTabControl
             // 
-            mfCentralTabControl.Controls.Add(mfBrowserTab);
-            mfCentralTabControl.Controls.Add(mfMyFilesTab);
-            mfCentralTabControl.Controls.Add(mfOptionsTab);
-            mfCentralTabControl.Dock = DockStyle.Fill;
-            mfCentralTabControl.Font = new Font("Century", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            mfCentralTabControl.Location = new Point(0, 0);
-            mfCentralTabControl.Margin = new Padding(2);
-            mfCentralTabControl.Name = "mfCentralTabControl";
-            mfCentralTabControl.SelectedIndex = 0;
-            mfCentralTabControl.Size = new Size(680, 715);
-            mfCentralTabControl.TabIndex = 0;
-            mfCentralTabControl.SelectedIndexChanged += CentralTabControl_SelectedIndexChanged;
+            this.mfCentralTabControl.Controls.Add(this.mfBrowserTab);
+            this.mfCentralTabControl.Controls.Add(this.mfMyFilesTab);
+            this.mfCentralTabControl.Controls.Add(this.mfOptionsTab);
+            this.mfCentralTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mfCentralTabControl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfCentralTabControl.Location = new System.Drawing.Point(0, 0);
+            this.mfCentralTabControl.Margin = new System.Windows.Forms.Padding(2);
+            this.mfCentralTabControl.Name = "mfCentralTabControl";
+            this.mfCentralTabControl.SelectedIndex = 0;
+            this.mfCentralTabControl.Size = new System.Drawing.Size(680, 715);
+            this.mfCentralTabControl.TabIndex = 0;
+            this.mfCentralTabControl.SelectedIndexChanged += new System.EventHandler(this.CentralTabControl_SelectedIndexChanged);
             // 
             // mfBrowserTab
             // 
-            mfBrowserTab.Controls.Add(mfBrowserTableLayout);
-            mfBrowserTab.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            mfBrowserTab.Location = new Point(4, 32);
-            mfBrowserTab.Name = "mfBrowserTab";
-            mfBrowserTab.Padding = new Padding(3);
-            mfBrowserTab.Size = new Size(672, 679);
-            mfBrowserTab.TabIndex = 0;
-            mfBrowserTab.Text = "Browser";
-            mfBrowserTab.UseVisualStyleBackColor = true;
+            this.mfBrowserTab.Controls.Add(this.mfBrowserTableLayout);
+            this.mfBrowserTab.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfBrowserTab.Location = new System.Drawing.Point(4, 32);
+            this.mfBrowserTab.Name = "mfBrowserTab";
+            this.mfBrowserTab.Padding = new System.Windows.Forms.Padding(3);
+            this.mfBrowserTab.Size = new System.Drawing.Size(672, 679);
+            this.mfBrowserTab.TabIndex = 0;
+            this.mfBrowserTab.Text = "Browser";
+            this.mfBrowserTab.UseVisualStyleBackColor = true;
             // 
             // mfBrowserTableLayout
             // 
-            mfBrowserTableLayout.ColumnCount = 2;
-            mfBrowserTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
-            mfBrowserTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
-            mfBrowserTableLayout.Controls.Add(mfFavoritesDataGrid, 0, 3);
-            mfBrowserTableLayout.Controls.Add(mfMainDataGrid, 0, 0);
-            mfBrowserTableLayout.Controls.Add(mfOnlineUsersLabel, 1, 0);
-            mfBrowserTableLayout.Controls.Add(mfOnlineUsersList, 1, 1);
-            mfBrowserTableLayout.Controls.Add(mfNotificationsLabel, 1, 2);
-            mfBrowserTableLayout.Controls.Add(mfNotificationsList, 1, 3);
-            mfBrowserTableLayout.Controls.Add(mfFavoritesLabel, 0, 2);
-            mfBrowserTableLayout.Location = new Point(3, 3);
-            mfBrowserTableLayout.Name = "mfBrowserTableLayout";
-            mfBrowserTableLayout.RowCount = 4;
-            mfBrowserTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 8.450705F));
-            mfBrowserTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 91.54929F));
-            mfBrowserTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
-            mfBrowserTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 211F));
-            mfBrowserTableLayout.Size = new Size(666, 673);
-            mfBrowserTableLayout.TabIndex = 0;
+            this.mfBrowserTableLayout.ColumnCount = 2;
+            this.mfBrowserTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.mfBrowserTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.mfBrowserTableLayout.Controls.Add(this.mfFavoritesDataGrid, 0, 3);
+            this.mfBrowserTableLayout.Controls.Add(this.mfMainDataGrid, 0, 0);
+            this.mfBrowserTableLayout.Controls.Add(this.mfOnlineUsersLabel, 1, 0);
+            this.mfBrowserTableLayout.Controls.Add(this.mfOnlineUsersList, 1, 1);
+            this.mfBrowserTableLayout.Controls.Add(this.mfNotificationsLabel, 1, 2);
+            this.mfBrowserTableLayout.Controls.Add(this.mfNotificationsList, 1, 3);
+            this.mfBrowserTableLayout.Controls.Add(this.mfFavoritesLabel, 0, 2);
+            this.mfBrowserTableLayout.Location = new System.Drawing.Point(3, 3);
+            this.mfBrowserTableLayout.Name = "mfBrowserTableLayout";
+            this.mfBrowserTableLayout.RowCount = 4;
+            this.mfBrowserTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.450705F));
+            this.mfBrowserTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.54929F));
+            this.mfBrowserTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.mfBrowserTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 211F));
+            this.mfBrowserTableLayout.Size = new System.Drawing.Size(666, 673);
+            this.mfBrowserTableLayout.TabIndex = 0;
             // 
             // mfFavoritesDataGrid
             // 
-            mfFavoritesDataGrid.AllowUserToAddRows = false;
-            mfFavoritesDataGrid.AllowUserToDeleteRows = false;
-            mfFavoritesDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            mfFavoritesDataGrid.Columns.AddRange(new DataGridViewColumn[] { mfFavoritesDataGridGUIDColumn, mfFavoritesDataGridOwnerColumn, mfFavoritesDataGridFilenameColumn, mfFavoritesDataGridFilesizeColumn, mfFavoritesDataGridAccessColumn });
-            mfFavoritesDataGrid.ContextMenuStrip = mfFilesContextMenu;
-            mfFavoritesDataGrid.Location = new Point(3, 464);
-            mfFavoritesDataGrid.Name = "mfFavoritesDataGrid";
-            mfFavoritesDataGrid.ReadOnly = true;
-            mfFavoritesDataGrid.RowHeadersVisible = false;
-            mfFavoritesDataGrid.RowTemplate.Height = 25;
-            mfFavoritesDataGrid.ScrollBars = ScrollBars.Vertical;
-            mfFavoritesDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            mfFavoritesDataGrid.Size = new Size(426, 206);
-            mfFavoritesDataGrid.TabIndex = 6;
+            this.mfFavoritesDataGrid.AllowUserToAddRows = false;
+            this.mfFavoritesDataGrid.AllowUserToDeleteRows = false;
+            this.mfFavoritesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.mfFavoritesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.mfFavoritesDataGridGUIDColumn,
+            this.mfFavoritesDataGridOwnerColumn,
+            this.mfFavoritesDataGridFilenameColumn,
+            this.mfFavoritesDataGridFilesizeColumn,
+            this.mfFavoritesDataGridAccessColumn});
+            this.mfFavoritesDataGrid.ContextMenuStrip = this.mfFilesContextMenu;
+            this.mfFavoritesDataGrid.Location = new System.Drawing.Point(3, 464);
+            this.mfFavoritesDataGrid.Name = "mfFavoritesDataGrid";
+            this.mfFavoritesDataGrid.ReadOnly = true;
+            this.mfFavoritesDataGrid.RowHeadersVisible = false;
+            this.mfFavoritesDataGrid.RowTemplate.Height = 25;
+            this.mfFavoritesDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mfFavoritesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.mfFavoritesDataGrid.Size = new System.Drawing.Size(426, 206);
+            this.mfFavoritesDataGrid.TabIndex = 6;
             // 
             // mfFavoritesDataGridGUIDColumn
             // 
-            mfFavoritesDataGridGUIDColumn.HeaderText = "GUID";
-            mfFavoritesDataGridGUIDColumn.Name = "mfFavoritesDataGridGUIDColumn";
-            mfFavoritesDataGridGUIDColumn.ReadOnly = true;
-            mfFavoritesDataGridGUIDColumn.Visible = false;
+            this.mfFavoritesDataGridGUIDColumn.HeaderText = "GUID";
+            this.mfFavoritesDataGridGUIDColumn.Name = "mfFavoritesDataGridGUIDColumn";
+            this.mfFavoritesDataGridGUIDColumn.ReadOnly = true;
+            this.mfFavoritesDataGridGUIDColumn.Visible = false;
             // 
             // mfFavoritesDataGridOwnerColumn
             // 
-            mfFavoritesDataGridOwnerColumn.HeaderText = "Owner";
-            mfFavoritesDataGridOwnerColumn.Name = "mfFavoritesDataGridOwnerColumn";
-            mfFavoritesDataGridOwnerColumn.ReadOnly = true;
+            this.mfFavoritesDataGridOwnerColumn.HeaderText = "Owner";
+            this.mfFavoritesDataGridOwnerColumn.Name = "mfFavoritesDataGridOwnerColumn";
+            this.mfFavoritesDataGridOwnerColumn.ReadOnly = true;
             // 
             // mfFavoritesDataGridFilenameColumn
             // 
-            mfFavoritesDataGridFilenameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            mfFavoritesDataGridFilenameColumn.HeaderText = "Filename";
-            mfFavoritesDataGridFilenameColumn.Name = "mfFavoritesDataGridFilenameColumn";
-            mfFavoritesDataGridFilenameColumn.ReadOnly = true;
+            this.mfFavoritesDataGridFilenameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.mfFavoritesDataGridFilenameColumn.HeaderText = "Filename";
+            this.mfFavoritesDataGridFilenameColumn.Name = "mfFavoritesDataGridFilenameColumn";
+            this.mfFavoritesDataGridFilenameColumn.ReadOnly = true;
             // 
             // mfFavoritesDataGridFilesizeColumn
             // 
-            mfFavoritesDataGridFilesizeColumn.HeaderText = "Filesize";
-            mfFavoritesDataGridFilesizeColumn.Name = "mfFavoritesDataGridFilesizeColumn";
-            mfFavoritesDataGridFilesizeColumn.ReadOnly = true;
+            this.mfFavoritesDataGridFilesizeColumn.HeaderText = "Filesize";
+            this.mfFavoritesDataGridFilesizeColumn.Name = "mfFavoritesDataGridFilesizeColumn";
+            this.mfFavoritesDataGridFilesizeColumn.ReadOnly = true;
             // 
             // mfFavoritesDataGridAccessColumn
             // 
-            mfFavoritesDataGridAccessColumn.HeaderText = "Access";
-            mfFavoritesDataGridAccessColumn.Name = "mfFavoritesDataGridAccessColumn";
-            mfFavoritesDataGridAccessColumn.ReadOnly = true;
-            mfFavoritesDataGridAccessColumn.Resizable = DataGridViewTriState.True;
-            mfFavoritesDataGridAccessColumn.Width = 70;
+            this.mfFavoritesDataGridAccessColumn.HeaderText = "Access";
+            this.mfFavoritesDataGridAccessColumn.Name = "mfFavoritesDataGridAccessColumn";
+            this.mfFavoritesDataGridAccessColumn.ReadOnly = true;
+            this.mfFavoritesDataGridAccessColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.mfFavoritesDataGridAccessColumn.Width = 70;
             // 
             // mfFilesContextMenu
             // 
-            mfFilesContextMenu.Items.AddRange(new ToolStripItem[] { downloadToolStripMenuItem, requestAccessToolStripMenuItem });
-            mfFilesContextMenu.Name = "mfContextMenu";
-            mfFilesContextMenu.Size = new Size(156, 48);
-            mfFilesContextMenu.ItemClicked += FileContextMenu_ItemClicked;
+            this.mfFilesContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.downloadToolStripMenuItem,
+            this.requestAccessToolStripMenuItem});
+            this.mfFilesContextMenu.Name = "mfContextMenu";
+            this.mfFilesContextMenu.Size = new System.Drawing.Size(156, 48);
+            this.mfFilesContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.FileContextMenu_ItemClicked);
             // 
             // downloadToolStripMenuItem
             // 
-            downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
-            downloadToolStripMenuItem.Size = new Size(155, 22);
-            downloadToolStripMenuItem.Text = "Download";
+            this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
+            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.downloadToolStripMenuItem.Text = "Download";
             // 
             // requestAccessToolStripMenuItem
             // 
-            requestAccessToolStripMenuItem.Name = "requestAccessToolStripMenuItem";
-            requestAccessToolStripMenuItem.Size = new Size(155, 22);
-            requestAccessToolStripMenuItem.Text = "Request Access";
+            this.requestAccessToolStripMenuItem.Name = "requestAccessToolStripMenuItem";
+            this.requestAccessToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.requestAccessToolStripMenuItem.Text = "Request Access";
             // 
             // mfMainDataGrid
             // 
-            mfMainDataGrid.AllowUserToAddRows = false;
-            mfMainDataGrid.AllowUserToDeleteRows = false;
-            mfMainDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            mfMainDataGrid.Columns.AddRange(new DataGridViewColumn[] { mfMainDataGridGUIDColumn, mfMainDataGridOwnerColumn, mfMainDataGridFilenameColumn, mfMainDataGridFilesizeColumn, mfMainDataGridAccessColumn });
-            mfMainDataGrid.ContextMenuStrip = mfFilesContextMenu;
-            mfMainDataGrid.Location = new Point(3, 3);
-            mfMainDataGrid.Name = "mfMainDataGrid";
-            mfMainDataGrid.ReadOnly = true;
-            mfMainDataGrid.RowHeadersVisible = false;
-            mfBrowserTableLayout.SetRowSpan(mfMainDataGrid, 2);
-            mfMainDataGrid.RowTemplate.Height = 25;
-            mfMainDataGrid.ScrollBars = ScrollBars.Vertical;
-            mfMainDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            mfMainDataGrid.Size = new Size(426, 417);
-            mfMainDataGrid.TabIndex = 0;
+            this.mfMainDataGrid.AllowUserToAddRows = false;
+            this.mfMainDataGrid.AllowUserToDeleteRows = false;
+            this.mfMainDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.mfMainDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.mfMainDataGridGUIDColumn,
+            this.mfMainDataGridOwnerColumn,
+            this.mfMainDataGridFilenameColumn,
+            this.mfMainDataGridFilesizeColumn,
+            this.mfMainDataGridAccessColumn});
+            this.mfMainDataGrid.ContextMenuStrip = this.mfFilesContextMenu;
+            this.mfMainDataGrid.Location = new System.Drawing.Point(3, 3);
+            this.mfMainDataGrid.Name = "mfMainDataGrid";
+            this.mfMainDataGrid.ReadOnly = true;
+            this.mfMainDataGrid.RowHeadersVisible = false;
+            this.mfBrowserTableLayout.SetRowSpan(this.mfMainDataGrid, 2);
+            this.mfMainDataGrid.RowTemplate.Height = 25;
+            this.mfMainDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mfMainDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.mfMainDataGrid.Size = new System.Drawing.Size(426, 417);
+            this.mfMainDataGrid.TabIndex = 0;
             // 
             // mfMainDataGridGUIDColumn
             // 
-            mfMainDataGridGUIDColumn.HeaderText = "GUID";
-            mfMainDataGridGUIDColumn.Name = "mfMainDataGridGUIDColumn";
-            mfMainDataGridGUIDColumn.ReadOnly = true;
-            mfMainDataGridGUIDColumn.Visible = false;
+            this.mfMainDataGridGUIDColumn.HeaderText = "GUID";
+            this.mfMainDataGridGUIDColumn.Name = "mfMainDataGridGUIDColumn";
+            this.mfMainDataGridGUIDColumn.ReadOnly = true;
+            this.mfMainDataGridGUIDColumn.Visible = false;
             // 
             // mfMainDataGridOwnerColumn
             // 
-            mfMainDataGridOwnerColumn.HeaderText = "Owner";
-            mfMainDataGridOwnerColumn.Name = "mfMainDataGridOwnerColumn";
-            mfMainDataGridOwnerColumn.ReadOnly = true;
+            this.mfMainDataGridOwnerColumn.HeaderText = "Owner";
+            this.mfMainDataGridOwnerColumn.Name = "mfMainDataGridOwnerColumn";
+            this.mfMainDataGridOwnerColumn.ReadOnly = true;
             // 
             // mfMainDataGridFilenameColumn
             // 
-            mfMainDataGridFilenameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            mfMainDataGridFilenameColumn.HeaderText = "Filename";
-            mfMainDataGridFilenameColumn.Name = "mfMainDataGridFilenameColumn";
-            mfMainDataGridFilenameColumn.ReadOnly = true;
+            this.mfMainDataGridFilenameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.mfMainDataGridFilenameColumn.HeaderText = "Filename";
+            this.mfMainDataGridFilenameColumn.Name = "mfMainDataGridFilenameColumn";
+            this.mfMainDataGridFilenameColumn.ReadOnly = true;
             // 
             // mfMainDataGridFilesizeColumn
             // 
-            mfMainDataGridFilesizeColumn.HeaderText = "Filesize";
-            mfMainDataGridFilesizeColumn.Name = "mfMainDataGridFilesizeColumn";
-            mfMainDataGridFilesizeColumn.ReadOnly = true;
+            this.mfMainDataGridFilesizeColumn.HeaderText = "Filesize";
+            this.mfMainDataGridFilesizeColumn.Name = "mfMainDataGridFilesizeColumn";
+            this.mfMainDataGridFilesizeColumn.ReadOnly = true;
             // 
             // mfMainDataGridAccessColumn
             // 
-            mfMainDataGridAccessColumn.HeaderText = "Access";
-            mfMainDataGridAccessColumn.Name = "mfMainDataGridAccessColumn";
-            mfMainDataGridAccessColumn.ReadOnly = true;
-            mfMainDataGridAccessColumn.Resizable = DataGridViewTriState.True;
-            mfMainDataGridAccessColumn.Width = 70;
+            this.mfMainDataGridAccessColumn.HeaderText = "Access";
+            this.mfMainDataGridAccessColumn.Name = "mfMainDataGridAccessColumn";
+            this.mfMainDataGridAccessColumn.ReadOnly = true;
+            this.mfMainDataGridAccessColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.mfMainDataGridAccessColumn.Width = 70;
             // 
             // mfOnlineUsersLabel
             // 
-            mfOnlineUsersLabel.Anchor = AnchorStyles.None;
-            mfOnlineUsersLabel.AutoSize = true;
-            mfOnlineUsersLabel.Location = new Point(489, 5);
-            mfOnlineUsersLabel.Name = "mfOnlineUsersLabel";
-            mfOnlineUsersLabel.Size = new Size(119, 25);
-            mfOnlineUsersLabel.TabIndex = 1;
-            mfOnlineUsersLabel.Text = "Online Users";
+            this.mfOnlineUsersLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfOnlineUsersLabel.AutoSize = true;
+            this.mfOnlineUsersLabel.Location = new System.Drawing.Point(489, 5);
+            this.mfOnlineUsersLabel.Name = "mfOnlineUsersLabel";
+            this.mfOnlineUsersLabel.Size = new System.Drawing.Size(119, 25);
+            this.mfOnlineUsersLabel.TabIndex = 1;
+            this.mfOnlineUsersLabel.Text = "Online Users";
             // 
             // mfOnlineUsersList
             // 
-            mfOnlineUsersList.ContextMenuStrip = mfUsersContextMenu;
-            mfOnlineUsersList.Dock = DockStyle.Fill;
-            mfOnlineUsersList.ItemHeight = 25;
-            mfOnlineUsersList.Location = new Point(435, 38);
-            mfOnlineUsersList.Name = "mfOnlineUsersList";
-            mfOnlineUsersList.Size = new Size(228, 382);
-            mfOnlineUsersList.TabIndex = 2;
-            // 
-            // mfNotificationsLabel
-            // 
-            mfNotificationsLabel.Anchor = AnchorStyles.None;
-            mfNotificationsLabel.AutoSize = true;
-            mfNotificationsLabel.Location = new Point(489, 429);
-            mfNotificationsLabel.Name = "mfNotificationsLabel";
-            mfNotificationsLabel.Size = new Size(119, 25);
-            mfNotificationsLabel.TabIndex = 3;
-            mfNotificationsLabel.Text = "Notifications";
-            // 
-            // mfNotificationsList
-            // 
-            mfNotificationsList.Dock = DockStyle.Fill;
-            mfNotificationsList.ItemHeight = 25;
-            mfNotificationsList.Location = new Point(435, 464);
-            mfNotificationsList.Name = "mfNotificationsList";
-            mfNotificationsList.Size = new Size(228, 206);
-            mfNotificationsList.TabIndex = 4;
-            // 
-            // mfFavoritesLabel
-            // 
-            mfFavoritesLabel.Anchor = AnchorStyles.None;
-            mfFavoritesLabel.AutoSize = true;
-            mfFavoritesLabel.Location = new Point(173, 429);
-            mfFavoritesLabel.Name = "mfFavoritesLabel";
-            mfFavoritesLabel.Size = new Size(86, 25);
-            mfFavoritesLabel.TabIndex = 5;
-            mfFavoritesLabel.Text = "Favorites";
-            // 
-            // mfMyFilesTab
-            // 
-            mfMyFilesTab.Controls.Add(mfMyFilesTableLayout);
-            mfMyFilesTab.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            mfMyFilesTab.Location = new Point(4, 32);
-            mfMyFilesTab.Name = "mfMyFilesTab";
-            mfMyFilesTab.Padding = new Padding(3);
-            mfMyFilesTab.Size = new Size(672, 679);
-            mfMyFilesTab.TabIndex = 1;
-            mfMyFilesTab.Text = "My Files";
-            mfMyFilesTab.UseVisualStyleBackColor = true;
-            // 
-            // mfMyFilesTableLayout
-            // 
-            mfMyFilesTableLayout.ColumnCount = 4;
-            mfMyFilesTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            mfMyFilesTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            mfMyFilesTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            mfMyFilesTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            mfMyFilesTableLayout.Controls.Add(mfAddNewFileLabel, 0, 2);
-            mfMyFilesTableLayout.Controls.Add(mfUsersToShareList, 3, 3);
-            mfMyFilesTableLayout.Controls.Add(mfUsersSharedWithList, 1, 3);
-            mfMyFilesTableLayout.Controls.Add(mfAuthorizedUsersList, 3, 1);
-            mfMyFilesTableLayout.Controls.Add(mfAuthorizedUsersLabel, 3, 0);
-            mfMyFilesTableLayout.Controls.Add(mfMyFilesDataGrid, 0, 0);
-            mfMyFilesTableLayout.Controls.Add(mfUsersShareListLabel, 3, 2);
-            mfMyFilesTableLayout.Controls.Add(mfSharedUsersLabel, 1, 2);
-            mfMyFilesTableLayout.Controls.Add(mfUnshareButton, 2, 5);
-            mfMyFilesTableLayout.Controls.Add(mfShareButton, 2, 4);
-            mfMyFilesTableLayout.Controls.Add(mfSelectFileButton, 0, 3);
-            mfMyFilesTableLayout.Controls.Add(mfAcceptFileButton, 0, 6);
-            mfMyFilesTableLayout.Controls.Add(mfNewFileFilenameTextBox, 0, 5);
-            mfMyFilesTableLayout.Controls.Add(mfNewFileFilenameLabel, 0, 4);
-            mfMyFilesTableLayout.Location = new Point(3, 3);
-            mfMyFilesTableLayout.Name = "mfMyFilesTableLayout";
-            mfMyFilesTableLayout.RowCount = 7;
-            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 8.450705F));
-            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 91.54929F));
-            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
-            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            mfMyFilesTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
-            mfMyFilesTableLayout.Size = new Size(666, 673);
-            mfMyFilesTableLayout.TabIndex = 1;
-            // 
-            // mfAddNewFileLabel
-            // 
-            mfAddNewFileLabel.Anchor = AnchorStyles.None;
-            mfAddNewFileLabel.AutoSize = true;
-            mfAddNewFileLabel.Location = new Point(38, 436);
-            mfAddNewFileLabel.Name = "mfAddNewFileLabel";
-            mfAddNewFileLabel.Size = new Size(123, 25);
-            mfAddNewFileLabel.TabIndex = 10;
-            mfAddNewFileLabel.Text = "Add New File";
-            // 
-            // mfUsersToShareList
-            // 
-            mfUsersToShareList.Dock = DockStyle.Fill;
-            mfUsersToShareList.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            mfUsersToShareList.ItemHeight = 21;
-            mfUsersToShareList.Location = new Point(467, 471);
-            mfUsersToShareList.Name = "mfUsersToShareList";
-            mfMyFilesTableLayout.SetRowSpan(mfUsersToShareList, 4);
-            mfUsersToShareList.Size = new Size(196, 199);
-            mfUsersToShareList.TabIndex = 5;
-            // 
-            // mfUsersSharedWithList
-            // 
-            mfUsersSharedWithList.Dock = DockStyle.Fill;
-            mfUsersSharedWithList.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            mfUsersSharedWithList.ItemHeight = 21;
-            mfUsersSharedWithList.Location = new Point(202, 471);
-            mfUsersSharedWithList.Name = "mfUsersSharedWithList";
-            mfMyFilesTableLayout.SetRowSpan(mfUsersSharedWithList, 4);
-            mfUsersSharedWithList.Size = new Size(193, 199);
-            mfUsersSharedWithList.TabIndex = 4;
-            // 
-            // mfAuthorizedUsersList
-            // 
-            mfAuthorizedUsersList.Dock = DockStyle.Fill;
-            mfAuthorizedUsersList.ItemHeight = 25;
-            mfAuthorizedUsersList.Location = new Point(467, 39);
-            mfAuthorizedUsersList.Name = "mfAuthorizedUsersList";
-            mfAuthorizedUsersList.Size = new Size(196, 388);
-            mfAuthorizedUsersList.TabIndex = 2;
-            // 
-            // mfAuthorizedUsersLabel
-            // 
-            mfAuthorizedUsersLabel.Anchor = AnchorStyles.None;
-            mfAuthorizedUsersLabel.AutoSize = true;
-            mfAuthorizedUsersLabel.Location = new Point(487, 5);
-            mfAuthorizedUsersLabel.Name = "mfAuthorizedUsersLabel";
-            mfAuthorizedUsersLabel.Size = new Size(156, 25);
-            mfAuthorizedUsersLabel.TabIndex = 1;
-            mfAuthorizedUsersLabel.Text = "Authorized Users";
-            // 
-            // mfMyFilesDataGrid
-            // 
-            mfMyFilesDataGrid.AllowUserToAddRows = false;
-            mfMyFilesDataGrid.AllowUserToDeleteRows = false;
-            mfMyFilesDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            mfMyFilesDataGrid.Columns.AddRange(new DataGridViewColumn[] { mfMyFilesDataGridGUIDColumn, mfMyFilesDataGridFilenameColumn, mfMyFilesDataGridFilesizeColumn });
-            mfMyFilesTableLayout.SetColumnSpan(mfMyFilesDataGrid, 3);
-            mfMyFilesDataGrid.Location = new Point(3, 3);
-            mfMyFilesDataGrid.Name = "mfMyFilesDataGrid";
-            mfMyFilesDataGrid.ReadOnly = true;
-            mfMyFilesDataGrid.RowHeadersVisible = false;
-            mfMyFilesTableLayout.SetRowSpan(mfMyFilesDataGrid, 2);
-            mfMyFilesDataGrid.RowTemplate.Height = 25;
-            mfMyFilesDataGrid.ScrollBars = ScrollBars.Vertical;
-            mfMyFilesDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            mfMyFilesDataGrid.Size = new Size(458, 418);
-            mfMyFilesDataGrid.TabIndex = 0;
-            // 
-            // mfMyFilesDataGridGUIDColumn
-            // 
-            mfMyFilesDataGridGUIDColumn.HeaderText = "GID";
-            mfMyFilesDataGridGUIDColumn.Name = "mfMyFilesDataGridGUIDColumn";
-            mfMyFilesDataGridGUIDColumn.ReadOnly = true;
-            mfMyFilesDataGridGUIDColumn.Visible = false;
-            // 
-            // mfMyFilesDataGridFilenameColumn
-            // 
-            mfMyFilesDataGridFilenameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            mfMyFilesDataGridFilenameColumn.HeaderText = "Filename";
-            mfMyFilesDataGridFilenameColumn.Name = "mfMyFilesDataGridFilenameColumn";
-            mfMyFilesDataGridFilenameColumn.ReadOnly = true;
-            // 
-            // mfMyFilesDataGridFilesizeColumn
-            // 
-            mfMyFilesDataGridFilesizeColumn.HeaderText = "Filesize";
-            mfMyFilesDataGridFilesizeColumn.Name = "mfMyFilesDataGridFilesizeColumn";
-            mfMyFilesDataGridFilesizeColumn.ReadOnly = true;
-            // 
-            // mfUsersShareListLabel
-            // 
-            mfUsersShareListLabel.Anchor = AnchorStyles.None;
-            mfUsersShareListLabel.AutoSize = true;
-            mfUsersShareListLabel.Location = new Point(519, 436);
-            mfUsersShareListLabel.Name = "mfUsersShareListLabel";
-            mfUsersShareListLabel.Size = new Size(91, 25);
-            mfUsersShareListLabel.TabIndex = 8;
-            mfUsersShareListLabel.Text = "Users List";
-            // 
-            // mfSharedUsersLabel
-            // 
-            mfSharedUsersLabel.Anchor = AnchorStyles.None;
-            mfSharedUsersLabel.AutoSize = true;
-            mfSharedUsersLabel.Location = new Point(229, 436);
-            mfSharedUsersLabel.Name = "mfSharedUsersLabel";
-            mfSharedUsersLabel.Size = new Size(139, 25);
-            mfSharedUsersLabel.TabIndex = 9;
-            mfSharedUsersLabel.Text = "Share File With";
-            // 
-            // mfUnshareButton
-            // 
-            mfUnshareButton.Anchor = AnchorStyles.Top;
-            mfUnshareButton.Enabled = false;
-            mfUnshareButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            mfUnshareButton.Location = new Point(401, 573);
-            mfUnshareButton.Name = "mfUnshareButton";
-            mfUnshareButton.Size = new Size(60, 29);
-            mfUnshareButton.TabIndex = 7;
-            mfUnshareButton.Text = ">>";
-            mfUnshareButton.UseVisualStyleBackColor = true;
-            mfUnshareButton.Click += NewFileUnshareButton_Click;
-            // 
-            // mfShareButton
-            // 
-            mfShareButton.Anchor = AnchorStyles.Bottom;
-            mfShareButton.Enabled = false;
-            mfShareButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            mfShareButton.Location = new Point(401, 538);
-            mfShareButton.Name = "mfShareButton";
-            mfShareButton.Size = new Size(60, 29);
-            mfShareButton.TabIndex = 6;
-            mfShareButton.Text = "<<";
-            mfShareButton.UseVisualStyleBackColor = true;
-            mfShareButton.Click += NewFileShareButton_Click;
-            // 
-            // mfSelectFileButton
-            // 
-            mfSelectFileButton.Anchor = AnchorStyles.None;
-            mfSelectFileButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            mfSelectFileButton.Location = new Point(43, 477);
-            mfSelectFileButton.Name = "mfSelectFileButton";
-            mfSelectFileButton.Size = new Size(113, 32);
-            mfSelectFileButton.TabIndex = 11;
-            mfSelectFileButton.Text = "Select File";
-            mfSelectFileButton.UseVisualStyleBackColor = true;
-            mfSelectFileButton.Click += NewFileSelectButton_Click;
-            // 
-            // mfAcceptFileButton
-            // 
-            mfAcceptFileButton.Anchor = AnchorStyles.None;
-            mfAcceptFileButton.Enabled = false;
-            mfAcceptFileButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            mfAcceptFileButton.Location = new Point(43, 631);
-            mfAcceptFileButton.Name = "mfAcceptFileButton";
-            mfAcceptFileButton.Size = new Size(113, 32);
-            mfAcceptFileButton.TabIndex = 12;
-            mfAcceptFileButton.Text = "Accept";
-            mfAcceptFileButton.UseVisualStyleBackColor = true;
-            mfAcceptFileButton.Click += NewFileAcceptButton_Click;
-            // 
-            // mfNewFileFilenameTextBox
-            // 
-            mfNewFileFilenameTextBox.Anchor = AnchorStyles.Top;
-            mfNewFileFilenameTextBox.Enabled = false;
-            mfNewFileFilenameTextBox.Location = new Point(3, 573);
-            mfNewFileFilenameTextBox.Name = "mfNewFileFilenameTextBox";
-            mfNewFileFilenameTextBox.Size = new Size(193, 33);
-            mfNewFileFilenameTextBox.TabIndex = 13;
-            // 
-            // mfNewFileFilenameLabel
-            // 
-            mfNewFileFilenameLabel.Anchor = AnchorStyles.Bottom;
-            mfNewFileFilenameLabel.AutoSize = true;
-            mfNewFileFilenameLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            mfNewFileFilenameLabel.Location = new Point(70, 553);
-            mfNewFileFilenameLabel.Name = "mfNewFileFilenameLabel";
-            mfNewFileFilenameLabel.Size = new Size(59, 17);
-            mfNewFileFilenameLabel.TabIndex = 14;
-            mfNewFileFilenameLabel.Text = "Filename";
-            // 
-            // mfOptionsTab
-            // 
-            mfOptionsTab.Controls.Add(button1);
-            mfOptionsTab.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            mfOptionsTab.Location = new Point(4, 32);
-            mfOptionsTab.Name = "mfOptionsTab";
-            mfOptionsTab.Padding = new Padding(3);
-            mfOptionsTab.Size = new Size(672, 679);
-            mfOptionsTab.TabIndex = 2;
-            mfOptionsTab.Text = "Options";
-            mfOptionsTab.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(543, 6);
-            button1.Name = "button1";
-            button1.Size = new Size(121, 63);
-            button1.TabIndex = 0;
-            button1.Text = "ping server";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += TEST_CLICK;
+            this.mfOnlineUsersList.ContextMenuStrip = this.mfUsersContextMenu;
+            this.mfOnlineUsersList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mfOnlineUsersList.ItemHeight = 25;
+            this.mfOnlineUsersList.Location = new System.Drawing.Point(435, 38);
+            this.mfOnlineUsersList.Name = "mfOnlineUsersList";
+            this.mfOnlineUsersList.Size = new System.Drawing.Size(228, 382);
+            this.mfOnlineUsersList.TabIndex = 2;
             // 
             // mfUsersContextMenu
             // 
-            mfUsersContextMenu.Items.AddRange(new ToolStripItem[] { refreshToolStripMenuItem });
-            mfUsersContextMenu.Name = "mfUsersContextMenu";
-            mfUsersContextMenu.Size = new Size(114, 26);
+            this.mfUsersContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshToolStripMenuItem});
+            this.mfUsersContextMenu.Name = "mfUsersContextMenu";
+            this.mfUsersContextMenu.Size = new System.Drawing.Size(181, 48);
+            this.mfUsersContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.UsersContextMenu_ItemClicked);
             // 
             // refreshToolStripMenuItem
             // 
-            refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            refreshToolStripMenuItem.Size = new Size(113, 22);
-            refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            // 
+            // mfNotificationsLabel
+            // 
+            this.mfNotificationsLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfNotificationsLabel.AutoSize = true;
+            this.mfNotificationsLabel.Location = new System.Drawing.Point(489, 429);
+            this.mfNotificationsLabel.Name = "mfNotificationsLabel";
+            this.mfNotificationsLabel.Size = new System.Drawing.Size(119, 25);
+            this.mfNotificationsLabel.TabIndex = 3;
+            this.mfNotificationsLabel.Text = "Notifications";
+            // 
+            // mfNotificationsList
+            // 
+            this.mfNotificationsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mfNotificationsList.ItemHeight = 25;
+            this.mfNotificationsList.Location = new System.Drawing.Point(435, 464);
+            this.mfNotificationsList.Name = "mfNotificationsList";
+            this.mfNotificationsList.Size = new System.Drawing.Size(228, 206);
+            this.mfNotificationsList.TabIndex = 4;
+            // 
+            // mfFavoritesLabel
+            // 
+            this.mfFavoritesLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfFavoritesLabel.AutoSize = true;
+            this.mfFavoritesLabel.Location = new System.Drawing.Point(173, 429);
+            this.mfFavoritesLabel.Name = "mfFavoritesLabel";
+            this.mfFavoritesLabel.Size = new System.Drawing.Size(86, 25);
+            this.mfFavoritesLabel.TabIndex = 5;
+            this.mfFavoritesLabel.Text = "Favorites";
+            // 
+            // mfMyFilesTab
+            // 
+            this.mfMyFilesTab.Controls.Add(this.mfMyFilesTableLayout);
+            this.mfMyFilesTab.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfMyFilesTab.Location = new System.Drawing.Point(4, 32);
+            this.mfMyFilesTab.Name = "mfMyFilesTab";
+            this.mfMyFilesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.mfMyFilesTab.Size = new System.Drawing.Size(672, 679);
+            this.mfMyFilesTab.TabIndex = 1;
+            this.mfMyFilesTab.Text = "My Files";
+            this.mfMyFilesTab.UseVisualStyleBackColor = true;
+            // 
+            // mfMyFilesTableLayout
+            // 
+            this.mfMyFilesTableLayout.ColumnCount = 4;
+            this.mfMyFilesTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.mfMyFilesTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.mfMyFilesTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.mfMyFilesTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.mfMyFilesTableLayout.Controls.Add(this.mfAddNewFileLabel, 0, 2);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfUsersToShareList, 3, 3);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfUsersSharedWithList, 1, 3);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfAuthorizedUsersList, 3, 1);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfAuthorizedUsersLabel, 3, 0);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfMyFilesDataGrid, 0, 0);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfUsersShareListLabel, 3, 2);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfSharedUsersLabel, 1, 2);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfUnshareButton, 2, 5);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfShareButton, 2, 4);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfSelectFileButton, 0, 3);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfAcceptFileButton, 0, 6);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfNewFileFilenameTextBox, 0, 5);
+            this.mfMyFilesTableLayout.Controls.Add(this.mfNewFileFilenameLabel, 0, 4);
+            this.mfMyFilesTableLayout.Location = new System.Drawing.Point(3, 3);
+            this.mfMyFilesTableLayout.Name = "mfMyFilesTableLayout";
+            this.mfMyFilesTableLayout.RowCount = 7;
+            this.mfMyFilesTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.450705F));
+            this.mfMyFilesTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.54929F));
+            this.mfMyFilesTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.mfMyFilesTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.mfMyFilesTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.mfMyFilesTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.mfMyFilesTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.mfMyFilesTableLayout.Size = new System.Drawing.Size(666, 673);
+            this.mfMyFilesTableLayout.TabIndex = 1;
+            // 
+            // mfAddNewFileLabel
+            // 
+            this.mfAddNewFileLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfAddNewFileLabel.AutoSize = true;
+            this.mfAddNewFileLabel.Location = new System.Drawing.Point(38, 436);
+            this.mfAddNewFileLabel.Name = "mfAddNewFileLabel";
+            this.mfAddNewFileLabel.Size = new System.Drawing.Size(123, 25);
+            this.mfAddNewFileLabel.TabIndex = 10;
+            this.mfAddNewFileLabel.Text = "Add New File";
+            // 
+            // mfUsersToShareList
+            // 
+            this.mfUsersToShareList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mfUsersToShareList.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfUsersToShareList.ItemHeight = 21;
+            this.mfUsersToShareList.Location = new System.Drawing.Point(467, 471);
+            this.mfUsersToShareList.Name = "mfUsersToShareList";
+            this.mfMyFilesTableLayout.SetRowSpan(this.mfUsersToShareList, 4);
+            this.mfUsersToShareList.Size = new System.Drawing.Size(196, 199);
+            this.mfUsersToShareList.TabIndex = 5;
+            // 
+            // mfUsersSharedWithList
+            // 
+            this.mfUsersSharedWithList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mfUsersSharedWithList.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfUsersSharedWithList.ItemHeight = 21;
+            this.mfUsersSharedWithList.Location = new System.Drawing.Point(202, 471);
+            this.mfUsersSharedWithList.Name = "mfUsersSharedWithList";
+            this.mfMyFilesTableLayout.SetRowSpan(this.mfUsersSharedWithList, 4);
+            this.mfUsersSharedWithList.Size = new System.Drawing.Size(193, 199);
+            this.mfUsersSharedWithList.TabIndex = 4;
+            // 
+            // mfAuthorizedUsersList
+            // 
+            this.mfAuthorizedUsersList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mfAuthorizedUsersList.ItemHeight = 25;
+            this.mfAuthorizedUsersList.Location = new System.Drawing.Point(467, 39);
+            this.mfAuthorizedUsersList.Name = "mfAuthorizedUsersList";
+            this.mfAuthorizedUsersList.Size = new System.Drawing.Size(196, 388);
+            this.mfAuthorizedUsersList.TabIndex = 2;
+            // 
+            // mfAuthorizedUsersLabel
+            // 
+            this.mfAuthorizedUsersLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfAuthorizedUsersLabel.AutoSize = true;
+            this.mfAuthorizedUsersLabel.Location = new System.Drawing.Point(487, 5);
+            this.mfAuthorizedUsersLabel.Name = "mfAuthorizedUsersLabel";
+            this.mfAuthorizedUsersLabel.Size = new System.Drawing.Size(156, 25);
+            this.mfAuthorizedUsersLabel.TabIndex = 1;
+            this.mfAuthorizedUsersLabel.Text = "Authorized Users";
+            // 
+            // mfMyFilesDataGrid
+            // 
+            this.mfMyFilesDataGrid.AllowUserToAddRows = false;
+            this.mfMyFilesDataGrid.AllowUserToDeleteRows = false;
+            this.mfMyFilesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.mfMyFilesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.mfMyFilesDataGridGUIDColumn,
+            this.mfMyFilesDataGridFilenameColumn,
+            this.mfMyFilesDataGridFilesizeColumn});
+            this.mfMyFilesTableLayout.SetColumnSpan(this.mfMyFilesDataGrid, 3);
+            this.mfMyFilesDataGrid.ContextMenuStrip = this.mfPersonalFilesContextMenu;
+            this.mfMyFilesDataGrid.Location = new System.Drawing.Point(3, 3);
+            this.mfMyFilesDataGrid.Name = "mfMyFilesDataGrid";
+            this.mfMyFilesDataGrid.ReadOnly = true;
+            this.mfMyFilesDataGrid.RowHeadersVisible = false;
+            this.mfMyFilesTableLayout.SetRowSpan(this.mfMyFilesDataGrid, 2);
+            this.mfMyFilesDataGrid.RowTemplate.Height = 25;
+            this.mfMyFilesDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mfMyFilesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.mfMyFilesDataGrid.Size = new System.Drawing.Size(458, 418);
+            this.mfMyFilesDataGrid.TabIndex = 0;
+            // 
+            // mfMyFilesDataGridGUIDColumn
+            // 
+            this.mfMyFilesDataGridGUIDColumn.HeaderText = "GID";
+            this.mfMyFilesDataGridGUIDColumn.Name = "mfMyFilesDataGridGUIDColumn";
+            this.mfMyFilesDataGridGUIDColumn.ReadOnly = true;
+            this.mfMyFilesDataGridGUIDColumn.Visible = false;
+            // 
+            // mfMyFilesDataGridFilenameColumn
+            // 
+            this.mfMyFilesDataGridFilenameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.mfMyFilesDataGridFilenameColumn.HeaderText = "Filename";
+            this.mfMyFilesDataGridFilenameColumn.Name = "mfMyFilesDataGridFilenameColumn";
+            this.mfMyFilesDataGridFilenameColumn.ReadOnly = true;
+            // 
+            // mfMyFilesDataGridFilesizeColumn
+            // 
+            this.mfMyFilesDataGridFilesizeColumn.HeaderText = "Filesize";
+            this.mfMyFilesDataGridFilesizeColumn.Name = "mfMyFilesDataGridFilesizeColumn";
+            this.mfMyFilesDataGridFilesizeColumn.ReadOnly = true;
+            // 
+            // mfPersonalFilesContextMenu
+            // 
+            this.mfPersonalFilesContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem,
+            this.shareWithToolStripMenuItem});
+            this.mfPersonalFilesContextMenu.Name = "mfPersonalFilesContextMenu";
+            this.mfPersonalFilesContextMenu.Size = new System.Drawing.Size(132, 48);
+            this.mfPersonalFilesContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.PersonalFileContextMenu_ItemClicked);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // shareWithToolStripMenuItem
+            // 
+            this.shareWithToolStripMenuItem.Name = "shareWithToolStripMenuItem";
+            this.shareWithToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.shareWithToolStripMenuItem.Text = "Share With";
+            // 
+            // mfUsersShareListLabel
+            // 
+            this.mfUsersShareListLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfUsersShareListLabel.AutoSize = true;
+            this.mfUsersShareListLabel.Location = new System.Drawing.Point(519, 436);
+            this.mfUsersShareListLabel.Name = "mfUsersShareListLabel";
+            this.mfUsersShareListLabel.Size = new System.Drawing.Size(91, 25);
+            this.mfUsersShareListLabel.TabIndex = 8;
+            this.mfUsersShareListLabel.Text = "Users List";
+            // 
+            // mfSharedUsersLabel
+            // 
+            this.mfSharedUsersLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfSharedUsersLabel.AutoSize = true;
+            this.mfSharedUsersLabel.Location = new System.Drawing.Point(229, 436);
+            this.mfSharedUsersLabel.Name = "mfSharedUsersLabel";
+            this.mfSharedUsersLabel.Size = new System.Drawing.Size(139, 25);
+            this.mfSharedUsersLabel.TabIndex = 9;
+            this.mfSharedUsersLabel.Text = "Share File With";
+            // 
+            // mfUnshareButton
+            // 
+            this.mfUnshareButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.mfUnshareButton.Enabled = false;
+            this.mfUnshareButton.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfUnshareButton.Location = new System.Drawing.Point(401, 573);
+            this.mfUnshareButton.Name = "mfUnshareButton";
+            this.mfUnshareButton.Size = new System.Drawing.Size(60, 29);
+            this.mfUnshareButton.TabIndex = 7;
+            this.mfUnshareButton.Text = ">>";
+            this.mfUnshareButton.UseVisualStyleBackColor = true;
+            this.mfUnshareButton.Click += new System.EventHandler(this.NewFileUnshareButton_Click);
+            // 
+            // mfShareButton
+            // 
+            this.mfShareButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.mfShareButton.Enabled = false;
+            this.mfShareButton.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfShareButton.Location = new System.Drawing.Point(401, 538);
+            this.mfShareButton.Name = "mfShareButton";
+            this.mfShareButton.Size = new System.Drawing.Size(60, 29);
+            this.mfShareButton.TabIndex = 6;
+            this.mfShareButton.Text = "<<";
+            this.mfShareButton.UseVisualStyleBackColor = true;
+            this.mfShareButton.Click += new System.EventHandler(this.NewFileShareButton_Click);
+            // 
+            // mfSelectFileButton
+            // 
+            this.mfSelectFileButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfSelectFileButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfSelectFileButton.Location = new System.Drawing.Point(43, 477);
+            this.mfSelectFileButton.Name = "mfSelectFileButton";
+            this.mfSelectFileButton.Size = new System.Drawing.Size(113, 32);
+            this.mfSelectFileButton.TabIndex = 11;
+            this.mfSelectFileButton.Text = "Select File";
+            this.mfSelectFileButton.UseVisualStyleBackColor = true;
+            this.mfSelectFileButton.Click += new System.EventHandler(this.NewFileSelectButton_Click);
+            // 
+            // mfAcceptFileButton
+            // 
+            this.mfAcceptFileButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfAcceptFileButton.Enabled = false;
+            this.mfAcceptFileButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfAcceptFileButton.Location = new System.Drawing.Point(43, 631);
+            this.mfAcceptFileButton.Name = "mfAcceptFileButton";
+            this.mfAcceptFileButton.Size = new System.Drawing.Size(113, 32);
+            this.mfAcceptFileButton.TabIndex = 12;
+            this.mfAcceptFileButton.Text = "Accept";
+            this.mfAcceptFileButton.UseVisualStyleBackColor = true;
+            this.mfAcceptFileButton.Click += new System.EventHandler(this.NewFileAcceptButton_Click);
+            // 
+            // mfNewFileFilenameTextBox
+            // 
+            this.mfNewFileFilenameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.mfNewFileFilenameTextBox.Enabled = false;
+            this.mfNewFileFilenameTextBox.Location = new System.Drawing.Point(3, 573);
+            this.mfNewFileFilenameTextBox.Name = "mfNewFileFilenameTextBox";
+            this.mfNewFileFilenameTextBox.Size = new System.Drawing.Size(193, 33);
+            this.mfNewFileFilenameTextBox.TabIndex = 13;
+            // 
+            // mfNewFileFilenameLabel
+            // 
+            this.mfNewFileFilenameLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.mfNewFileFilenameLabel.AutoSize = true;
+            this.mfNewFileFilenameLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfNewFileFilenameLabel.Location = new System.Drawing.Point(70, 553);
+            this.mfNewFileFilenameLabel.Name = "mfNewFileFilenameLabel";
+            this.mfNewFileFilenameLabel.Size = new System.Drawing.Size(59, 17);
+            this.mfNewFileFilenameLabel.TabIndex = 14;
+            this.mfNewFileFilenameLabel.Text = "Filename";
+            // 
+            // mfOptionsTab
+            // 
+            this.mfOptionsTab.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfOptionsTab.Location = new System.Drawing.Point(4, 32);
+            this.mfOptionsTab.Name = "mfOptionsTab";
+            this.mfOptionsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.mfOptionsTab.Size = new System.Drawing.Size(672, 679);
+            this.mfOptionsTab.TabIndex = 2;
+            this.mfOptionsTab.Text = "Options";
+            this.mfOptionsTab.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(680, 715);
-            Controls.Add(mfCentralTabControl);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            Name = "MainForm";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Zipline Client";
-            FormClosing += MainForm_FormClosing;
-            mfCentralTabControl.ResumeLayout(false);
-            mfBrowserTab.ResumeLayout(false);
-            mfBrowserTableLayout.ResumeLayout(false);
-            mfBrowserTableLayout.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)mfFavoritesDataGrid).EndInit();
-            mfFilesContextMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)mfMainDataGrid).EndInit();
-            mfMyFilesTab.ResumeLayout(false);
-            mfMyFilesTableLayout.ResumeLayout(false);
-            mfMyFilesTableLayout.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)mfMyFilesDataGrid).EndInit();
-            mfOptionsTab.ResumeLayout(false);
-            mfUsersContextMenu.ResumeLayout(false);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(680, 715);
+            this.Controls.Add(this.mfCentralTabControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Zipline Client";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.mfCentralTabControl.ResumeLayout(false);
+            this.mfBrowserTab.ResumeLayout(false);
+            this.mfBrowserTableLayout.ResumeLayout(false);
+            this.mfBrowserTableLayout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mfFavoritesDataGrid)).EndInit();
+            this.mfFilesContextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mfMainDataGrid)).EndInit();
+            this.mfUsersContextMenu.ResumeLayout(false);
+            this.mfMyFilesTab.ResumeLayout(false);
+            this.mfMyFilesTableLayout.ResumeLayout(false);
+            this.mfMyFilesTableLayout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mfMyFilesDataGrid)).EndInit();
+            this.mfPersonalFilesContextMenu.ResumeLayout(false);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -638,11 +669,13 @@
         private DataGridViewTextBoxColumn mfFavoritesDataGridFilenameColumn;
         private DataGridViewTextBoxColumn mfFavoritesDataGridFilesizeColumn;
         private DataGridViewCheckBoxColumn mfFavoritesDataGridAccessColumn;
-        private Button button1;
         private ContextMenuStrip mfFilesContextMenu;
         private ToolStripMenuItem downloadToolStripMenuItem;
         private ToolStripMenuItem requestAccessToolStripMenuItem;
         private ContextMenuStrip mfUsersContextMenu;
         private ToolStripMenuItem refreshToolStripMenuItem;
+        private ContextMenuStrip mfPersonalFilesContextMenu;
+        private ToolStripMenuItem deleteToolStripMenuItem;
+        private ToolStripMenuItem shareWithToolStripMenuItem;
     }
 }
