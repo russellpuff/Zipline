@@ -93,10 +93,27 @@ def printFinalResults(testname, failures):
 def testAddNewFile():
     printHeader('addNewFile')
     failures = 0
+
     ## Test with Existing User, New File
+    response = sendPackage('{"Command":"add_new_file","Username":"barbara","FileGUID":"1234-2345-3456-4567","Filename":"test.txt","FileSize":100,"AuthorizedUsers":"danielle?evan"}')
+    expected = genResponse('STATUS_OK')
+    failures += testResults('Existing User, New File Test', response, expected)
+
     ## Test with Existing User, Duplicate FIle
+    response = sendPackage('{"Command":"add_new_file","Username":"barbara","FileGUID":"11AA-22BB-33CC-44DD","Filename":"sample.db","FileSize":64000,"AuthorizedUsers":"danielle?evan"}')
+    expected = genResponse('STATUS_FILE_EXISTS')
+    failures += testResults('Existing User, Duplicate File Test', response, expected)
+
     ## Test with Non-Existent User, New File
+    response = sendPackage('{"Command":"add_new_file","Username":"nonexistentuser1","FileGUID":"1234-2345-3456-4567","Filename":"test.txt","FileSize":100,"AuthorizedUsers":"danielle?evan"}')
+    expected = genResponse('STATUS_USER_DOES_NOT_EXIST')
+    failures += testResults('Non-Existent User, New File Test', response, expected)
+
     ## Test with Non-Existent user, Duplicate File
+    response = sendPackage('{"Command":"add_new_file","Username":"nonexistentuser1","FileGUID":"11AA-22BB-33CC-44DD","Filename":"sample.db","FileSize":64000,"AuthorizedUsers":"danielle?evan"}')
+    expected = genResponse('STATUS_USER_DOES_NOT_EXIST')
+    failures += testResults('Non-Existent User, Duplicate File Test', response, expected)
+
     printFinalResults('addNewFile', failures)
 
 
@@ -109,7 +126,15 @@ def testDeleteFile():
     printHeader('deleteFile')
     failures = 0
     ## Test with Existing File
+    response = sendPackage('{"Command":"delete_file","FileGUID":"1234-2345-3456-4567"}')
+    expected = genResponse('STATUS_OK')
+    failures += testResults('Existing File Test', response, expected)
+
     ## Test with Non-Existent File
+    response = sendPackage('{"Command":"delete_file","FileGUID":"9999-9999-9999-9999"}')
+    expected = genResponse('STATUS_IGNORE')
+    failures += testResults('Non-Existent File Test', response, expected)
+
     printFinalResults('deleteFile', failures)
 
 
