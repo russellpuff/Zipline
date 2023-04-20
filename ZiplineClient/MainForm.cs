@@ -31,7 +31,7 @@ namespace ZiplineClient
             {
                 username = lf.Username;
                 current_ip = lf.CurrentIP;
-                _ = Task.Run(() => ConnectionListener(57321));
+                _ = Task.Run(() => ConnectionListener(49128));
                 this.Text = "Zipline Client - " + username;
                 GetUsersAndFiles();
                 userFiles = LoadUserFileList();

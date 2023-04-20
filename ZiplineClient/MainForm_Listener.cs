@@ -16,8 +16,7 @@ namespace ZiplineClient
 
                 while (true)
                 {
-                    TcpClient client = await listener.AcceptTcpClientAsync();
-                    _ = Task.Run(() => HandleConnection(client));
+                    await Task.Run(() => listener.AcceptTcpClientAsync());
                 }
             }
             catch (Exception ex)
@@ -45,6 +44,7 @@ namespace ZiplineClient
                     MessageBox.Show(msg, "Error", MessageBoxButtons.OK);
                 }
             }
+            finally { cancellation.Cancel(); }
         }
 
         private void HandleConnection(TcpClient client)
@@ -88,14 +88,19 @@ namespace ZiplineClient
                     {
                         case "download_file":
                             string path = Application.StartupPath + "/Shared Files/" + obj.Filename;
-                            string[] response_ip = obj.CurrentIP.Split(':');
+                            int lst_idx = obj.CurrentIP.LastIndexOf(":");
+                            string ip = obj.CurrentIP.Substring(0, lst_idx);
+                            string port = obj.CurrentIP.Substring(lst_idx + 1);
+
+
+
                             if (File.Exists(path))
                             {
                                 string msg = obj.Username + " is requesting to download " + obj.Filename;
                                 var res = MessageBox.Show(msg, "Download Request", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                 if (res == DialogResult.Yes)
                                 {
-                                    if (SendFile(path, response_ip[0], response_ip[1]))
+                                    if (SendFile(path, ip, port))
                                     {
                                         MessageBox.Show("File successfully send.", "Send Success",
                                             MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -111,7 +116,7 @@ namespace ZiplineClient
                                         Command = "download_rejected",
                                         Username = username
                                     };
-                                    Program.SendCommandToUser(response_package, response_ip[0], response_ip[1]);
+                                    Program.SendCommandToUser(response_package, ip, port);
                                 }
                             } else
                             {
@@ -120,7 +125,7 @@ namespace ZiplineClient
                                     Command = "download_404",
                                     Username = username
                                 };
-                                Program.SendCommandToUser(response_package, response_ip[0], response_ip[1]);
+                                Program.SendCommandToUser(response_package, ip, port);
                             }
                             break;
                         case "download_rejected":
@@ -156,18 +161,28 @@ namespace ZiplineClient
             return 0; // Is neither.
         }
 
-        private bool SendFile(string filepath, string ip, string port)
+        private static bool SendFile(string filepath, string ip, string port)
         {
             FileStream fs = new(filepath, FileMode.Open, FileAccess.Read);
             BinaryReader br = new(fs);
 
-            byte[] fileBytes = br.ReadBytes((int)fs.Length);
+            byte[] file_bytes = br.ReadBytes((int)fs.Length);
+            int pkg_length = 12 + file_bytes.Length;
+            byte[] length_bytes = BitConverter.GetBytes(pkg_length);
+            if (BitConverter.IsLittleEndian) { Array.Reverse(length_bytes); }
+            byte[] outgoing_package = new byte[pkg_length];
+            byte[] header_bytes = { 0x7F, 0x52, 0x8B, 0x59, 0xE9, 0xF9, 0x04, 0xC3 }; // Header for sending files. 
+
+            length_bytes.CopyTo(outgoing_package, 0);
+            header_bytes.CopyTo(outgoing_package, 4);
+            file_bytes.CopyTo(outgoing_package, 12);
+
             TcpClient tclient = new();
             try
             {
                 tclient.Connect(new(IPAddress.Parse(ip), int.Parse(port)));
                 NetworkStream stream = tclient.GetStream();
-                stream.Write(fileBytes, 0, fileBytes.Length);
+                stream.Write(file_bytes, 0, file_bytes.Length);
                 tclient.Close();
                 return true;
             }

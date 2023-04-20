@@ -48,7 +48,10 @@ namespace ZiplineClient
                     break;
                 default:
                     int ndx = server_response.IndexOf(':') + 2;
-                    string[] user_ip = server_response[ndx..^5].Split(':');
+                    int lst_idx = server_response[ndx..^5].LastIndexOf(":");
+                    string ip = server_response[ndx..^5].Substring(0, lst_idx);
+                    string port = server_response[ndx..^5].Substring(lst_idx + 1);
+
                     var rtr_outgoing_payload = new
                     {
                         Command = "download_file",
@@ -56,7 +59,7 @@ namespace ZiplineClient
                         CurrentIP = current_ip,
                         TargetGUID = target_guid
                     };
-                    Program.SendCommandToUser(rtr_outgoing_payload, user_ip[0], user_ip[1]);
+                    Program.SendCommandToUser(rtr_outgoing_payload, ip, port);
                     break;
             }
         }
@@ -83,6 +86,23 @@ namespace ZiplineClient
             };
 
             string server_response = await Program.SendCommandToServerAsync(outgoing_payload);
+            if (server_response.Contains("OK"))
+            {
+                var idx = userFiles.FindIndex(x => x.FileGUID == guid);
+                if (idx != -1) 
+                {
+                    string filename = Application.StartupPath + "/Shared Files/" + userFiles[idx].Filename;
+                    if (File.Exists(filename)) { File.Delete(filename); }
+                    userFiles.RemoveAt(idx); 
+                }
+                string msg = "File successfully deleted.";
+                MessageBox.Show(msg, "Delete success.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            } else
+            {
+                string messg = "Unable to delete file. Try again later.";
+                MessageBox.Show(messg, "File Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

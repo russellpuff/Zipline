@@ -77,8 +77,9 @@ namespace ZiplineClient
 
                 retVal = Encoding.UTF8.GetString(incoming_package);
             }
-            catch
+            catch(Exception ex)
             {
+                string msg = ex.Message;
                 retVal = "STATUS_FAILURE";
             }
             finally { tclient.Close(); }
@@ -109,7 +110,7 @@ namespace ZiplineClient
             }
             catch (Exception ex)
             {
-                string mesg = $"Unable to communicate with the other user.\nInfo{ex.Message}";
+                string mesg = $"Unable to communicate with the other user.\nInfo: {ex.Message}";
                 MessageBox.Show(mesg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally { tclient.Close(); }

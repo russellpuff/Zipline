@@ -1,13 +1,5 @@
-﻿using System.Collections.Specialized;
-using System.Media;
-using System.Net;
-using System.Net.Http;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json;
+﻿using System.Media;
 using System.Text.RegularExpressions;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ZiplineClient
 {
@@ -29,7 +21,7 @@ namespace ZiplineClient
             string password = "null"; // Replace with password hashing.
             CurrentIP = await GetCurrentIP();
             // Replace this with a grab from a config file.
-            CurrentIP += ":57321";
+            CurrentIP += ":49128";
             // 
             if (CurrentIP == "STATUS_RETRY") { return; }
             var outgoing_payload = new
@@ -62,7 +54,7 @@ namespace ZiplineClient
             try
             { // Request public ip. 
                 using HttpClient httpClient = new();
-                HttpResponseMessage response = await httpClient.GetAsync("https://api.ipify.org");
+                HttpResponseMessage response = await httpClient.GetAsync("https://api64.ipify.org");
                 if (response.IsSuccessStatusCode)
                 { current_ip = await response.Content.ReadAsStringAsync(); }
             }

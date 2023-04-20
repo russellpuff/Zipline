@@ -58,7 +58,7 @@ namespace ZiplineClient
             string[] files = Directory.GetFiles(directory);
             string allFiles = "";
             foreach (string file in files) { allFiles += Path.GetFileName(file) + "?"; }
-            allFiles = allFiles[..^1];
+            if (allFiles != "") { allFiles = allFiles[..^1]; }
             var outgoing_payload = new
             {
                 Command = "verify_user_files",
@@ -105,6 +105,9 @@ namespace ZiplineClient
                         }
                     }
 
+                    missing_files.RemoveAll(x => x == "");
+                    unknown_files.RemoveAll(y => y == "");
+
                     if (missing_files.Count > 0)
                     {
                         string mesg = "The following files are known by the server but missing from your computer.\n\n";
@@ -113,7 +116,30 @@ namespace ZiplineClient
                         var bar = MessageBox.Show(mesg, "Missing Files", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                         if (bar == DialogResult.Yes)
                         {
-                            // Implement this.
+                            bool problems = false;
+                            foreach(string file in missing_files)
+                            {
+                                var outgoing_package = new
+                                {
+                                    Command = "delete_file",
+                                    Username = username,
+                                    Filename = file
+                                };
+                                server_response = await Program.SendCommandToServerAsync(outgoing_package);
+                                if (!server_response.Contains("OK")) { problems = true; continue; }
+                                // Remove from user's list if they have it. 
+                                var idx = userFiles.FindIndex(x => x.Filename == file);
+                                if (idx != -1) { userFiles.RemoveAt(idx); }
+                            }
+                            if (problems)
+                            {
+                                string ysg = "There were issues tring to delete the files. Try again later.";
+                                MessageBox.Show(ysg, "File Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            } else
+                            {
+                                msg = "Files deleted successfully.";
+                                MessageBox.Show(msg, "File Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
                     }
 
