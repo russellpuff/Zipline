@@ -1,14 +1,5 @@
-﻿using System;
-using System.Data.Common;
-using System.Diagnostics.CodeAnalysis;
-using System.Net;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ZiplineClient
 {

@@ -44,7 +44,6 @@ namespace ZiplineClient
                     MessageBox.Show(msg, "Error", MessageBoxButtons.OK);
                 }
             }
-            finally { cancellation.Cancel(); }
         }
 
         private void HandleConnection(TcpClient client)

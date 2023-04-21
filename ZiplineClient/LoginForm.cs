@@ -13,6 +13,7 @@ namespace ZiplineClient
             InitializeComponent();
             UserAuthenticated = false;
             Username = string.Empty;
+            CurrentIP = string.Empty;
         }
 
         private async void LoginButton_ClickAsync(object sender, EventArgs e)
