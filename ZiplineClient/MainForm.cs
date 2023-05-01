@@ -1,20 +1,28 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace ZiplineClient
 {
     public partial class MainForm : Form
     {
         #region Form
+        //------------------------------------PRIVATE VARIABLES------------------------------------//
         record FileData(string FileGUID, string Username, string Filename, long FileSize);
         List<FileData> userFiles = default!;
         readonly string username = default!;
         readonly string current_ip = default!;
+        //[RestrictAccessTo(nameof(NewFileSelectButton_Click), nameof(AddNewFile))]
         string original_filename = ""; // For use with the add new file section. Probably should rework this. 
-        string requested_file = ""; // A workaround. When a user sends a file you won't know the filename. 
+        string requested_file = ""; // For use with downloading file. Should also rework this.
+        //-----------------------------------------------------------------------------------------//
         public MainForm()
         {
             InitializeComponent();
+
+            this.Enabled = false;
             LoginForm lf = new();
             this.Show();
             lf.ShowDialog();
@@ -22,11 +30,14 @@ namespace ZiplineClient
             {
                 username = lf.Username;
                 current_ip = lf.CurrentIP;
-                _ = Task.Run(() => ConnectionListener(49128));
-                this.Text = "Zipline Client - " + username;
+                
                 GetUsersAndFiles();
                 userFiles = LoadUserFileList();
                 VerifyUserFiles();
+                Task.Run(() => ServerListener());
+
+                this.Text = "Zipline Client - " + username;
+                this.Enabled = true;
             }
             else { Application.Exit(); }
         }
@@ -52,7 +63,7 @@ namespace ZiplineClient
                     Command = "logout_user",
                     Username = username,
                 };
-                _ = Program.SendCommandToServerAsync(outgoing_payload); // Have nothing to do with the result right now. 
+                _ = ServerCommunicator.SendCommandToServer(outgoing_payload); // Have nothing to do with the result right now. 
             }
 
             if (userFiles.Any())
@@ -66,6 +77,8 @@ namespace ZiplineClient
                 using var writer = new BinaryWriter(File.Open(path, FileMode.Truncate, FileAccess.Write));
                 writer.Write(encoded);
             }
+
+            ServerConnection.Instance.Socket.Close();
         }
         #endregion
     }

@@ -92,8 +92,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "DownloadForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Download";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DownloadForm_FormClosing);
+            this.Shown += new System.EventHandler(this.DownloadForm_Shown);
             this.dfTableLayout.ResumeLayout(false);
             this.dfTableLayout.PerformLayout();
             this.ResumeLayout(false);

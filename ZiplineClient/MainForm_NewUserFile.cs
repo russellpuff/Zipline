@@ -86,7 +86,7 @@ namespace ZiplineClient
                 AuthorizedUsers = shared_users
             };
 
-            string server_response = await Program.SendCommandToServerAsync(outgoing_payload);
+            string server_response = ServerCommunicator.SendCommandToServer(outgoing_payload);
             string operationResult;
             switch (server_response)
             {

@@ -1,5 +1,6 @@
 ﻿using System.Media;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 
 namespace ZiplineClient
 {
@@ -21,9 +22,6 @@ namespace ZiplineClient
             lfLoginButton.Enabled = false;
             string password = "null"; // Replace with password hashing.
             CurrentIP = await GetCurrentIP();
-            // Replace this with a grab from a config file.
-            CurrentIP += ":49128";
-            // 
             if (CurrentIP == "STATUS_RETRY") { return; }
             var outgoing_payload = new
             {
@@ -32,7 +30,7 @@ namespace ZiplineClient
                 Password = password,
                 LatestIP = CurrentIP
             };
-            string server_response = await Program.SendCommandToServerAsync(outgoing_payload);
+            string server_response = ServerCommunicator.SendCommandToServer(outgoing_payload);
             if (server_response.Contains("OK"))
             {
                 UserAuthenticated = true;
@@ -56,7 +54,7 @@ namespace ZiplineClient
             { // Request public ip. 
                 using HttpClient httpClient = new();
                 HttpResponseMessage response = await httpClient.GetAsync("https://api64.ipify.org");
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode) 
                 { current_ip = await response.Content.ReadAsStringAsync(); }
             }
             catch
