@@ -4,6 +4,51 @@
 # Module containing SQL statements used by the server.
 ###################################################################################################
 
+#####
+# Statement used to check if a database file contains the proper schema.
+#####
+checkTablesExist = '''
+    SELECT      name
+    FROM        sqlite_master
+    WHERE       name='USERS' or name='FILES' or name='ACCESS';
+'''
+
+
+#####
+# Statements to create tables within a newly created database file.
+#####
+createUsersTable = '''
+    CREATE TABLE "USERS" ("USER_ID"         INTEGER NOT NULL UNIQUE,
+                          "USERNAME"        TEXT NOT NULL UNIQUE,
+                          "PW_HASH"         TEXT,
+                          "ONLINESTATUS"    INTEGER NOT NULL,
+                          "LATEST_IP"       TEXT NOT NULL,
+                          PRIMARY KEY("USER_ID"));
+'''
+
+createFilesTable = '''
+    CREATE TABLE "FILES" ("FILE_ID"         INTEGER NOT NULL UNIQUE,
+                          "USER_ID"         INTEGER NOT NULL,
+                          "FILE_GUID"       TEXT NOT NULL UNIQUE,
+                          "FILENAME"        TEXT NOT NULL,
+                          "FILESIZE"        NUMERIC NOT NULL,
+                          PRIMARY KEY("FILE_ID" AUTOINCREMENT),
+                          FOREIGN KEY("USER_ID") REFERENCES "USERS"("USER_ID"));
+'''
+
+createAccessTable = '''
+    CREATE TABLE "ACCESS" ("ACCESS_ID"      INTEGER NOT NULL UNIQUE,
+                           "FILE_GUID"      TEXT NOT NULL,
+                           "USER_ID"        INTEGER NOT NULL,
+                           PRIMARY KEY("ACCESS_ID" AUTOINCREMENT),
+                           FOREIGN KEY("FILE_GUID") REFERENCES "FILES"("FILE_GUID")
+                           FOREIGN KEY("USER_ID")   REFERENCES "USERS"("USER_ID"));
+'''
+
+
+#####
+# Statements to delete entries from tables.
+#####
 deleteAccess = '''
     DELETE FROM     ACCESS
     WHERE           FILE_GUID = ?;
@@ -14,6 +59,10 @@ deleteFile = '''
     WHERE           FILE_GUID = ?;
 '''
 
+
+#####
+# Statements to extract data from tables.
+#####
 queryFile = '''
     SELECT          FILENAME
     FROM            FILES
@@ -66,6 +115,10 @@ queryUsersAndFiles = '''
     WHERE           USERS.ONLINESTATUS = 1;
 '''
 
+
+#####
+# Statements to insert entries into tables.
+#####
 insertAccess = '''
     INSERT INTO     ACCESS (FILE_GUID, USER_ID)
     SELECT          ?, USERS.USER_ID
@@ -85,6 +138,9 @@ insertOnlineUser = '''
     VALUES          (?, ?, 1, ?);
 '''
 
+#####
+# Statements to update existing entries within tables.
+#####
 updateUserOnline = '''
     UPDATE          USERS
     SET             LATEST_IP = ?, ONLINESTATUS = 1
@@ -97,3 +153,7 @@ updateUserOffline = '''
     WHERE           USERNAME = ?;
 '''
 
+
+###################################################################################################
+# EOF
+###################################################################################################
