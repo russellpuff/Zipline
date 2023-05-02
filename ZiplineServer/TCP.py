@@ -46,14 +46,16 @@ def acceptConnection(sock):
 def serviceConnection(key, mask):
     sock = key.fileobj
     data = key.data
-    address = sock.getpeername()
+    address = sock.getpeername()[0]
+
     try:
         ## Handle Selector Read Event
         if mask & selectors.EVENT_READ:
             request = receive(sock)
             if request:
                 data.response = process(parse(request), sock)
-            elif address not in CONNECTIONS:
+                Log.printRequest(request, address)
+            elif DB.getUsernameFromAddress(address) not in CONNECTIONS:
                 SELECTOR.unregister(sock)
                 sock.close()
                 return
@@ -61,22 +63,26 @@ def serviceConnection(key, mask):
         if mask & selectors.EVENT_WRITE:
             if data.response:
                 send(sock, data.response)
-                Log.printResponse(data.response)
+                Log.printResponse(data.response, address)
                 data.response = b''
+
     except ConnectionResetError:
         Log.info('ConnectionResetError Handled: {}'.format(address))
-        if address in CONNECTIONS.keys():
-            del CONNECTIONS[address]
-        SELECTOR.unregister(sock)
-        sock.close()
+        username = DB.getUsernameFromAddress(address)
+        terminateConnection(username)
         return
+
     except BrokenPipeError:
         Log.info('BrokenPipeError Handled: {}'.format(address))
         data.response = b''
-        if address in CONNECTIONS.keys():
-            del CONNECTIONS[address]
-        SELECTOR.unregister(sock)
-        sock.close()
+        username = DB.getUsernameFromAddress(address)
+        terminateConnection(username)
+        return
+
+    except OSError:
+        Log.info('OSError Handled: {}'.format(address))
+        username = DB.getUsernameFromAddress(address)
+        terminateConnection(username)
         return
 
 
@@ -85,9 +91,9 @@ def serviceConnection(key, mask):
 #####
 # - Adds username:socket pair to connections dictionary.
 #####
-def maintainConnection(address, socket):
-    if address not in CONNECTIONS.keys():
-        CONNECTIONS[address] = socket
+def maintainConnection(username, socket):
+    if username not in CONNECTIONS.keys():
+        CONNECTIONS[username] = socket
 
 
 #####
@@ -95,9 +101,13 @@ def maintainConnection(address, socket):
 #####
 # - Removes username:socket pair from connections dictionary.
 #####
-def terminateConnection(address):
-    if address in CONNECTIONS.keys():
-        del CONNECTIONS[address]
+def terminateConnection(username):
+    if username in CONNECTIONS.keys():
+        DB.markUserOffline(username)
+        socket = CONNECTIONS[username]
+        del CONNECTIONS[username]
+        SELECTOR.unregister(socket)
+        socket.close()
 
 
 #####
@@ -127,7 +137,6 @@ def receive(socket):
     if not payload:
         return None
     else:
-        Log.printRequest(messageSize.to_bytes(SIZE_PREFIX_LENGTH, 'big') + messageHeader + bytes(payload))
         payload = bytes(payload).strip()
         return bytes(payload)
 
@@ -192,6 +201,8 @@ def process(payload, socket):
         match command:
             case 'add_new_file':
                 response = DB.addNewFile(payload)
+            case 'change_password':
+                response = DB.changePassword(payload)
             case 'delete_file':
                 response = DB.deleteFile(payload)
             case 'download_file':
@@ -201,7 +212,7 @@ def process(payload, socket):
             case 'logout_user':
                 response = DB.logoutUser(payload)
             case 'get_users_files':
-                response = DB.getUsersAndFiles()
+                response = DB.getUsersAndFiles(payload)
             case 'get_user_ip':
                 response = DB.getUserIP(payload)
             case 'send_file':

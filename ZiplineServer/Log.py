@@ -36,16 +36,15 @@ def info(message):
 # - Prints a request header and some of the request data.
 # - Prints the full request bytes array as a UTF-8 string.
 #####
-def printRequest(package):
-    if package:
-        size = int.from_bytes(package[0:4], 'big')
+def printRequest(payload, address):
+    if payload:
         print('[INBOUND REQUEST]')
-        print('|--Size:         {}'.format(size))
-        print('|--Header:       {}'.format(package[4:12]))
-        if (size > LARGE_PACKAGE_MINIMUM_SIZE):
-            print('|--Received:  [Large Package]')
+        print('|--Peer:         {}'.format(address))
+        print('|--Size:         {}'.format(len(payload)))
+        if (len(payload) > LARGE_PACKAGE_MINIMUM_SIZE):
+            print('|--Received:     [Large Package]')
         else:
-            print('|--Received:     {}'.format(package))
+            print('|--Received:     {}'.format(payload))
         print()
         print()
 
@@ -56,14 +55,15 @@ def printRequest(package):
 # - Prints a response header and some of the response data.
 # - Prints the full response bytes array as a UTF-8 string.
 #####
-def printResponse(package):
-    if package:
+def printResponse(payload, address):
+    if payload:
         print('[OUTBOUND RESPONSE]')
-        print('|--Size:         {}'.format(len(package)))
-        if (len(package) > LARGE_PACKAGE_MINIMUM_SIZE):
+        print('|--Peer:         {}'.format(address))
+        print('|--Size:         {}'.format(len(payload)))
+        if (len(payload) > LARGE_PACKAGE_MINIMUM_SIZE):
             print('|--Transmitted:  [Large Package]')
         else:
-            print('|--Transmitted:  {}'.format(package))
+            print('|--Transmitted:  {}'.format(payload))
         print()
         print()
 

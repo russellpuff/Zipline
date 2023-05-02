@@ -63,6 +63,14 @@ deleteFile = '''
 #####
 # Statements to extract data from tables.
 #####
+queryAccess = '''
+    SELECT          *
+    FROM            ACCESS
+    INNER JOIN      USERS ON ACCESS.USER_ID = USERS.USER_ID
+    INNER JOIN      FILES ON ACCESS.FILE_GUID = FILES.FILE_GUID
+    WHERE           USERS.USERNAME = ? and FILES.FILE_GUID = ?;
+'''
+
 queryFile = '''
     SELECT          FILENAME
     FROM            FILES
@@ -74,6 +82,12 @@ queryFileGUID = '''
     FROM            FILES
     INNER JOIN      USERS ON FILES.USER_ID = USERS.USER_ID
     WHERE           USERS.USERNAME = ? and FILES.FILENAME = ?;
+'''
+
+queryPasswordByUser = '''
+    SELECT          PW_HASH
+    FROM            USERS
+    WHERE           USERNAME = ?;
 '''
 
 queryUsersOnline = '''
@@ -101,6 +115,12 @@ queryUserIP = '''
     WHERE           USERNAME = ? and ONLINESTATUS = 1;
 '''
 
+queryUsernameByIP = '''
+    SELECT          USERNAME
+    FROM            USERS
+    WHERE           LATEST_IP = ?;
+'''
+
 queryUsersAndFiles = '''
     SELECT          json_group_array(
                         json_object(
@@ -112,7 +132,7 @@ queryUsersAndFiles = '''
                     )
     FROM            FILES
     INNER JOIN      USERS ON FILES.USER_ID = USERS.USER_ID
-    WHERE           USERS.ONLINESTATUS = 1;
+    WHERE           USERS.ONLINESTATUS = 1 and USERS.USERNAME != ?;
 '''
 
 
@@ -150,6 +170,12 @@ updateUserOnline = '''
 updateUserOffline = '''
     UPDATE          USERS
     SET             ONLINESTATUS = 0
+    WHERE           USERNAME = ?;
+'''
+
+updateUserPassword = '''
+    UPDATE          USERS
+    SET             PW_HASH = ?
     WHERE           USERNAME = ?;
 '''
 
