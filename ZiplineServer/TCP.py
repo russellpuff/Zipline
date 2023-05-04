@@ -46,7 +46,11 @@ def acceptConnection(sock):
 def serviceConnection(key, mask):
     sock = key.fileobj
     data = key.data
-    address = sock.getpeername()[0]
+
+    try:
+        address = sock.getpeername()[0]
+    except OSError:
+        address = ''
 
     try:
         ## Handle Selector Read Event
@@ -80,9 +84,7 @@ def serviceConnection(key, mask):
         return
 
     except OSError:
-        Log.info('OSError Handled: {}'.format(address))
-        username = DB.getUsernameFromAddress(address)
-        terminateConnection(username)
+        Log.info('OSError Handled')
         return
 
 
@@ -104,10 +106,7 @@ def maintainConnection(username, socket):
 def terminateConnection(username):
     if username in CONNECTIONS.keys():
         DB.markUserOffline(username)
-        socket = CONNECTIONS[username]
         del CONNECTIONS[username]
-        SELECTOR.unregister(socket)
-        socket.close()
 
 
 #####

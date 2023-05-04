@@ -5,6 +5,7 @@
 ########################################################################################################################
 
 import base64
+import json
 import os
 import re
 import socket
@@ -51,9 +52,6 @@ class SQLite():
 def checkPassword(stored, received):
     stored = base64.b64decode(stored)[16:]
     received = base64.b64decode(received)[16:]
-    print('CHECKING PASSWORD:')
-    print('STORED:   {}'.format(stored))
-    print('RECEIVED: {}'.format(received))
     return stored == received
     
 
@@ -68,9 +66,6 @@ def checkPassword(stored, received):
 def checkPasswordSalt(stored, received):
     stored = base64.b64decode(stored)[0:16]
     received = base64.b64decode(received)[0:16]
-    print('CHECKING PASSWORD SALT:')
-    print('STORED:   {}'.format(stored))
-    print('RECEIVED: {}'.format(received))
     return stored == received
 
 
@@ -180,6 +175,17 @@ def changePassword(payload):
         username = payload['Username']
         password = payload['Password']
 
+        ## Check password hash
+        '''
+        storedpass = database.execute(SQL.queryPasswordByUser, [username]).fetchone()[0]
+        if not checkPasswordSalt(storedpass, password):
+            salt = base64.b64decode(storedpass)[0:16]
+            salt = base64.b64encode(salt)
+            return '{"STATUS":"STATUS_BAD_SALT", "SALT":"' + salt.decode('utf-8') + '"}'
+        if not checkPassword(storedpass, password):
+            return '{"STATUS":"STATUS_PASSWORD_INCORRECT"}'
+        '''
+
         ## Check that user exists
         userexists = database.execute(SQL.queryUser, [username]).fetchone()
         if not userexists:
@@ -247,13 +253,13 @@ def downloadFile(payload):
         fileguid = payload['TargetGUID']
 
         ## Check that target user exists
-        userexists = database.execute(SQL.queryUser, [username]).fetchone()
-        if not userexists:
+        targetexists = database.execute(SQL.queryUser, [target]).fetchone()
+        if not targetexists:
             return 'STATUS_TARGET_USER_DOES_NOT_EXIST'
 
-        ## Check that user is online
-        useronline = database.execute(SQL.queryUserIP, [target]).fetchone()
-        if not useronline:
+        ## Check that target user is online
+        targetonline = database.execute(SQL.queryUserIP, [target]).fetchone()
+        if not targetonline:
             return 'STATUS_TARGET_USER_OFFLINE'
 
         ## Check that file exists
@@ -262,9 +268,9 @@ def downloadFile(payload):
             return 'STATUS_FILE_DOES_NOT_EXIST'
 
         ## Check that user has access
-        useraccess = database.execute(SQL.queryAccess, [username, fileguid]).fetchone()
-        if not useraccess:
-            return 'STATUS_ACCESS_DENIED'
+        ##useraccess = database.execute(SQL.queryAccess, [username, fileguid]).fetchone()
+        ##if not useraccess:
+            ##return 'STATUS_ACCESS_DENIED'
 
         ## Construct Payload
         payload = bytes(str(payload), 'utf-8')
@@ -272,7 +278,10 @@ def downloadFile(payload):
         package = length + TCP.HEADERBYTES + payload
 
         ## Send Package to Target User
-        targetip = parseIPAddress(useronline[0])
+        targetip = parseIPAddress(targetonline[0])
+        if target not in TCP.CONNECTIONS.keys():
+            Log.error('Target Online in Database; Connection Not Maintained')
+            return 'STATUS_TARGET_OFFLINE'
         targetsock = TCP.CONNECTIONS[target]
         Log.printResponse(package, targetip)
         TCP.send(targetsock, package)
@@ -344,7 +353,6 @@ def loginUser(payload, socket):
         ## If user exists and is already online
         ## Terminate prior maintained socket and add current socket to maintain
         database.execute(SQL.updateUserOnline, [latestip, username])
-        Log.error('Existing, Online User Logged In: {} - {}'.format(username, latestip))
         TCP.terminateConnection(username)
         TCP.maintainConnection(username, socket)
         return '{"STATUS":"STATUS_OK"}'
@@ -445,25 +453,34 @@ def sendFile(payload):
         if not targetonline:
             return 'STATUS_TARGET_USER_OFFLINE'
 
-        ## If Response is not 'STATUS_OK', let target know
-        if response != 'STATUS_OK':
-            return payload
-
-        ## Get file data and construct package
-        filedata = bytes(payload['File'], 'utf-8')
-        header = bytes([0x7f, 0x52, 0x8b, 0x59, 0xe9, 0xf9, 0x04, 0xc3])
-        length = (4 + len(header) + len(filedata)).to_bytes(4, 'big')
-        package = length + header + filedata
-
-        ## Send File to Target
+        ## Get Target IP Address
         target = TCP.CONNECTIONS[target]
         targetip = parseIPAddress(targetonline[0])
-        Log.printResponse(package, targetip)
-        TCP.send(target, package)
-        return 'STATUS_OK'
 
-        
-        
+        ## If Response isn't 'STATUS_OK', send response to requester
+        ## Else, send file to requester
+        if response != 'STATUS_OK':
+            ## Construct Package
+            payload = json.dumps(payload).encode('utf-8')
+            header = TCP.HEADERBYTES
+            length = (4 + len(header) + len(payload)).to_bytes(4, 'big')
+            package = length + header + payload
+            ## Send Package
+            Log.printResponse(package, targetip)
+            TCP.send(target, package)
+            ## Respond to Request
+            return payload
+        else:
+            ## Construct Package
+            payload = bytes(payload['File'], 'utf-8')
+            header = bytes([0x7f, 0x52, 0x8b, 0x59, 0xe9, 0xf9, 0x04, 0xc3])
+            length = (4 + len(header) + len(payload)).to_bytes(4, 'big')
+            package = length + header + filedata
+            ## Send Package
+            Log.printResponse(package, targetip)
+            TCP.send(target, package)
+            ## Respond to Request
+            return 'STATUS_OK'
 
 
 #####
@@ -515,9 +532,9 @@ def verifyUserFiles(payload):
             if ok:
                 status = 'STATUS_OK'
             elif unknown:
-                status = 'STATUS_UNKNOWN'
+                status = 'STATUS_UNKNOWN_FILE'
             elif missing:
-                status = 'STATUS_MISSING'
+                status = 'STATUS_MISSING_FILE'
             else:
                 status = 'STATUS_LOGIC_ERROR'
             result.append({file : status})

@@ -4,8 +4,10 @@
 #### Perform unit testing on the Zipline server.
 #######################################################################################################################
 
+import base64
 import os
 import sqlite3
+import selectors
 import socket
 import threading
 
@@ -27,12 +29,13 @@ def testLoginUser():
     failures = 0
 
     ## Test with New User
-    response = Test.sendPackage('''{"Command": "login_user","Username": "testuser1","Password": "null","LatestIP": "1.2.3.4:55555"}''')
+    password = str(base64.b64encode(b'123456789012345678901234567890123456'))
+    response = Test.sendPackage('{"Command": "login_user","Username": "testuser1","Password":"' + password  + '"}')
     expected = Test.generateResponse('STATUS_OK')
     failures += Test.printResult('New User Test', response, expected)
 
     ## Test with Existing User, Different IP
-    response = Test.sendPackage('''{"Command": "login_user","Username": "testuser1","Password": "null","LatestIP": "5.6.7.8:22222"}''')
+    response = Test.sendPackage('{"Command": "login_user","Username": "testuser1","Password":"' + password  + '"}')
     expected = Test.generateResponse('STATUS_OK')
     failures += Test.printResult('Existing User Test', response, expected)
 
@@ -54,7 +57,7 @@ def testLogoutUser():
 
     ## Test with Existing Offline User
     response = Test.sendPackage('{"Command":"logout_user","Username":"eduardo"}')
-    expected = Test.generateResponse('STATUS_OK')
+    expected = Test.generateResponse('STATUS_IGNORE')
     failures += Test.printResult('Existing Offline User Test', response, expected)
 
     ## Test with Non-Existent User
@@ -92,7 +95,6 @@ def testGetUserIP():
     Test.printFinalResults('getUserIP', failures)
 
 
-
 #######################################################################################################################
 # Testing
 #######################################################################################################################
@@ -103,36 +105,62 @@ def testGetUserIP():
 #### - Delete database file after testing.
 #######################################################################################################################
 
-## Set Database to Load a Separate Testing File
-DB.DATABASE = '.TestDatabase.db'
-DB.loadDatabase()
-Test.resetDatabase()
-Log.info('Using {} for Testing'.format(DB.DATABASE))
+def serverThread():
+    host, port = '0.0.0.0', 52525
+    TCP.SELECTOR = selectors.DefaultSelector()
+
+    ## Bind Socket and Listen
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as lsock:
+            lsock.bind((host, port))
+            lsock.listen(1)
+            lsock.setblocking(False)
+            TCP.SELECTOR.register(lsock, selectors.EVENT_READ, data=None)
+            Log.info('Listening on Address: {} and Port: {}'.format(host, port))
+            while TESTING:
+                events = TCP.SELECTOR.select(timeout=None)
+                for key, mask in events:
+                    if key.data is None:
+                        TCP.acceptConnection(key.fileobj)
+                    else:
+                        TCP.serviceConnection(key, mask)
+    except KeyboardInterrupt:
+        Log.info('Keyboard Interrupt Received; Exiting')
+    except ConnectionRefusedError:
+        Log.error('ConnectionRefusedError Handled')
+        TESTING = False
+    finally:
+        TCP.SELECTOR.close()
 
 
-## Start Threaded Testing Server
-with TCP.ThreadedTCPServer((Test.HOST, Test.PORT), TCP.RequestHandler) as server:
-    server_thread = threading.Thread(target=server.serve_forever)
-    server_thread.daemon = True
-    server_thread.start()
-    Log.info("Threaded Server Loop Running in Thread: {}".format(server_thread.name))
+if __name__ == '__main__':
+    ## Set Database Module to Load a Separate Test Database File
+    DB.DATABASE = '.TestDatabase.db'
+    DB.loadDatabase()
+    Test.resetDatabase()
+    Log.info('Using {} for Testing'.format(DB.DATABASE))
+
+    ## Start Test Server in Separate Thread
+    TESTING = True
+    thread = threading.Thread(target=serverThread)
+    thread.start()
 
     ## Run Unit Tests
     testLoginUser()
     testLogoutUser()
     testGetUserIP()
 
-    ## Shutdown Server
-    Log.info('Shutting Down Test Server')
-    server.shutdown()
+    ## Shutdown the Server
+    Log.info('Shutting Down the Test Server')
+    TESTING = False
+    thread.join()
 
-
-## Delete Test Database
-if os.path.isfile(DB.DATABASE):
-    os.remove(DB.DATABASE)
-    Log.info('Removing {} Test Database'.format(DB.DATABASE))
-else:
-    Log.error('Could Not Delete {}; File Not Found'.format(DB.DATABASE))
+    ## Delete Test Database
+    if os.path.isfile(DB.DATABASE):
+        os.remove(DB.DATABASE)
+        Log.info('Removing {} Test Database'.format(DB.DATABASE))
+    else:
+        Log.error('Could Not Delete {}; File Not Found'.format(DB.DATABASE))
 
 
 #######################################################################################################################
