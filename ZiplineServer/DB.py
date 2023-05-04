@@ -475,7 +475,7 @@ def sendFile(payload):
             payload = bytes(payload['File'], 'utf-8')
             header = bytes([0x7f, 0x52, 0x8b, 0x59, 0xe9, 0xf9, 0x04, 0xc3])
             length = (4 + len(header) + len(payload)).to_bytes(4, 'big')
-            package = length + header + filedata
+            package = length + header + payload
             ## Send Package
             Log.printResponse(package, targetip)
             TCP.send(target, package)
