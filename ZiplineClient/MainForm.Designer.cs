@@ -41,6 +41,7 @@
             this.mfFilesContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.requestAccessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.favoriteUnfavoriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mfMainDataGrid = new System.Windows.Forms.DataGridView();
             this.mfMainDataGridGUIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mfMainDataGridOwnerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,6 +78,13 @@
             this.mfNewFileFilenameTextBox = new System.Windows.Forms.TextBox();
             this.mfNewFileFilenameLabel = new System.Windows.Forms.Label();
             this.mfOptionsTab = new System.Windows.Forms.TabPage();
+            this.mfOptionsTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.mfChangePasswordLabel = new System.Windows.Forms.Label();
+            this.mfNewPasswordLabel = new System.Windows.Forms.Label();
+            this.mfRetypePasswordLabel = new System.Windows.Forms.Label();
+            this.mfNewPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.mfRetypePasswordTextBox = new System.Windows.Forms.TextBox();
+            this.mfChangePasswordButton = new System.Windows.Forms.Button();
             this.mfCentralTabControl.SuspendLayout();
             this.mfBrowserTab.SuspendLayout();
             this.mfBrowserTableLayout.SuspendLayout();
@@ -88,6 +96,8 @@
             this.mfMyFilesTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mfMyFilesDataGrid)).BeginInit();
             this.mfPersonalFilesContextMenu.SuspendLayout();
+            this.mfOptionsTab.SuspendLayout();
+            this.mfOptionsTableLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // mfCentralTabControl
@@ -183,9 +193,11 @@
             // 
             // mfFavoritesDataGridFilesizeColumn
             // 
-            this.mfFavoritesDataGridFilesizeColumn.HeaderText = "Filesize";
+            this.mfFavoritesDataGridFilesizeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.mfFavoritesDataGridFilesizeColumn.HeaderText = "Size (kb)";
             this.mfFavoritesDataGridFilesizeColumn.Name = "mfFavoritesDataGridFilesizeColumn";
             this.mfFavoritesDataGridFilesizeColumn.ReadOnly = true;
+            this.mfFavoritesDataGridFilesizeColumn.Width = 108;
             // 
             // mfFavoritesDataGridAccessColumn
             // 
@@ -199,22 +211,29 @@
             // 
             this.mfFilesContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.downloadToolStripMenuItem,
-            this.requestAccessToolStripMenuItem});
+            this.requestAccessToolStripMenuItem,
+            this.favoriteUnfavoriteToolStripMenuItem});
             this.mfFilesContextMenu.Name = "mfContextMenu";
-            this.mfFilesContextMenu.Size = new System.Drawing.Size(156, 48);
+            this.mfFilesContextMenu.Size = new System.Drawing.Size(177, 70);
             this.mfFilesContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.FileContextMenu_ItemClicked);
             // 
             // downloadToolStripMenuItem
             // 
             this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
-            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.downloadToolStripMenuItem.Text = "Download";
             // 
             // requestAccessToolStripMenuItem
             // 
             this.requestAccessToolStripMenuItem.Name = "requestAccessToolStripMenuItem";
-            this.requestAccessToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.requestAccessToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.requestAccessToolStripMenuItem.Text = "Request Access";
+            // 
+            // favoriteUnfavoriteToolStripMenuItem
+            // 
+            this.favoriteUnfavoriteToolStripMenuItem.Name = "favoriteUnfavoriteToolStripMenuItem";
+            this.favoriteUnfavoriteToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.favoriteUnfavoriteToolStripMenuItem.Text = "Favorite/Unfavorite";
             // 
             // mfMainDataGrid
             // 
@@ -261,9 +280,11 @@
             // 
             // mfMainDataGridFilesizeColumn
             // 
-            this.mfMainDataGridFilesizeColumn.HeaderText = "Filesize";
+            this.mfMainDataGridFilesizeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.mfMainDataGridFilesizeColumn.HeaderText = "Size (kb)";
             this.mfMainDataGridFilesizeColumn.Name = "mfMainDataGridFilesizeColumn";
             this.mfMainDataGridFilesizeColumn.ReadOnly = true;
+            this.mfMainDataGridFilesizeColumn.Width = 108;
             // 
             // mfMainDataGridAccessColumn
             // 
@@ -298,13 +319,13 @@
             this.mfUsersContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.refreshToolStripMenuItem});
             this.mfUsersContextMenu.Name = "mfUsersContextMenu";
-            this.mfUsersContextMenu.Size = new System.Drawing.Size(181, 48);
+            this.mfUsersContextMenu.Size = new System.Drawing.Size(114, 26);
             this.mfUsersContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.UsersContextMenu_ItemClicked);
             // 
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.refreshToolStripMenuItem.Text = "Refresh";
             // 
             // mfNotificationsLabel
@@ -471,9 +492,11 @@
             // 
             // mfMyFilesDataGridFilesizeColumn
             // 
-            this.mfMyFilesDataGridFilesizeColumn.HeaderText = "Filesize";
+            this.mfMyFilesDataGridFilesizeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.mfMyFilesDataGridFilesizeColumn.HeaderText = "Size (kb)";
             this.mfMyFilesDataGridFilesizeColumn.Name = "mfMyFilesDataGridFilesizeColumn";
             this.mfMyFilesDataGridFilesizeColumn.ReadOnly = true;
+            this.mfMyFilesDataGridFilesizeColumn.Width = 108;
             // 
             // mfPersonalFilesContextMenu
             // 
@@ -481,19 +504,19 @@
             this.deleteToolStripMenuItem,
             this.shareWithToolStripMenuItem});
             this.mfPersonalFilesContextMenu.Name = "mfPersonalFilesContextMenu";
-            this.mfPersonalFilesContextMenu.Size = new System.Drawing.Size(132, 48);
+            this.mfPersonalFilesContextMenu.Size = new System.Drawing.Size(181, 70);
             this.mfPersonalFilesContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.PersonalFileContextMenu_ItemClicked);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // shareWithToolStripMenuItem
             // 
             this.shareWithToolStripMenuItem.Name = "shareWithToolStripMenuItem";
-            this.shareWithToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.shareWithToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.shareWithToolStripMenuItem.Text = "Share With";
             // 
             // mfUsersShareListLabel
@@ -589,6 +612,7 @@
             // 
             // mfOptionsTab
             // 
+            this.mfOptionsTab.Controls.Add(this.mfOptionsTableLayout);
             this.mfOptionsTab.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.mfOptionsTab.Location = new System.Drawing.Point(4, 32);
             this.mfOptionsTab.Name = "mfOptionsTab";
@@ -597,6 +621,88 @@
             this.mfOptionsTab.TabIndex = 2;
             this.mfOptionsTab.Text = "Options";
             this.mfOptionsTab.UseVisualStyleBackColor = true;
+            // 
+            // mfOptionsTableLayout
+            // 
+            this.mfOptionsTableLayout.ColumnCount = 2;
+            this.mfOptionsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.mfOptionsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.mfOptionsTableLayout.Controls.Add(this.mfChangePasswordLabel, 0, 0);
+            this.mfOptionsTableLayout.Controls.Add(this.mfNewPasswordLabel, 0, 1);
+            this.mfOptionsTableLayout.Controls.Add(this.mfRetypePasswordLabel, 0, 3);
+            this.mfOptionsTableLayout.Controls.Add(this.mfNewPasswordTextBox, 0, 2);
+            this.mfOptionsTableLayout.Controls.Add(this.mfRetypePasswordTextBox, 0, 4);
+            this.mfOptionsTableLayout.Controls.Add(this.mfChangePasswordButton, 0, 5);
+            this.mfOptionsTableLayout.Location = new System.Drawing.Point(6, 6);
+            this.mfOptionsTableLayout.Name = "mfOptionsTableLayout";
+            this.mfOptionsTableLayout.RowCount = 6;
+            this.mfOptionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.mfOptionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.mfOptionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.mfOptionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.mfOptionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.mfOptionsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.mfOptionsTableLayout.Size = new System.Drawing.Size(658, 665);
+            this.mfOptionsTableLayout.TabIndex = 0;
+            // 
+            // mfChangePasswordLabel
+            // 
+            this.mfChangePasswordLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mfChangePasswordLabel.AutoSize = true;
+            this.mfChangePasswordLabel.Location = new System.Drawing.Point(84, 2);
+            this.mfChangePasswordLabel.Name = "mfChangePasswordLabel";
+            this.mfChangePasswordLabel.Size = new System.Drawing.Size(161, 25);
+            this.mfChangePasswordLabel.TabIndex = 0;
+            this.mfChangePasswordLabel.Text = "Change Password";
+            // 
+            // mfNewPasswordLabel
+            // 
+            this.mfNewPasswordLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.mfNewPasswordLabel.AutoSize = true;
+            this.mfNewPasswordLabel.Location = new System.Drawing.Point(3, 32);
+            this.mfNewPasswordLabel.Name = "mfNewPasswordLabel";
+            this.mfNewPasswordLabel.Size = new System.Drawing.Size(134, 25);
+            this.mfNewPasswordLabel.TabIndex = 1;
+            this.mfNewPasswordLabel.Text = "New Password";
+            // 
+            // mfRetypePasswordLabel
+            // 
+            this.mfRetypePasswordLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.mfRetypePasswordLabel.AutoSize = true;
+            this.mfRetypePasswordLabel.Location = new System.Drawing.Point(3, 102);
+            this.mfRetypePasswordLabel.Name = "mfRetypePasswordLabel";
+            this.mfRetypePasswordLabel.Size = new System.Drawing.Size(152, 25);
+            this.mfRetypePasswordLabel.TabIndex = 2;
+            this.mfRetypePasswordLabel.Text = "Retype Password";
+            // 
+            // mfNewPasswordTextBox
+            // 
+            this.mfNewPasswordTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfNewPasswordTextBox.Location = new System.Drawing.Point(3, 63);
+            this.mfNewPasswordTextBox.Name = "mfNewPasswordTextBox";
+            this.mfNewPasswordTextBox.PasswordChar = '*';
+            this.mfNewPasswordTextBox.Size = new System.Drawing.Size(323, 33);
+            this.mfNewPasswordTextBox.TabIndex = 5;
+            // 
+            // mfRetypePasswordTextBox
+            // 
+            this.mfRetypePasswordTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mfRetypePasswordTextBox.Location = new System.Drawing.Point(3, 133);
+            this.mfRetypePasswordTextBox.Name = "mfRetypePasswordTextBox";
+            this.mfRetypePasswordTextBox.PasswordChar = '*';
+            this.mfRetypePasswordTextBox.Size = new System.Drawing.Size(323, 33);
+            this.mfRetypePasswordTextBox.TabIndex = 6;
+            // 
+            // mfChangePasswordButton
+            // 
+            this.mfChangePasswordButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.mfChangePasswordButton.Location = new System.Drawing.Point(111, 173);
+            this.mfChangePasswordButton.Name = "mfChangePasswordButton";
+            this.mfChangePasswordButton.Size = new System.Drawing.Size(106, 37);
+            this.mfChangePasswordButton.TabIndex = 7;
+            this.mfChangePasswordButton.Text = "Change";
+            this.mfChangePasswordButton.UseVisualStyleBackColor = true;
+            this.mfChangePasswordButton.Click += new System.EventHandler(this.ChangePasswordButton_Click);
             // 
             // MainForm
             // 
@@ -623,6 +729,9 @@
             this.mfMyFilesTableLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mfMyFilesDataGrid)).EndInit();
             this.mfPersonalFilesContextMenu.ResumeLayout(false);
+            this.mfOptionsTab.ResumeLayout(false);
+            this.mfOptionsTableLayout.ResumeLayout(false);
+            this.mfOptionsTableLayout.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -656,19 +765,6 @@
         private Button mfAcceptFileButton;
         private TextBox mfNewFileFilenameTextBox;
         private Label mfNewFileFilenameLabel;
-        private DataGridViewTextBoxColumn mfMyFilesDataGridGUIDColumn;
-        private DataGridViewTextBoxColumn mfMyFilesDataGridFilenameColumn;
-        private DataGridViewTextBoxColumn mfMyFilesDataGridFilesizeColumn;
-        private DataGridViewTextBoxColumn mfMainDataGridGUIDColumn;
-        private DataGridViewTextBoxColumn mfMainDataGridOwnerColumn;
-        private DataGridViewTextBoxColumn mfMainDataGridFilenameColumn;
-        private DataGridViewTextBoxColumn mfMainDataGridFilesizeColumn;
-        private DataGridViewCheckBoxColumn mfMainDataGridAccessColumn;
-        private DataGridViewTextBoxColumn mfFavoritesDataGridGUIDColumn;
-        private DataGridViewTextBoxColumn mfFavoritesDataGridOwnerColumn;
-        private DataGridViewTextBoxColumn mfFavoritesDataGridFilenameColumn;
-        private DataGridViewTextBoxColumn mfFavoritesDataGridFilesizeColumn;
-        private DataGridViewCheckBoxColumn mfFavoritesDataGridAccessColumn;
         private ContextMenuStrip mfFilesContextMenu;
         private ToolStripMenuItem downloadToolStripMenuItem;
         private ToolStripMenuItem requestAccessToolStripMenuItem;
@@ -677,5 +773,26 @@
         private ContextMenuStrip mfPersonalFilesContextMenu;
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ToolStripMenuItem shareWithToolStripMenuItem;
+        private TableLayoutPanel mfOptionsTableLayout;
+        private Label mfChangePasswordLabel;
+        private Label mfNewPasswordLabel;
+        private Label mfRetypePasswordLabel;
+        private TextBox mfNewPasswordTextBox;
+        private TextBox mfRetypePasswordTextBox;
+        private Button mfChangePasswordButton;
+        private ToolStripMenuItem favoriteUnfavoriteToolStripMenuItem;
+        private DataGridViewTextBoxColumn mfFavoritesDataGridGUIDColumn;
+        private DataGridViewTextBoxColumn mfFavoritesDataGridOwnerColumn;
+        private DataGridViewTextBoxColumn mfFavoritesDataGridFilenameColumn;
+        private DataGridViewTextBoxColumn mfFavoritesDataGridFilesizeColumn;
+        private DataGridViewCheckBoxColumn mfFavoritesDataGridAccessColumn;
+        private DataGridViewTextBoxColumn mfMainDataGridGUIDColumn;
+        private DataGridViewTextBoxColumn mfMainDataGridOwnerColumn;
+        private DataGridViewTextBoxColumn mfMainDataGridFilenameColumn;
+        private DataGridViewTextBoxColumn mfMainDataGridFilesizeColumn;
+        private DataGridViewCheckBoxColumn mfMainDataGridAccessColumn;
+        private DataGridViewTextBoxColumn mfMyFilesDataGridGUIDColumn;
+        private DataGridViewTextBoxColumn mfMyFilesDataGridFilenameColumn;
+        private DataGridViewTextBoxColumn mfMyFilesDataGridFilesizeColumn;
     }
 }

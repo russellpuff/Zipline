@@ -1,70 +1,73 @@
 ﻿using System.Media;
 using System.Text.RegularExpressions;
-using System.Security.Cryptography;
+using static ZiplineClient.MainForm;
+using System.Text.Json;
+using System.Text;
 
 namespace ZiplineClient
 {
     public partial class LoginForm : Form
     {
+        public ConfigData UserConfig { get; private set; }
         public bool UserAuthenticated { get; private set; }
         public string Username { get; private set; }
-        public string CurrentIP { get; private set; }
+        private bool rehashing;
+
         public LoginForm()
         {
             InitializeComponent();
             UserAuthenticated = false;
             Username = string.Empty;
-            CurrentIP = string.Empty;
+            UserConfig = default!;
+            rehashing = false;
         }
 
-        private async void LoginButton_ClickAsync(object sender, EventArgs e)
+        private void LoginButton_Click(object sender, EventArgs e)
         {
             lfLoginButton.Enabled = false;
-            string password = "null"; // Replace with password hashing.
-            CurrentIP = await GetCurrentIP();
-            if (CurrentIP == "STATUS_RETRY") { return; }
+            if (!rehashing) { UserConfig = LoadUserConfig(); }
+            string password = ServerCommunicator.HashPassword(lfPasswordTextBox.Text, UserConfig, nameof(UserConfig.Salt));
             var outgoing_payload = new
             {
                 Command = "login_user",
                 Username = lfUsernameTextBox.Text,
                 Password = password,
-                LatestIP = CurrentIP
             };
+            Console.WriteLine($"Logging in user {lfUsernameTextBox.Text}");
             string server_response = ServerCommunicator.SendCommandToServer(outgoing_payload);
-            if (server_response.Contains("OK"))
+            JsonDocument jdoc = JsonDocument.Parse(server_response);
+            JsonElement root = jdoc.RootElement;
+            if (root.TryGetProperty("STATUS", out JsonElement status))
             {
-                UserAuthenticated = true;
-                Username = lfUsernameTextBox.Text;
-                this.Close();
+                switch (status.GetString())
+                {
+                    case "STATUS_OK":
+                        Console.WriteLine("Login OK");
+                        UserAuthenticated = true;
+                        Username = lfUsernameTextBox.Text;
+                        this.Close();
+                        break;
+                    case "STATUS_BAD_SALT":
+                        Console.WriteLine("Password salt was incorrect, attempting to regenerate...");
+                        string salt64 = root.GetProperty("SALT").GetString() ?? "ERR_BAD_SALT";
+                        byte[] salt_reminder = Convert.FromBase64String(salt64);
+                        for (int i = 0; i < salt_reminder.Length; ++i)
+                        { UserConfig.Salt[i] = salt_reminder[i]; }
+                        rehashing = true;
+                        LoginButton_Click(sender, e);
+                        break;
+                    case "STATUS_PASSWORD_INCORRECT":
+                        Console.WriteLine("Server indicated the input password was incorrect.");
+                        MessageBox.Show("Invalid password.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        lfLoginButton.Enabled = true;
+                        break;
+                    default:
+                        string msg = $"Unable to communicate with the server.";
+                        var result = MessageBox.Show(msg, "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                        if (result == DialogResult.Retry) { LoginButton_Click(sender, e); } else { this.Close(); }
+                        break;
+                }
             }
-            else if (server_response is not "STATUS_FAILURE")
-            { MessageBox.Show("Invalid password.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-            else
-            {
-                string msg = $"Unable to communicate with the server.";
-                var result = MessageBox.Show(msg, "Network error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-                if (result == DialogResult.Retry) { LoginButton_ClickAsync(sender, e); } else { this.Close(); }
-            }
-        }
-
-        private async Task<string> GetCurrentIP()
-        {
-            string current_ip = string.Empty;
-            try
-            { // Request public ip. 
-                using HttpClient httpClient = new();
-                HttpResponseMessage response = await httpClient.GetAsync("https://api64.ipify.org");
-                if (response.IsSuccessStatusCode) 
-                { current_ip = await response.Content.ReadAsStringAsync(); }
-            }
-            catch
-            {
-                string msg = "Couldn't retrieve current IP. Make sure you are connected to the internet.";
-                var result = MessageBox.Show(msg, "IP Retrieve Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                if (result == DialogResult.Cancel) { this.Close(); }
-                else { current_ip = "STATUS_RETRY"; } // bootleg solution
-            }
-            return current_ip;
         }
 
         private void UsernameTextBox_TextChanged(object sender, EventArgs e)
@@ -77,5 +80,26 @@ namespace ZiplineClient
 
             lfLoginButton.Enabled = tb.Text.Length >= 3; // Username must be between 3 and 20 characters. 
         }
+
+        private void PasswordTextBox_TextChanged(object sender, EventArgs e)
+        { lfLoginButton.Enabled = lfPasswordTextBox.Text.Length >= 8; }
+
+        private ConfigData LoadUserConfig()
+        {
+            string path = Application.StartupPath + "/Users/" + lfUsernameTextBox.Text + ".config";
+            if (!File.Exists(path))
+            {
+                return new(new List<FileData>(), new List<FileData>(), new byte[16]);
+                // rebuild files list
+            }
+
+            using var reader = new BinaryReader(File.OpenRead(path));
+            string encoded = reader.ReadString();
+            byte[] bytes = Convert.FromBase64String(encoded);
+            string json = Encoding.UTF8.GetString(bytes);
+
+            return JsonSerializer.Deserialize<ConfigData>(json);
+        }
+
     }
 }

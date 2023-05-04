@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-using System.Drawing;
-
-namespace ZiplineClient
+﻿namespace ZiplineClient
 {
     public partial class MainForm : Form
     {
@@ -17,6 +14,7 @@ namespace ZiplineClient
             if (open.ShowDialog() == DialogResult.OK)
             {
                 original_filename = open.FileName;
+                Console.WriteLine($"Grabbed file from {original_filename}");
                 mfNewFileFilenameTextBox.Text = Path.GetFileNameWithoutExtension(open.FileName);
 
                 mfAcceptFileButton.Enabled = mfNewFileFilenameTextBox.Enabled =
@@ -32,7 +30,7 @@ namespace ZiplineClient
         private void NewFileAcceptButton_Click(object sender, EventArgs e)
         { AddNewFile(true, mfNewFileFilenameTextBox.Text); }
 
-        private async void AddNewFile(bool viaMyFilesTab, string newFilename)
+        private void AddNewFile(bool viaMyFilesTab, string newFilename)
         {
             if(!viaMyFilesTab) 
             { 
@@ -51,6 +49,7 @@ namespace ZiplineClient
             }
 
             // Prepare to copy file to shared folder.
+            Console.WriteLine("Copying file to shared folder.");
             string full_filename = newFilename.Replace(' ', '_') + Path.GetExtension(original_filename);
             string directory = Application.StartupPath + "/Shared Files/";
             string destination = Path.Combine(directory, full_filename);
@@ -62,7 +61,7 @@ namespace ZiplineClient
                 var result = MessageBox.Show(msg, "Share File Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (result == DialogResult.No) { return; }
 
-                var file_to_delete = userFiles.Find(f => f.Filename == full_filename);
+                var file_to_delete = userConfig.Files.Find(f => f.Filename == full_filename);
                 if (file_to_delete is not null) { DeleteFile(file_to_delete.FileGUID); }
                 overwrite_file = true;
             }
@@ -86,6 +85,7 @@ namespace ZiplineClient
                 AuthorizedUsers = shared_users
             };
 
+            Console.WriteLine("Informing the server of a new file.");
             string server_response = ServerCommunicator.SendCommandToServer(outgoing_payload);
             string operationResult;
             switch (server_response)
@@ -100,7 +100,6 @@ namespace ZiplineClient
                     operationResult = "There was a problem adding a new file: File already exists.";
                     break;
                 case "STATUS_OK":
-                    // Copy file. Encryption goes here. 
                     if (overwrite_file)
                     { // Bootleg workaround to file in use problem. 
                         File.Copy(original_filename, destination + "2");
@@ -111,12 +110,13 @@ namespace ZiplineClient
 
                     // Update personal table.
                     mfMyFilesDataGrid.Rows.Add(file_guid, full_filename, fileSize);
-                    userFiles.Add(new FileData(file_guid, username, full_filename, fileSize));
+                    userConfig.Files.Add(new FileData(file_guid, username, full_filename, fileSize));
                     operationResult = "The file was successfully added to the server list.";
                     break;
                 default: 
                     operationResult = "There was a problem adding a new file: There was an unexpected response from the server.";
-                    break; // Unexpected response from server. LOG THIS IN THE FUTURE
+                    Console.WriteLine($"Got a strange response from the server: {server_response}");
+                    break;
             }
             if (operationResult.Contains("Problem")) 
             { MessageBox.Show(operationResult, "File Add Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }

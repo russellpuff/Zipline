@@ -79,6 +79,7 @@
             this.lfPasswordTextBox.PasswordChar = '*';
             this.lfPasswordTextBox.Size = new System.Drawing.Size(256, 33);
             this.lfPasswordTextBox.TabIndex = 4;
+            this.lfPasswordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             // 
             // lfMainTableLayout
             // 
@@ -113,7 +114,7 @@
             this.lfLoginButton.TabIndex = 0;
             this.lfLoginButton.Text = "Login";
             this.lfLoginButton.UseVisualStyleBackColor = true;
-            this.lfLoginButton.Click += new System.EventHandler(this.LoginButton_ClickAsync);
+            this.lfLoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // LoginForm
             // 
