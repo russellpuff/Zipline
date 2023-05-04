@@ -7,8 +7,9 @@
 import socket
 
 import DB
+import TCP
 
-HOST, PORT = 'localhost', 52525
+HOST, PORT = '127.0.0.1', 52525
 HEADERBYTES = bytes([0x63, 0xC3, 0x1E, 0xE9, 0xF0, 0x58, 0x60, 0x1D])
 
 

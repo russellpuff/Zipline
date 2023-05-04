@@ -5,6 +5,7 @@
 ########################################################################################################################
 
 import base64
+import json
 import os
 import re
 import socket
@@ -41,6 +42,34 @@ class SQLite():
 ########################################################################################################################
 
 #####
+# checkPassword(stored: string, received: string)
+#####
+# - Compares stored password against the received password (excluding salts).
+# - 36 bytes: 0-15 Salt, 16-35 Hashed Password
+# - Returns True if they match.
+# - Returns False otherwise.
+#####
+def checkPassword(stored, received):
+    stored = base64.b64decode(stored)[16:]
+    received = base64.b64decode(received)[16:]
+    return stored == received
+    
+
+
+#####
+# checkPasswordSalt(stored: string, received: string)
+#####
+# - Compares stored password salt against received password salt.
+# - Returns True if they match.
+# - Returns False otherwise.
+#####
+def checkPasswordSalt(stored, received):
+    stored = base64.b64decode(stored)[0:16]
+    received = base64.b64decode(received)[0:16]
+    return stored == received
+
+
+#####
 # checkPayload(payload: JSON Object, fields: list of string)
 #####
 # - Returns True if all fields are present in the payload.
@@ -55,15 +84,39 @@ def checkPayload(payload, fields):
 
 
 #####
+# getUsernameFromAddress(address: string)
+#####
+# - Accepts an ip address as a string.
+# - Returns the associated IP address if the username is in the database.
+# - Returns None otherwise.
+#####
+def getUsernameFromAddress(address):
+    with SQLite() as database:
+        username = database.execute(SQL.queryUsernameByIP, [address]).fetchone()
+        if username:
+            return username
+        else:
+            return None
+
+
+#####
+# markUserOffline(username: string)
+#####
+# - Updates database to set online status to 0 for given username.
+# - Used for handling client crashes and unexpected disconnects.
+#####
+def markUserOffline(username):
+    with SQLite() as database:
+        database.execute(SQL.updateUserOffline, [username])
+
+
+#####
 # parseIPAddress(text: string)
 #####
 # - Expects a string containing an ip address that may be in IPv4 or IPv6 with or without a port
 # - Returns the address portion of the string
 #####
 def parseIPAddress(text):
-    ip = text[12:].strip('"}')
-    print('Text: {}'.format(text))
-    print('IP: {}'.format(ip))
     return text[12:].strip('"}')
 
 
@@ -105,6 +158,42 @@ def addNewFile(payload):
         database.execute(SQL.insertAccess, [fileguid, username])
         return 'STATUS_OK'
 
+
+#####
+# changePassword(payload: JSON Object)
+#####
+# - Expects payload to have Command, Username, and Password Fields
+#####
+def changePassword(payload):
+    with SQLite() as database:
+        ## Verify payload is well-formed
+        valid = checkPayload(payload, ['Command','Username','Password'])
+        if not valid:
+            return 'STATUS_MISSING_COMMAND_FIELDS'
+
+        ## Get payload field values
+        username = payload['Username']
+        password = payload['Password']
+
+        ## Check password hash
+        '''
+        storedpass = database.execute(SQL.queryPasswordByUser, [username]).fetchone()[0]
+        if not checkPasswordSalt(storedpass, password):
+            salt = base64.b64decode(storedpass)[0:16]
+            salt = base64.b64encode(salt)
+            return '{"STATUS":"STATUS_BAD_SALT", "SALT":"' + salt.decode('utf-8') + '"}'
+        if not checkPassword(storedpass, password):
+            return '{"STATUS":"STATUS_PASSWORD_INCORRECT"}'
+        '''
+
+        ## Check that user exists
+        userexists = database.execute(SQL.queryUser, [username]).fetchone()
+        if not userexists:
+            return 'STATUS_USER_DOES_NOT_EXIST'
+
+        ## Update user password
+        database.execute(SQL.updateUserPassword, [password, username])
+        return 'STATUS_OK'
 
 
 #####
@@ -164,13 +253,13 @@ def downloadFile(payload):
         fileguid = payload['TargetGUID']
 
         ## Check that target user exists
-        userexists = database.execute(SQL.queryUser, [username]).fetchone()
-        if not userexists:
+        targetexists = database.execute(SQL.queryUser, [target]).fetchone()
+        if not targetexists:
             return 'STATUS_TARGET_USER_DOES_NOT_EXIST'
 
-        ## Check that user is online
-        useronline = database.execute(SQL.queryUserIP, [target]).fetchone()
-        if not useronline:
+        ## Check that target user is online
+        targetonline = database.execute(SQL.queryUserIP, [target]).fetchone()
+        if not targetonline:
             return 'STATUS_TARGET_USER_OFFLINE'
 
         ## Check that file exists
@@ -178,15 +267,23 @@ def downloadFile(payload):
         if not fileexists:
             return 'STATUS_FILE_DOES_NOT_EXIST'
 
+        ## Check that user has access
+        ##useraccess = database.execute(SQL.queryAccess, [username, fileguid]).fetchone()
+        ##if not useraccess:
+            ##return 'STATUS_ACCESS_DENIED'
+
         ## Construct Payload
         payload = bytes(str(payload), 'utf-8')
         length = (4 + len(TCP.HEADERBYTES) + len(payload)).to_bytes(4, 'big')
         package = length + TCP.HEADERBYTES + payload
 
         ## Send Package to Target User
-        targetip = parseIPAddress(useronline[0])
-        targetsock = TCP.CONNECTIONS[targetip]
-        Log.printResponse(package)
+        targetip = parseIPAddress(targetonline[0])
+        if target not in TCP.CONNECTIONS.keys():
+            Log.error('Target Online in Database; Connection Not Maintained')
+            return 'STATUS_TARGET_OFFLINE'
+        targetsock = TCP.CONNECTIONS[target]
+        Log.printResponse(package, targetip)
         TCP.send(targetsock, package)
 
         ## Send Response Status to Requester
@@ -215,40 +312,50 @@ def loadDatabase():
 #####
 # loginUser(payload: JSON Object, socket: socket.socket)
 #####
-# - Expects payload to have Command, Username, and LatestIP Fields.
+# - Expects payload to have Command, Username Fields.
 # - Expects socket to be the current active network socket for this connection.
 #####
 def loginUser(payload, socket):
     with SQLite() as database:
         ## Verify payload is well-formed
-        valid = checkPayload(payload, ['Command','Username','Password','LatestIP'])
+        valid = checkPayload(payload, ['Command','Username','Password'])
         if not valid:
             return 'STATUS_MISSING_COMMAND_FIELDS'
 
         ## Get payload field values
         username = payload['Username']
         password = payload['Password']
-        latestip = payload['LatestIP']
+        latestip = socket.getpeername()[0]
 
         ## Check if user does not exist
         userexists = database.execute(SQL.queryUser, [username]).fetchone()
         if not userexists:
             database.execute(SQL.insertOnlineUser, [username, password, latestip])
-            TCP.maintainConnection(latestip, socket)
-            return 'STATUS_OK'
+            TCP.maintainConnection(username, socket)
+            return '{"STATUS":"STATUS_OK"}'
 
-        ## Check if user online
+        ## Check password hash
+        storedpass = database.execute(SQL.queryPasswordByUser, [username]).fetchone()[0]
+        if not checkPasswordSalt(storedpass, password):
+            salt = base64.b64decode(storedpass)[0:16]
+            salt = base64.b64encode(salt)
+            return '{"STATUS":"STATUS_BAD_SALT", "SALT":"' + salt.decode('utf-8') + '"}'
+        if not checkPassword(storedpass, password):
+            return '{"STATUS":"STATUS_PASSWORD_INCORRECT"}'
+
+        ## Check if user not online
         useronline = database.execute(SQL.queryUserIP, [username]).fetchone()
         if not useronline:
             database.execute(SQL.updateUserOnline, [latestip, username])
-            useronline = database.execute(SQL.queryUserIP, [username]).fetchone()
-            parseIPAddress(useronline[0])
-            TCP.maintainConnection(latestip, socket)
-            return 'STATUS_OK'
+            TCP.maintainConnection(username, socket)
+            return '{"STATUS":"STATUS_OK"}'
 
         ## If user exists and is already online
-        TCP.maintainConnection(latestip, socket)
-        return 'STATUS_OK'
+        ## Terminate prior maintained socket and add current socket to maintain
+        database.execute(SQL.updateUserOnline, [latestip, username])
+        TCP.terminateConnection(username)
+        TCP.maintainConnection(username, socket)
+        return '{"STATUS":"STATUS_OK"}'
 
 
 #####
@@ -277,10 +384,8 @@ def logoutUser(payload):
             return 'STATUS_IGNORE'
 
         ## If user exists and is online, logout
-        address = useronline[0][12:].strip('"}')
-        database.execute(SQL.updateUserOffline, [username])
-        TCP.terminateConnection(address)
-        return 'STATUS_OK'
+        TCP.terminateConnection(username)
+        return ''
 
 
 #####
@@ -288,9 +393,18 @@ def logoutUser(payload):
 #####
 #
 #####
-def getUsersAndFiles():
+def getUsersAndFiles(payload):
     with SQLite() as database:
-        result = database.execute(SQL.queryUsersAndFiles).fetchall()
+        ## Verify payload is well-formed
+        valid = checkPayload(payload, ['Command','Username'])
+        if not valid:
+            return 'STATUS_MISSING_COMMAND_FIELDS'
+        
+        ## Get payload field value
+        username = payload['Username']
+
+        ## Return query result
+        result = database.execute(SQL.queryUsersAndFiles, [username]).fetchall()
         return result
 
 
@@ -339,24 +453,34 @@ def sendFile(payload):
         if not targetonline:
             return 'STATUS_TARGET_USER_OFFLINE'
 
-        ## If Response is not 'STATUS_OK', let target know
+        ## Get Target IP Address
+        target = TCP.CONNECTIONS[target]
+        targetip = parseIPAddress(targetonline[0])
+
+        ## If Response isn't 'STATUS_OK', send response to requester
+        ## Else, send file to requester
         if response != 'STATUS_OK':
+            ## Construct Package
+            payload = json.dumps(payload).encode('utf-8')
+            header = TCP.HEADERBYTES
+            length = (4 + len(header) + len(payload)).to_bytes(4, 'big')
+            package = length + header + payload
+            ## Send Package
+            Log.printResponse(package, targetip)
+            TCP.send(target, package)
+            ## Respond to Request
             return payload
-
-        ## Get target socket
-        targetip = targetonline[0][12:].strip('"}')
-        target = TCP.CONNECTIONS[targetip]
-
-        ## Get file data and construct package
-        filedata = bytes(payload['File'], 'utf-8')
-        header = bytes([0x7f, 0x52, 0x8b, 0x59, 0xe9, 0xf9, 0x04, 0xc3])
-        length = (4 + len(header) + len(filedata)).to_bytes(4, 'big')
-        package = length + header + filedata
-        TCP.send(target, package)
-        return 'STATUS_OK'
-
-        
-        
+        else:
+            ## Construct Package
+            payload = bytes(payload['File'], 'utf-8')
+            header = bytes([0x7f, 0x52, 0x8b, 0x59, 0xe9, 0xf9, 0x04, 0xc3])
+            length = (4 + len(header) + len(payload)).to_bytes(4, 'big')
+            package = length + header + payload
+            ## Send Package
+            Log.printResponse(package, targetip)
+            TCP.send(target, package)
+            ## Respond to Request
+            return 'STATUS_OK'
 
 
 #####
@@ -408,9 +532,9 @@ def verifyUserFiles(payload):
             if ok:
                 status = 'STATUS_OK'
             elif unknown:
-                status = 'STATUS_UNKNOWN'
+                status = 'STATUS_UNKNOWN_FILE'
             elif missing:
-                status = 'STATUS_MISSING'
+                status = 'STATUS_MISSING_FILE'
             else:
                 status = 'STATUS_LOGIC_ERROR'
             result.append({file : status})

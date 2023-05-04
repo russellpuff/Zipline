@@ -23,6 +23,7 @@ if __name__ == "__main__":
         
     
     ## Bind Socket and Listen
+    ## Register Socket with Selector
     host, port = '0.0.0.0', 52525
     TCP.SELECTOR = selectors.DefaultSelector()
     try:
